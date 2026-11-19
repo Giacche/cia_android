@@ -1,0 +1,30 @@
+{
+  "data": {
+    "layout": {
+      "appBarTitle": "MI COMERCIO",
+      "type": "HOME_LAYOUT",
+      "sections": [
+        {
+          "id": "header_empresas",
+          "title": null,
+          "linkText": null
+        },
+        {
+          "id": "options",
+          "title": null,
+          "linkText": null
+        },
+        {
+          "id": "total_sales",
+          "title": null,
+          "linkText": null
+        },
+        {
+          "id": "banners",
+          "title": "Pensado para vos",
+          "linkText": null
+        }
+      ]
+    }
+  }
+}

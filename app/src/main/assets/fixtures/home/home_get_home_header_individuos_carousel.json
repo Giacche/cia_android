@@ -1,0 +1,51 @@
+{
+  "data": {
+    "type": "HOME_HEADER_INDIVIDUOS_CAROUSEL",
+    "individuosCarousel": {
+      "branches": [
+        {
+          "address": "Aquino 1120, Asunción",
+          "branchId": "branch-001",
+          "subscriptionPlan": "UPAY BASE"
+        },
+        {
+          "address": "Aviadores del Chaco 1234, Asunción",
+          "branchId": "branch-002",
+          "subscriptionPlan": "UPAY PRO"
+        },
+        {
+          "address": "Mcal. López 3456, Asunción",
+          "branchId": "branch-003",
+          "subscriptionPlan": "UPAY BASE"
+        },
+        {
+          "address": "España 890, Asunción",
+          "branchId": "branch-004",
+          "subscriptionPlan": "UPAY PRO"
+        },
+        {
+          "address": "San Martín 567, Luque",
+          "branchId": "branch-005",
+          "subscriptionPlan": "UPAY BASE"
+        }
+      ],
+      "showAllBranchesButton": {
+        "text": "Mostrar todas las sucursales",
+        "tag": "cia_individuos_all_branches_btn",
+        "deeplink": "ALL_BRANCHES"
+      }
+    },
+    "editProfileButton": {
+      "text": "Ir al perfil",
+      "tag": "cia_home_edit_profile",
+      "deeplink": "PROFILE",
+      "icon": "user"
+    },
+    "helpButton": {
+      "text": "Ayuda",
+      "tag": "cia_home_help",
+      "deeplink": "sections/Cobros",
+      "icon": "help"
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "data": {
+    "paymentEntryPoint": {
+      "tag": "cia_payment_entry_point",
+      "appBarTitle": "COBRAR",
+      "type": "ENTRY_POINT",
+      "data": {
+        "title": "Elegí el tipo de QR",
+        "options": [
+          {
+            "id": "QR_PIX",
+            "icon": "qr_brasil",
+            "title": "QR Pix",
+            "description": "",
+            "badge": {
+              "text": "Nuevo",
+              "type": "success",
+              "icon": null
+            },
+            "tag": "cia_qr_code_btn",
+            "deeplink": "PAYMENT_QR"
+          },
+          {
+            "id": "QR_DEPAY",
+            "icon": "qr_argentina",
+            "title": "QR Argentina",
+            "description": "",
+            "badge": {
+              "text": "Nuevo",
+              "type": "success",
+              "icon": null
+            },
+            "tag": "cia_qr_code_btn",
+            "deeplink": "PAYMENT_QR"
+          },
+          {
+            "id": "QR_BOLIVIA",
+            "icon": "qr_bolivia",
+            "title": "QR Bolivia",
+            "description": "",
+            "badge": {
+              "text": "Nuevo",
+              "type": "success",
+              "icon": null
+            },
+            "tag": "cia_qr_code_btn",
+            "deeplink": "PAYMENT_QR"
+          },
+          {
+            "id": "QR_PERU",
+            "icon": "qr_peru",
+            "title": "QR Perú",
+            "description": "",
+            "badge": {
+              "text": "Nuevo",
+              "type": "success",
+              "icon": null
+            },
+            "tag": "cia_qr_code_btn",
+            "deeplink": "PAYMENT_QR"
+          },
+          {
+            "id": "QR_COLOMBIA",
+            "icon": "qr_colombia",
+            "title": "QR Colombia",
+            "description": "",
+            "badge": {
+              "text": "Nuevo",
+              "type": "success",
+              "icon": null
+            },
+            "tag": "cia_qr_code_btn",
+            "deeplink": "PAYMENT_QR"
+          }
+        ]
+      }
+    }
+  }
+}

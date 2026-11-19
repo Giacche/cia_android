@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_options_title_default">Elegí cómo querés cobrar</string>
+    <string name="home_pending_settlement_title_default">Total de ventas</string>
+    <string name="home_header_title_error">Tenemos inconvenientes para mostrar el nombre de tu comercio. Por favor, intentá de nuevo más tarde.</string>
+    <string name="home_loading_title">Cobros</string>
+    <string name="home_branches_sheet_title">Seleccioná una sucursal</string>
+</resources>

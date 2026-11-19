@@ -1,0 +1,40 @@
+{
+  "data": {
+    "layout": {
+      "appBarTitle": "COBROS",
+      "type": "HOME_LAYOUT",
+      "sections": [
+        {
+          "id": "header",
+          "title": null,
+          "linkText": null
+        },
+        {
+          "id": "alerts",
+          "title": null,
+          "linkText": null
+        },
+        {
+          "id": "options",
+          "title": "Elegí cómo querés cobrar",
+          "linkText": null
+        },
+        {
+          "id": "banners",
+          "title": "Pensado para vos",
+          "linkText": null
+        },
+        {
+          "id": "recents",
+          "title": "Últimos cobros",
+          "linkText": {
+            "text": "Mostrar todo",
+            "tag": "cia_view_all_btn",
+            "deeplink": "MOVEMENTS",
+            "action": "null"
+          }
+        }
+      ]
+    }
+  }
+}

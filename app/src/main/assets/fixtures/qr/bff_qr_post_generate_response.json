@@ -1,0 +1,68 @@
+{
+  "data": {
+    "qrScreen": {
+      "type": "QR",
+      "appBarTitle": "COBRO CON QR",
+      "tag": "cia_qr",
+      "title": "Mostrá o compartí este QR",
+      "subtitle": "Solo se aceptan pagos con dinero en cuenta. Acreditación entre 24 y hasta 48 horas hábiles.",
+      "description": "Vence en 5 minutos",
+      "qrCode": {
+        "provider": "Upay",
+        "referenceCode": "509UP1744136743748",
+        "image": "iVBORw0KGgoAAAANSUhEUgAAAR0AAAEdAQAAAAAZEY7WAAAEMklEQVR4Xs2Z0W3jMBBE1/AHP12COrEbMyABbkzphCXkUx+C9uYN6QMOuAJWH0pCjg832dnZIROhZ8nMLY7nY4t4Ps7leP2u2XbtJK/xVAO1zHNp++PT8+f33tsV99R3IWSm1vT5oqA93ksapP2eKWSwL7jYAS8Maqk6iMmnqyyfVFney3FLMy4NOhDN8QRuFaX224/LUhdkPakYqOgd2hqN0KWnc/lHdLVAPEvT/v9fkK0JSh4x+XTVhi04mfEVa2/eLQnSo2Lsj8Qk11ECra64jn3Uny4IQkoDa4rq4A27VCPIjrJd8n5EVw+khW1J++P+OPVFoyrd1U8z1dpREmTFhEwyZJIQk/xdESE1tJKNkqDjpi+s0q0siJ3W7slnIi+8vyRIxUj8US+NpWxEm2Gh1pOod1esHkhzCBI4zFT+V09DXvangiC69Ws4+A8gtbGd6J7W02juaiDcPRx246bXlNIYr7JL55uSINklwRFjfyGli4o4tP8gr0sWCvF6oKBRqQOpS8Re9AD5S5+xssS4JMgl8GnDdOyejb5wlkFP/AoKgnS8gImQ9hrxVKChB/RwAmGtJEj/f/fAXcRoiQCkEKbaTD0NkuVAQRKzdlQbiBG9nnNtQW2L4045kGaTemCP8MKYtlh8H6F9GmtFUDgz4jV2dweBlzSWnO9m9q0I4tifMJm1uahN0hdDTwG7iiD94oNRBRNsnwKpNoGPnvwj8v6SIP3OV0hgQubp8x3jNb65oCbI89QJJsyOAnF/lO7g5slVEuQemPtipzY+v1FdLxy1R0lQI/vyomU5hEpPiXseDFr/eJQEidEYqiEQZ6XHvKxTve6dg2lR0OEevYH0zQUJRh3sKrks1lNBEN1qnye8bHgm3p9MKa40YOfUUw7ElIoRdmNUZCOJBUiizSxLPRDNm74/H9dE6oFoEtlgPNlVBCUD1JEAAU12fyMkysqiILbcrfMSnV6+KBCeOe8DKoJUFrTz68P02ok2i0uF7S/JkaMoiPHPow4W/OuZOQcUyKMkyKnLshnZF89Mrnnnddcw1oIgX7mErxWdfdGTyjKqNMZXlARpVZ65h1timqQtVP6jXk6XpSIo0JMoMlQ537lvfUyystATmHog8jpY6+nNtJW8MCHrKV7+o0ZJEM37vf2X8nc1b9pw+JFe7lETpOCIntYxllC+CsRnZi7YEF1BUHC+s9dwm+GrgOmZTC5ygTVXD5TuUThhQvNEjYrSpyaE5mRfEcT3eKayDFU6SY85gxneb3blQDwLoiJ/EceYUo7C6MkxwXoqB2qURasj+1KME4qww47Sp9OSoJ3g6Htn12HXGg0N3H+xQE9lQUEbj7toXMcFci7A+ylLVVAbRw4mK65jJ5LZJyZ0VgWhJxakHa36eDGME3YevjVBPHSwuhXlB/cuY0phR8F1eknQH1nQYILGwuiNAAAAAElFTkSuQmCC",
+        "timeout": 300,
+        "interval": 5
+      },
+      "bottomSheet": {
+        "title": "Elegí cómo querés cobrar",
+        "options": [
+          {
+            "provider": "UPAY",
+            "icon": "ueno",
+            "title": "ueno bank",
+            "subtitle": "Entre cuentas ueno.",
+            "label": "Cambiar QR",
+            "tag": "cia_qr_code_btn"
+          },
+          {
+            "provider": "BANCARD",
+            "icon": "bank",
+            "title": "Otras billeteras o bancos",
+            "subtitle": "Dentro del país.",
+            "label": "Cambiar QR",
+            "tag": "cia_qr_code_btn"
+          }
+        ]
+      },
+      "summaryInfo": {
+        "amountTitle": "Total a cobrar",
+        "amountValueTemplate": "{amount}"
+      },
+      "primaryButton": {
+        "text": "Compartir QR",
+        "tag": "cia_qr_share_qr_btn"
+      },
+      "secondaryButton": {
+        "text": "Editar monto",
+        "tag": "cia_qr_edit_amount_btn"
+      }
+    },
+    "timeoutScreen": {
+      "type": "QR_TIMEOUT",
+      "tag": "cia_qr_timeout",
+      "appBarTitle": "",
+      "illustration": "sateliteIllustration",
+      "title": "Se venció el código QR",
+      "subtitle": "Generá uno nuevo para continuar con el cobro.",
+      "primaryButton": {
+        "text": "Reintentar",
+        "tag": "cia_qr_retry"
+      },
+      "secondaryButton": {
+        "text": "Ir a cobros",
+        "tag": "cia_qr_home"
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "data": {
+    "responseScreen": {
+      "type": "PAYMENT_LINK_CONGRATS_SUCCESS",
+      "tag": "cia_payment_link_congrats",
+      "appBarTitle": "",
+      "primaryButton": {
+        "text": "Compartir link",
+        "tag": "cia_payment_link_share",
+        "deeplink": "SHARED"
+      },
+      "secondaryButton": {
+        "text": "Ir a Cobros",
+        "tag": "cia_qr_home"
+      },
+      "data": {
+        "feedbackScreenType": "semantic",
+        "semanticStatus": "success",
+        "title": "¡Listo! Creaste el link de pago",
+        "description": "Es de un solo uso y vence en 48 horas.",
+        "card": {
+          "title": "Detalle",
+          "items": [
+            {
+              "label": "Url",
+              "value": "https://pago.pagopar.com/6yzlp",
+              "shareDescription": "Pagá gorra roja a través de este link de pago https://pago.pagopar.com/6yzlp . Disponible sólo por 48 horas",
+              "type": "LINK",
+              "actionButton": {
+                "action": "COPY",
+                "icon": "duplicate",
+                "tag": "payment_link_copy",
+                "content": "https://pago.pagopar.com/6yzlp"
+              }
+            },
+            {
+              "label": "Total a cobrar",
+              "value": "Gs. 120.000"
+            }
+          ]
+        }
+      }
+    },
+    "receiptScreen": null
+  }
+}

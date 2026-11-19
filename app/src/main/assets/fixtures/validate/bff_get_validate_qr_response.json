@@ -1,0 +1,44 @@
+{
+  "data": {
+    "amountScreen": {
+      "tag": "cia_amount_qr",
+      "appBarTitle": "COBRO CON QR",
+      "type": "AMOUNT",
+      "primaryButton": {
+        "text": "Continuar",
+        "tag": "cia_amount_qr_btn"
+      },
+      "data": {
+        "title": "¿Cuánto quieres cobrar?",
+        "maxAmount": 150000,
+        "minAmount": 1000,
+        "currency": "GS",
+        "commission": 5.5,
+        "maxAmountErrorMessage": "Podés cobrar hasta GS. 150.000",
+        "minAmountErrorMessage": "El monto mínimo es de GS. 1.000"
+      },
+      "summaryInfo": {
+        "amountTitle": "Aproximado a recibir",
+        "amountValueTemplate": "{amount}",
+        "commissionTitle": "Comisión",
+        "commissionValueTemplate": "{commission}% = {commission_amount}"
+      }
+    },
+    "cpfScreen": {
+      "type": "CPF_SCREEN",
+      "appBarTitle": "Número de CPF",
+      "title": "Ingresá el CPF de tu cliente",
+      "numberInput": {
+        "title": "Es el número de identificación fiscal de Brasil",
+        "maxLength": 11,
+        "regex": "^[0-9]{11}$",
+        "errorMessage": "El número es incorrecto.",
+        "helper": "El CPF tiene 11 dígitos."
+      },
+      "primaryButton": {
+        "text": "Continuar",
+        "tag": ""
+      }
+    }
+  }
+}

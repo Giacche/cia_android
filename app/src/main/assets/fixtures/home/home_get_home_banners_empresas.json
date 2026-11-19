@@ -1,0 +1,17 @@
+{
+  "data": {
+    "type": "HOME_BANNERS",
+    "banners": [
+      {
+        "overline": "¡TU UPOS TE ESPERA!",
+        "title": "Suscribite a upay pro e impulsá tus ventas.",
+        "color": "blue",
+        "asset": "posIllustration",
+        "size": "m",
+        "buttonText": "Conocer más",
+        "actionType": "products_onboarding",
+        "type": "SUBSCRIPTION"
+      }
+    ]
+  }
+}

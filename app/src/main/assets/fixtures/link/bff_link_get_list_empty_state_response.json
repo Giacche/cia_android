@@ -1,0 +1,48 @@
+{
+  "data": {
+    "linkListScreen": {
+      "tag": "cia_payment_link_list_screen",
+      "appBarTitle": "MIS LINKS",
+      "type": "PAYMENT_LINK_LIST",
+      "tabsOptions": [
+        {
+          "label": "Vigentes",
+          "message": null,
+          "disabled": false,
+          "id": "ACTIVE",
+          "selected": true
+        },
+        {
+          "label": "Expirados",
+          "message": {
+            "id": "PAYMENT_LINK_EXPIRED_INFO",
+            "type": "information",
+            "message": "Cada link de pago tiene una vigencia de 48 horas. Después de ese tiempo, queda expirado."
+          },
+          "disabled": true,
+          "id": "EXPIRED",
+          "selected": false
+        },
+        {
+          "label": "Rechazados",
+          "message": null,
+          "disabled": true,
+          "id": "REJECTED",
+          "selected": false
+        }
+      ],
+      "tabItems": null,
+      "emptyState": {
+        "illustration": "searchIllustration",
+        "title": "No tenés links activos",
+        "subtitle": "Creá un link y compartilo por redes o WhatsApp para empezar a cobrar."
+      },
+      "primaryButton": null,
+      "secondaryButton": {
+        "text": "Volver a Cobros",
+        "tag": "cia_home_back",
+        "deeplink": ""
+      }
+    }
+  }
+}

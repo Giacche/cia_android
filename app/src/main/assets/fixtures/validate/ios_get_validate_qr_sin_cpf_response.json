@@ -1,0 +1,28 @@
+{
+  "data": {
+    "amountScreen": {
+      "tag": "cia_amount_qr",
+      "appBarTitle": "COBRO CON QR",
+      "type": "AMOUNT",
+      "primaryButton": {
+        "text": "Continuar",
+        "tag": "cia_amount_qr_btn"
+      },
+      "data": {
+        "title": "¿Cuánto querés cobrar?",
+        "maxAmount": 150000,
+        "minAmount": 1000,
+        "currency": "GS",
+        "commission": 5.5,
+        "maxAmountErrorMessage": "Podés cobrar hasta GS. 150.000",
+        "minAmountErrorMessage": "El monto mínimo es de GS. 1.000"
+      },
+      "summaryInfo": {
+        "amountTitle": "",
+        "amountValueTemplate": "",
+        "commissionTitle": "",
+        "commissionValueTemplate": ""
+      }
+    }
+  }
+}

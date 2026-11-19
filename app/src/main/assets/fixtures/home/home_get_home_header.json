@@ -1,0 +1,21 @@
+{
+  "data": {
+    "type": "HOME_HEADER",
+    "individuos": {
+      "merchantName": "Nutritiva Store"
+    },
+    "subscriptionPlan": "UPAY BASE",
+    "editProfileButton": {
+      "text": "Ir al perfil",
+      "tag": "cia_home_edit_profile",
+      "deeplink": "PROFILE",
+      "icon": "user"
+    },
+    "helpButton": {
+      "text": "Ayuda",
+      "tag": "cia_home_help",
+      "deeplink": "sections/Cobros",
+      "icon": "help"
+    }
+  }
+}

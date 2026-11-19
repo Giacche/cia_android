@@ -1,0 +1,84 @@
+{
+  "data": {
+    "paymentEntryPoint": {
+      "tag": "cia_payment_entry_point",
+      "appBarTitle": "COBRAR",
+      "type": "ENTRY_POINT",
+      "data": {
+        "title": "Elegí cómo querés cobrar",
+        "options": [
+          {
+            "id": "QR_UENO",
+            "icon": "qr",
+            "title": "QR ueno",
+            "description": "",
+            "badge": {
+              "text": "",
+              "type": "neutral",
+              "icon": null
+            },
+            "tag": "cia_qr_ueno_btn",
+            "deeplink": "PAYMENT_QR",
+            "disabled": false
+          },
+          {
+            "id": "QR_BANCARD",
+            "icon": "qr",
+            "title": "QR otras entidades",
+            "description": "",
+            "badge": {
+              "text": "",
+              "type": "neutral",
+              "icon": null
+            },
+            "tag": "cia_qr_code_btn",
+            "deeplink": "PAYMENT_QR",
+            "disabled": false
+          },
+          {
+            "id": "QR_SIP",
+            "icon": "qr",
+            "title": "QR SIP",
+            "description": "",
+            "badge": {
+              "text": "",
+              "type": "neutral",
+              "icon": null
+            },
+            "tag": "cia_qr_sip_btn",
+            "deeplink": "PAYMENT_QR",
+            "disabled": false
+          },
+          {
+            "id": "QR_INTERNACIONAL",
+            "icon": "world",
+            "title": "QR internacional",
+            "description": "",
+            "badge": {
+              "text": "",
+              "type": "neutral",
+              "icon": null
+            },
+            "tag": "cia_qr_internacional_btn",
+            "deeplink": "QR_INTERNACIONAL",
+            "disabled": false
+          },
+          {
+            "id": "LINK",
+            "icon": "link",
+            "title": "Link de pago",
+            "description": "",
+            "badge": {
+              "text": "",
+              "type": "neutral",
+              "icon": null
+            },
+            "tag": "cia_payment_link_create_btn",
+            "deeplink": "LINK_CREATE",
+            "disabled": false
+          }
+        ]
+      }
+    }
+  }
+}

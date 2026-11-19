@@ -1,0 +1,16 @@
+{
+  "data": {
+    "type": "HOME_BANNERS",
+    "banners": [
+      {
+        "overline": "6 MESES BONIFICADOS",
+        "title": "Pedí más uPOS y no pierdas ni una venta.",
+        "color": "violet",
+        "asset": "posIllustration",
+        "size": "m",
+        "buttonText": "Conocer más",
+        "actionType": "add_ons/upos"
+      }
+    ]
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "data": {
+    "type": "HOME_OPTIONS",
+    "informationAlert": null,
+    "messages": [
+      {
+        "id": "IOS_PAYMENT_NOT_AVAILABLE",
+        "type": "INFO",
+        "message": "Aún no podés cobrar con iOS",
+        "description": "Solo está disponible para Android. Estamos trabajando para que pronto puedas cobrar."
+      },
+      {
+        "id": "NFC_NOT_AVAILABLE",
+        "type": "INFO",
+        "message": "Tu celular no tiene NFC",
+        "description": "Cambiá a un modelo compatible para seguir cobrando."
+      },
+      {
+        "id": "EMPTY_OPTIONS",
+        "type": "INFO",
+        "message": "¡Pronto vas cobrar con QR!",
+        "description": "Mantente al tanto de la próxima actualización."
+      }
+    ],
+    "options": [
+      {
+        "id": "TTP",
+        "icon": "nfc",
+        "title": "Sin contacto",
+        "description": "",
+        "badge": {
+          "text": "Activar",
+          "type": "neutral",
+          "icon": null
+        },
+        "tag": "cia_contactless_btn",
+        "deeplink": "PAYMENT_CONTACTLESS"
+      },
+      {
+        "id": "QR_UENO",
+        "icon": "qr",
+        "title": "QR ueno",
+        "description": "",
+        "badge": {
+          "text": "Nuevo",
+          "type": "success",
+          "icon": null
+        },
+        "tag": "cia_qr_code_btn",
+        "deeplink": "PAYMENT_QR"
+      },
+      {
+        "id": "QR_BANCARD",
+        "icon": "qr",
+        "title": "QR otras entidades",
+        "description": "",
+        "badge": {
+          "text": "Nuevo",
+          "type": "success",
+          "icon": null
+        },
+        "tag": "cia_qr_code_btn",
+        "deeplink": "PAYMENT_QR"
+      },
+      {
+        "id": "QR_DEPAY",
+        "icon": "qr",
+        "title": "QR Argentina",
+        "description": "Deshabilitado",
+        "badge": {
+          "text": "Nuevo",
+          "type": "success",
+          "icon": null
+        },
+        "tag": "cia_qr_code_btn",
+        "deeplink": "PAYMENT_QR",
+        "disabled": true
+      },
+      {
+        "id": "QR_PIX",
+        "icon": "pix",
+        "title": "QR Pix",
+        "description": "",
+        "badge": {
+          "text": "Nuevo",
+          "type": "success",
+          "icon": null
+        },
+        "tag": "cia_qr_code_btn",
+        "deeplink": "PAYMENT_QR",
+        "disabled": true
+      }
+    ]
+  }
+}

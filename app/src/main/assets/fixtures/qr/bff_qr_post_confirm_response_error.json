@@ -1,0 +1,25 @@
+{
+  "data": {
+    "responseScreen": {
+      "type": "QR_ERROR",
+      "tag": "cia_qr_error_[provider]",
+      "appBarTitle": "",
+      "primaryButton": {
+        "text": "Reintentar",
+        "tag": "cia_qr_retry_btn_[provider]"
+      },
+      "secondaryButton": {
+        "text": "Ir a cobros",
+        "tag": "cia_qr_home_btn_[provider]"
+      },
+      "data": {
+        "feedbackScreenType": "semantic",
+        "semanticStatus": "error",
+        "title": "No pudimos procesar tu cobro",
+        "description": "Intentá nuevamente o pedile a tu cliente que pague con otro medio.",
+        "card": null
+      }
+    },
+    "receiptScreen": null
+  }
+}

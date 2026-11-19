@@ -1,0 +1,119 @@
+{
+  "data": {
+    "detailScreen": {
+      "type": "DETAIL",
+      "tag": "detail",
+      "appBarTitle": "DETALLE DE COBRO",
+      "primaryButton": {
+        "text": "Compartir",
+        "tag": "detail_compartir"
+      },
+      "secondaryButton": {
+        "text": "Anular cobro",
+        "tag": "detail_anular"
+      },
+      "data": {
+        "title": "Cobro con tarjeta",
+        "badge": {
+          "type": "success/error",
+          "icon": "clock",
+          "text": "Aprobado/Anulado"
+        },
+        "subtitle": "Se acreditara entre 24 y 48 horas.",
+        "card": {
+          "title": "Detalle de movimiento",
+          "items": [
+            {
+              "label": "Monto cobrado",
+              "value": "Gs. 200.000"
+            },
+            {
+              "label": "Comisión y retenciones",
+              "value": "Gs. 10.020",
+              "actionLink": {
+                "action": "SHOW_COMISSION",
+                "text": "Mostrar descuentos",
+                "tag": "detail_show_comission"
+              }
+            },
+            {
+              "label": "Total a cobrar",
+              "value": "Gs. 189.582"
+            },
+            {
+              "label": "Medio de pago",
+              "value": "Dinero en cuenta"
+            },
+            {
+              "label": "Nro. de operación",
+              "value": "902854390234",
+              "actionLink": {
+                "action": "COPY",
+                "text": "Copiar",
+                "tag": "detail_copy_nro_op"
+              }
+            },
+            {
+              "label": "Fecha y hora",
+              "value": "13/12/2024 15:51 hs"
+            }
+          ],
+          "inlineMessage": null
+        },
+        "bottomSheet": {
+          "title": "Descuentos aplicados",
+          "items": [
+            {
+              "label": "Comisión ueno 3%",
+              "value": "Gs. 6.000"
+            },
+            {
+              "label": "IVA sobre comisión 10%",
+              "value": "Gs. 600"
+            },
+            {
+              "label": "Retención de renta (sobre el cobro) 1% ",
+              "value": "Gs. 1.895"
+            },
+            {
+              "label": "Retención de IVA (sobre el cobro) 0.91%",
+              "value": "Gs. 1.726"
+            }
+          ]
+        }
+      }
+    },
+    "receiptScreen": {
+      "type": "receipt",
+      "tag": "receipt_screen",
+      "receiptName": "Comprobante de pago",
+      "appBarTitle": "Comprobante de pago",
+      "subTitle": "Monto total",
+      "downloadLabel": "descargar",
+      "shareLabel": "compartir",
+      "amount": 100.0,
+      "currency": "PYG",
+      "date": "2023-10-01T00:00:00.000Z",
+      "items": [
+        {
+          "type": "double",
+          "value": "Mastercard crédito terminada en 4256",
+          "subtitle": "Medio de pago",
+          "enabled": true
+        },
+        {
+          "type": "double",
+          "value": "902854390234",
+          "subtitle": "Nro. de operación",
+          "enabled": true
+        },
+        {
+          "type": "double",
+          "value": "13/12/2024 a las 15:51 hs",
+          "subtitle": "Fecha y hora",
+          "enabled": true
+        }
+      ]
+    }
+  }
+}

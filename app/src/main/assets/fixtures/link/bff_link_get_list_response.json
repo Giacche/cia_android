@@ -1,0 +1,58 @@
+{
+  "data": {
+    "linkListScreen": {
+      "tag": "cia_payment_link_list_screen",
+      "appBarTitle": "MIS LINKS",
+      "type": "PAYMENT_LINK_LIST",
+      "tabsOptions": [
+        {
+          "label": "Vigentes",
+          "message": null,
+          "disabled": false,
+          "id": "ACTIVE",
+          "selected": true
+        },
+        {
+          "label": "Expirados",
+          "message": {
+            "id": "PAYMENT_LINK_EXPIRED_INFO",
+            "type": "information",
+            "message": "Cada link de pago tiene una vigencia de 48 horas. Después de ese tiempo, queda expirado."
+          },
+          "disabled": false,
+          "id": "EXPIRED",
+          "selected": false
+        },
+        {
+          "label": "Rechazados",
+          "message": null,
+          "disabled": false,
+          "id": "REJECTED",
+          "selected": false
+        }
+      ],
+      "tabItems": [
+        {
+          "label": "Sin descripción",
+          "value": "Gs. 80.000",
+          "actionButton": {
+            "action": "SHARE",
+            "icon": "share",
+            "tag": "payment_link_share",
+            "content": "https://pagos.cia.com.py/pay/123456"
+          }
+        },
+        {
+          "label": "Gorra roja",
+          "value": "Gs. 125.000",
+          "actionButton": {
+            "action": "SHARE",
+            "icon": "share",
+            "tag": "payment_link_share",
+            "content": "https://pagos.cia.com.py/pay/123456"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "data": {
+    "paymentEntryPoint": {
+      "tag": "cia_payment_entry_point",
+      "appBarTitle": "COBRAR",
+      "type": "ENTRY_POINT",
+      "data": {
+        "title": "Elegí cómo querés cobrar",
+        "options": [
+          {
+            "id": "QR_UENO",
+            "icon": "qr",
+            "title": "QR ueno",
+            "description": "",
+            "badge": {
+              "text": "Nuevo",
+              "type": "success",
+              "icon": null
+            },
+            "tag": "cia_qr_code_btn",
+            "deeplink": "PAYMENT_QR"
+          },
+          {
+            "id": "QR_BANCARD",
+            "icon": "qr",
+            "title": "QR otras entidades",
+            "description": "",
+            "badge": {
+              "text": "Nuevo",
+              "type": "success",
+              "icon": null
+            },
+            "tag": "cia_qr_code_btn",
+            "deeplink": "PAYMENT_QR"
+          },
+          {
+            "id": "QR_DEPAY",
+            "icon": "qr",
+            "title": "QR Argentina",
+            "description": "",
+            "badge": {
+              "text": "Nuevo",
+              "type": "success",
+              "icon": null
+            },
+            "tag": "cia_qr_code_btn",
+            "deeplink": "PAYMENT_QR"
+          },
+          {
+            "id": "QR_PIX",
+            "icon": "pix",
+            "title": "QR Pix",
+            "description": "",
+            "badge": {
+              "text": "Nuevo",
+              "type": "success",
+              "icon": null
+            },
+            "tag": "cia_qr_code_btn",
+            "deeplink": "PAYMENT_QR"
+          },
+          {
+            "id": "QR_SIP",
+            "icon": "qr",
+            "title": "QR Paraguay",
+            "description": "",
+            "badge": {
+              "text": "Nuevo",
+              "type": "success",
+              "icon": null
+            },
+            "tag": "cia_qr_code_btn",
+            "deeplink": "PAYMENT_QR"
+          },
+          {
+            "id": "LINK",
+            "icon": "link",
+            "title": "Link de pago",
+            "description": "",
+            "badge": {
+              "text": "Nuevo",
+              "type": "success",
+              "icon": null
+            },
+            "tag": "cia_payment_link_create_btn",
+            "deeplink": "LINK_CREATE"
+          }
+        ]
+      }
+    }
+  }
+}

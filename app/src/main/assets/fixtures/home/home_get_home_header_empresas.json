@@ -1,0 +1,66 @@
+{
+  "data": {
+    "type": "HOME_HEADER_EMPRESAS",
+    "empresas": {
+      "branches": [
+        {
+          "address": "Aquino 1120, Asunción",
+          "branchId": "branch-001",
+          "subscriptionPlan": "UPAY PRO"
+        },
+        {
+          "address": "Aviadores del Chaco 1234, Asunción",
+          "branchId": "branch-002",
+          "subscriptionPlan": "UPAY PRO"
+        },
+        {
+          "address": "Mcal. López 3456, Asunción",
+          "branchId": "branch-003",
+          "subscriptionPlan": "UPAY PRO"
+        },
+        {
+          "address": "España 890, Asunción",
+          "branchId": "branch-004",
+          "subscriptionPlan": "UPAY PRO"
+        },
+        {
+          "address": "San Martín 567, Luque",
+          "branchId": "branch-005",
+          "subscriptionPlan": "UPAY PRO"
+        },
+        {
+          "address": "Mariscal Estigarribia 210, Asunción",
+          "branchId": "branch-006",
+          "subscriptionPlan": "UPAY PRO"
+        },
+        {
+          "address": "Eusebio Ayala 780, Asunción",
+          "branchId": "branch-007",
+          "subscriptionPlan": "UPAY PRO"
+        },
+        {
+          "address": "República Argentina 450, Asunción",
+          "branchId": "branch-008",
+          "subscriptionPlan": "UPAY PRO"
+        }
+      ],
+      "showAllBranchesButton": {
+        "text": "Mostrar todas las sucursales",
+        "tag": "cia_empresas_all_branches_btn",
+        "deeplink": "ALL_BRANCHES"
+      }
+    },
+    "editProfileButton": {
+      "text": "Ir al perfil",
+      "tag": "cia_home_edit_profile",
+      "deeplink": "PROFILE",
+      "icon": "user"
+    },
+    "helpButton": {
+      "text": "Ayuda",
+      "tag": "cia_home_help",
+      "deeplink": "sections/Cobros",
+      "icon": "help"
+    }
+  }
+}

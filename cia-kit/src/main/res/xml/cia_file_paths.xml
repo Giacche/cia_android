@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- Imágenes (QR, comprobante) que CIA comparte con otras apps -->
+    <cache-path name="cia_share" path="cia_share/" />
+</paths>

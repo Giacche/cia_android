@@ -1,0 +1,237 @@
+{
+  "data": {
+    "tabsOptions": [
+      { "id": "charges", "title": "Cobros", "active": true },
+      { "id": "services", "title": "Servicios", "active": false }
+    ],
+    "filterButton": {
+      "text": "Filtrar",
+      "tag": "cia_movements_filter_btn",
+      "deeplink": ""
+    },
+    "activeFilters": [
+      { "id": "app", "label": "App" },
+      { "id": "payment_link", "label": "Link de pago" },
+      { "id": "approved", "label": "Aprobado" },
+      { "id": "today", "label": "Hoy" }
+    ],
+    "clearFiltersButton": {
+      "text": "Limpiar",
+      "tag": "cia_movements_clear_filters_btn"
+    },
+    "filterScreen": {
+      "type": "FILTER",
+      "appBarTitle": "FILTRAR",
+      "tag": "cia_filter_screen",
+      "channel": {
+        "label": "Canal",
+        "hint": "Seleccioná un canal",
+        "options": [
+          { "id": "app", "name": "App" },
+          { "id": "upos", "name": "uPOS" }
+        ]
+      },
+      "method": {
+        "label": "Método",
+        "hint": "Seleccioná un método de cobro",
+        "options": [
+          { "id": "qr", "name": "QR" },
+          { "id": "payment_link", "name": "Link de pago" }
+        ]
+      },
+      "status": {
+        "label": "Estado",
+        "hint": "Seleccioná un estado",
+        "options": [
+          { "id": "all", "name": "Todos" },
+          { "id": "approved", "name": "Aprobado" },
+          { "id": "credited", "name": "Acreditado" }
+        ]
+      },
+      "period": {
+        "title": "Período",
+        "from": {
+          "title": "Desde",
+          "hint": "dd/mm/aa"
+        },
+        "to": {
+          "title": "Hasta",
+          "hint": "dd/mm/aa"
+        },
+        "description": "Podés elegir un rango de hasta 30 días."
+      },
+      "amount": {
+        "title": "Monto",
+        "from": {
+          "title": "Desde",
+          "hint": "Gs. 0"
+        },
+        "to": {
+          "title": "Hasta",
+          "hint": "Gs. 0"
+        }
+      },
+      "secondaryButton": {
+        "text": "Limpiar filtros",
+        "tag": "cia_filter_clear_btn"
+      },
+      "primaryButton": {
+        "text": "Aplicar",
+        "tag": "cia_filter_apply_btn"
+      }
+    },
+    "charges": [
+      {
+        "id": "qr",
+        "title": "Cobro con QR",
+        "subtitle": "Mastercard ****1234",
+        "amount": "+ Gs. 37.450",
+        "date": "07/01/2026",
+        "hour": "",
+        "ticketNumber": "350"
+      },
+      {
+        "id": "paymentLink",
+        "title": "Cobro con Link de pago",
+        "subtitle": "Mastercard ****1234",
+        "amount": "+ Gs. 1.770",
+        "date": "06/01/2026",
+        "hour": "",
+        "ticketNumber": "345"
+      },
+      {
+        "id": "qr",
+        "title": "Cobro con QR",
+        "subtitle": "Mastercard ****1234",
+        "amount": "+ Gs. 37.450",
+        "date": "07/01/2026",
+        "hour": "",
+        "ticketNumber": "350"
+      },
+      {
+        "id": "paymentLink",
+        "title": "Cobro con Link de pago",
+        "subtitle": "Mastercard ****1234",
+        "amount": "+ Gs. 1.770",
+        "date": "06/01/2026",
+        "hour": "",
+        "ticketNumber": "345"
+      },
+      {
+        "id": "qr",
+        "title": "Cobro con QR",
+        "subtitle": "Mastercard ****1234",
+        "amount": "+ Gs. 37.450",
+        "date": "07/01/2026",
+        "hour": "",
+        "ticketNumber": "350"
+      },
+      {
+        "id": "paymentLink",
+        "title": "Cobro con Link de pago",
+        "subtitle": "Mastercard ****1234",
+        "amount": "+ Gs. 1.770",
+        "date": "06/01/2026",
+        "hour": "",
+        "ticketNumber": "345"
+      },
+      {
+        "id": "qr",
+        "title": "Cobro con QR",
+        "subtitle": "Mastercard ****1234",
+        "amount": "+ Gs. 37.450",
+        "date": "07/01/2026",
+        "hour": "",
+        "ticketNumber": "350"
+      },
+      {
+        "id": "paymentLink",
+        "title": "Cobro con Link de pago",
+        "subtitle": "Mastercard ****1234",
+        "amount": "+ Gs. 1.770",
+        "date": "06/01/2026",
+        "hour": "",
+        "ticketNumber": "345"
+      },
+      {
+        "id": "qr",
+        "title": "Cobro con QR",
+        "subtitle": "Mastercard ****1234",
+        "amount": "+ Gs. 37.450",
+        "date": "07/01/2026",
+        "hour": "",
+        "ticketNumber": "350"
+      },
+      {
+        "id": "paymentLink",
+        "title": "Cobro con Link de pago",
+        "subtitle": "Mastercard ****1234",
+        "amount": "+ Gs. 1.770",
+        "date": "06/01/2026",
+        "hour": "",
+        "ticketNumber": "345"
+      },
+      {
+        "id": "qr",
+        "title": "Cobro con QR",
+        "subtitle": "Mastercard ****1234",
+        "amount": "+ Gs. 37.450",
+        "date": "07/01/2026",
+        "hour": "",
+        "ticketNumber": "350"
+      },
+      {
+        "id": "paymentLink",
+        "title": "Cobro con Link de pago",
+        "subtitle": "Mastercard ****1234",
+        "amount": "+ Gs. 1.770",
+        "date": "06/01/2026",
+        "hour": "",
+        "ticketNumber": "345"
+      },
+      {
+        "id": "qr",
+        "title": "Cobro con QR",
+        "subtitle": "Mastercard ****1234",
+        "amount": "+ Gs. 37.450",
+        "date": "07/01/2026",
+        "hour": "",
+        "ticketNumber": "350"
+      },
+      {
+        "id": "paymentLink",
+        "title": "Cobro con Link de pago",
+        "subtitle": "Mastercard ****1234",
+        "amount": "+ Gs. 1.770",
+        "date": "06/01/2026",
+        "hour": "",
+        "ticketNumber": "345"
+      },
+      {
+        "id": "qr",
+        "title": "Cobro con QR",
+        "subtitle": "Mastercard ****1234",
+        "amount": "+ Gs. 37.450",
+        "date": "07/01/2026",
+        "hour": "",
+        "ticketNumber": "350"
+      },
+      {
+        "id": "paymentLink",
+        "title": "Cobro con Link de pago",
+        "subtitle": "Mastercard ****1234",
+        "amount": "+ Gs. 1.770",
+        "date": "06/01/2026",
+        "hour": "",
+        "ticketNumber": "345"
+      }
+    ],
+    "emptyState": {
+      "illustration": "searchIllustration",
+      "title": "¡Sigamos buscando!",
+      "subtitle": "Probá con otros filtros y volvé a intentar."
+    },
+    "page": 1,
+    "size": 30
+  }
+}

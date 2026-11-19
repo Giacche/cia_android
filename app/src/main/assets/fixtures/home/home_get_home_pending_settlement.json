@@ -1,0 +1,9 @@
+{
+  "data": {
+    "type": "HOME_PENDING_SETTLEMENT",
+    "pendingSettlement": {
+      "title": "Total de ventas",
+      "amount": "Gs. 12.000.000"
+    }
+  }
+}

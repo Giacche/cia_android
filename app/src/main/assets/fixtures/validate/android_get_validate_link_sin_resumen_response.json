@@ -1,0 +1,50 @@
+{
+  "data": {
+    "amountScreen": {
+      "tag": "cia_amount_qr_upay",
+      "appBarTitle": "COBRO CON LINK DE PAGO",
+      "type": "AMOUNT",
+      "primaryButton": {
+        "text": "Continuar",
+        "tag": "cia_amount_qr_btn_upay"
+      },
+      "data": {
+        "title": "¿Cuánto querés cobrar?",
+        "maxAmount": 150000,
+        "minAmount": 50,
+        "currency": "GS",
+        "commission": 3.19,
+        "maxAmountErrorMessage": "Podés cobrar hasta GS. 150.000",
+        "minAmountErrorMessage": "El monto mínimo es de GS. 50",
+        "descriptionInput": {
+          "title": "Descripción",
+          "maxLength": 100,
+          "minLength": 3,
+          "helper": "Mínimo 3 caracteres"
+        }
+      },
+      "summaryInfo": {
+        "amountTitle": "",
+        "amountValueTemplate": "",
+        "commissionTitle": "",
+        "commissionValueTemplate": ""
+      }
+    },
+    "linkPreConfirmScreen": {
+      "tag": "cia_payment_link_detail",
+      "appBarTitle": "COBRO CON LINK DE PAGO",
+      "type": "LINK_DETAIL",
+      "title": "Revisá que todo esté bien",
+      "subTitle": null,
+      "primaryButton": {
+        "text": "Crear link",
+        "tag": "cia_payment_link_detail_btn_confirm",
+        "deeplink": "link/generate"
+      },
+      "detailCard": {
+        "title": "Detalle"
+      }
+    },
+    "cpfScreen": null
+  }
+}

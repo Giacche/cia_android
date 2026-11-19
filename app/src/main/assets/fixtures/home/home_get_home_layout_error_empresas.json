@@ -1,0 +1,52 @@
+{
+  "data": {
+    "layout": {
+      "appBarTitle": "MI COMERCIO",
+      "type": "HOME_LAYOUT",
+      "sections": [
+        {
+          "id": "header_empresas",
+          "title": null,
+          "linkText": null
+        },
+        {
+          "id": "options",
+          "title": null,
+          "linkText": null
+        },
+        {
+          "id": "total_sales",
+          "title": null,
+          "linkText": null
+        },
+        {
+          "id": "banners",
+          "title": "Pensado para vos",
+          "linkText": null
+        }
+      ],
+      "errorScreen": {
+        "type": "ERROR",
+        "tag": "",
+        "appBarTitle": "",
+        "primaryButton": {
+          "text": "Ir a la web",
+          "tag": "",
+          "deeplink": "https://ueno.com.py"
+        },
+        "secondaryButton": {
+          "text": "Volver",
+          "tag": "",
+          "deeplink": "HOME"
+        },
+        "data": {
+          "feedbackScreenType": "neutral",
+          "semanticStatus": "error",
+          "title": "Empezá a cobrar con tu empresa",
+          "description": "Accedé a ueno empresas desde la web para activar Cobros y gestionar tus ventas y transacciones.",
+          "illustration": "refound"
+        }
+      }
+    }
+  }
+}

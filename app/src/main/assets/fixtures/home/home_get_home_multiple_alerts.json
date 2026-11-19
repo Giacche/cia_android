@@ -1,0 +1,22 @@
+{
+  "data": {
+    "type": "HOME_ALERTS",
+    "informationAlert": [
+      {
+        "type": "warning",
+        "title": null,
+        "description": "Para volver a cobrar con QR PIX o QR otras entidades, regularizá tu situación ante la SET."
+      },
+      {
+        "type": "warning",
+        "title": "Habilitá todos tus medios de cobro",
+        "description": "Algunas opciones no están disponibles para tu cuenta.",
+        "actionLink": {
+          "action": "UPDATE_RUC",
+          "text": "Conocer más",
+          "tag": "update_ruc_link"
+        }
+      }
+    ]
+  }
+}

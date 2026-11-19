@@ -1,0 +1,66 @@
+{
+  "data": {
+    "responseScreen": {
+      "type": "QR_CONGRATS_SUCCESS",
+      "tag": "cia_qr_congrats",
+      "appBarTitle": "",
+      "primaryButton": {
+        "text": "Enviar comprobante",
+        "tag": "cia_qr_send_receipt"
+      },
+      "secondaryButton": {
+        "text": "Ir a cobros",
+        "tag": "cia_qr_home"
+      },
+      "data": {
+        "feedbackScreenType": "semantic",
+        "semanticStatus": "success",
+        "title": "Cobraste GS. 45.00",
+        "card": {
+          "title": "Detalle de cobro",
+          "items": [
+            {
+              "label": "Medio de pago",
+              "value": "Dinero en cuenta"
+            },
+            {
+              "label": "Nro. de operación",
+              "value": "902854390234"
+            }
+          ]
+        }
+      }
+    },
+    "receiptScreen": {
+      "tag": "cia_qr_receipt",
+      "receiptName": "Comprobante de pago",
+      "appBarTitle": "Comprobante de pago",
+      "subTitle": "Monto total",
+      "downloadLabel": "descargar",
+      "shareLabel": "compartir",
+      "amount": 45.00,
+      "currency": "PYG",
+      "date": "2023-10-01T00:00:00.000Z",
+      "items": [
+        {
+          "type": "double",
+          "value": "Dinero en cuenta",
+          "subtitle": "Medio de pago",
+          "enabled": true
+        },
+        {
+          "type": "double",
+          "value": "902854390234",
+          "subtitle": "Nro. de operación",
+          "enabled": true
+        },
+        {
+          "type": "double",
+          "value": "13/12/2024 a las 15:51hs",
+          "subtitle": "Fecha y hora",
+          "enabled": true
+        }
+      ]
+    }
+  }
+}

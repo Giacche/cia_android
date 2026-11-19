@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cia_pending_title">Próximamente</string>
+    <string name="cia_pending_accept">Entendido</string>
+    <string name="cia_pending_description">Esta pantalla todavía no está migrada a Android.</string>
+    <string name="cia_copied">Copiado</string>
+    <string name="cia_share_chooser">Compartir</string>
+</resources>

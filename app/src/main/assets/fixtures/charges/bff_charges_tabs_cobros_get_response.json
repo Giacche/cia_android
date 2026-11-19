@@ -1,0 +1,71 @@
+{
+  "data": {
+    "tabsOptions": [
+      { "id": "charges", "title": "Cobros", "active": true },
+      { "id": "services", "title": "Servicios", "active": false }
+    ],
+    "filterButton": {
+      "text": "Filtrar",
+      "tag": "cia_movements_filter_btn",
+      "deeplink": ""
+    },
+    "clearFiltersButton": {
+      "text": "Limpiar",
+      "tag": "cia_movements_clear_filters_btn"
+    },
+    "charges": [
+      {
+        "id": "qr",
+        "title": "Cobro con QR",
+        "subtitle": "Visa crédito 3242",
+        "amount": "+ Gs. 125.000",
+        "date": "Hoy",
+        "hour": "",
+        "ticketNumber": "350"
+      },
+      {
+        "id": "payment_link",
+        "title": "Cobro con Link de pago",
+        "subtitle": "Mastercard crédito 2354",
+        "amount": "+ Gs. 125.000",
+        "date": "Hoy",
+        "hour": "",
+        "ticketNumber": "351"
+      },
+      {
+        "id": "payment_link",
+        "title": "Cobro con Link de pago",
+        "subtitle": "Mastercard crédito 7532",
+        "amount": "+ Gs. 10.225.000",
+        "date": "Hoy",
+        "hour": "",
+        "ticketNumber": "352"
+      },
+      {
+        "id": "payment_link",
+        "title": "Cobro con Link de pago",
+        "subtitle": "Visa crédito 3242",
+        "amount": "+ Gs. 125.000",
+        "date": "Hoy",
+        "hour": "",
+        "ticketNumber": "353"
+      },
+      {
+        "id": "qr",
+        "title": "Cobro con QR",
+        "subtitle": "Visa débito 2354",
+        "amount": "+ Gs. 125.000",
+        "date": "Hoy",
+        "hour": "",
+        "ticketNumber": "354"
+      }
+    ],
+    "emptyState": {
+      "illustration": "searchIllustration",
+      "title": "Sin resultados",
+      "subtitle": "Probá con otros filtros y volvé a intentar."
+    },
+    "page": 1,
+    "size": 30
+  }
+}

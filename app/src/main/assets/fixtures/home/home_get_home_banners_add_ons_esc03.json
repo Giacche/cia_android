@@ -1,0 +1,16 @@
+{
+  "data": {
+    "type": "HOME_BANNERS",
+    "banners": [
+      {
+        "overline": "FACTURACIÓN ELECTRÓNICA",
+        "title": "Generá y emití facturas directo desde tu uPOS.",
+        "color": "green",
+        "asset": "posIllustration",
+        "size": "m",
+        "buttonText": "Conocer más",
+        "actionType": "add_ons/electronic_billing"
+      }
+    ]
+  }
+}

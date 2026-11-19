@@ -1,0 +1,17 @@
+{
+  "data": {
+    "type": "HOME_RECENTS",
+    "emptyState": {
+      "illustration": "searchIllustration",
+      "title": "Pronto vas a ver todos tus cobros desde acá",
+      "subtitle": ""
+    },
+    "historyScreen": {
+      "tag": "cia_movements",
+      "appBarTitle": "ÚLTIMOS COBROS",
+      "type": "CHARGES",
+      "title": "Historial de cobros",
+      "pageSize": 10
+    }
+  }
+}

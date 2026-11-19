@@ -1,0 +1,104 @@
+{
+  "data": {
+    "detailScreen": {
+      "type": "DETAIL",
+      "tag": "cia_detail",
+      "appBarTitle": "DETALLE DE COBRO",
+      "date": "09 de dic. de 2018 12:02 h",
+      "title": "Monto cobrado",
+      "amount": "Gs. 200.000",
+      "stepperCard": {
+        "tag": "cia_stepper_card",
+        "title": "Estado del cobro",
+        "items": [
+          {
+            "title": "Aprobado",
+            "description": "Vas a recibir el dinero entre 24 y hasta 48 horas hábiles.",
+            "status": "completed"
+          }
+        ]
+      },
+      "paymentTypeCard": {
+        "title": "Medio de pago",
+        "subtitle": "Dinero en cuenta",
+        "detail": "Mastercard crédito 2354",
+        "icon": "mastercard"
+      },
+      "detailCard": {
+        "title": "Detalle",
+        "items": [
+          {
+            "label": "Monto a recibir",
+            "value": "Gs. 189.582"
+          },
+          {
+            "label": "Comisión ueno 3%",
+            "value": "Gs. 6.000"
+          },
+          {
+            "label": "IVA sobre comisión 10%",
+            "value": "Gs. 600"
+          },
+          {
+            "label": "Nro. de comprobante",
+            "value": "1234567890",
+            "actionLink": {
+              "action": "COPY",
+              "text": "Copiar",
+              "tag": "detail_copy_nro_op"
+            }
+          }
+        ]
+      },
+      "discountsCard": {
+        "title": "Descuentos aplicados",
+        "items": [
+          {
+            "label": "Retención de renta (sobre el cobro) 1% ",
+            "value": "Gs. 1.895"
+          },
+          {
+            "label": "Retención de IVA (sobre el cobro) 0.91%",
+            "value": "Gs. 1.726"
+          }
+        ]
+      },
+      "primaryButton": {
+        "text": "Compartir comprobante",
+        "tag": "cia_detail_compartir"
+      }
+    },
+    "receiptScreen": {
+      "type": "RECEIPT",
+      "tag": "cia_charge_detail_receipt",
+      "receiptName": "Comprobante de pago",
+      "appBarTitle": "Comprobante de pago",
+      "subTitle": "Monto total",
+      "downloadLabel": "Descargar",
+      "shareLabel": "Compartir",
+      "amount": 100.0,
+      "currency": "PYG",
+      "date": "2023-10-01T00:00:00.000Z",
+      "items": [
+        {
+          "type": "double",
+          "value": "{receiptDescription}",
+          "subtitle": "Medio de pago",
+          "enabled": true
+        },
+        {
+          "type": "double",
+          "value": "{operationId}",
+          "subtitle": "Nro. de comprobante",
+          "enabled": true
+        },
+        {
+          "type": "double",
+          "value": "{date}",
+          "subtitle": "Fecha",
+          "enabled": true
+        }
+      ]
+    }
+  }
+}

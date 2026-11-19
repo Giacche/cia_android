@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ds_retry">Reintentar</string>
+    <string name="ds_retry_title">Hubo un error</string>
+    <string name="ds_retry_description">Estamos trabajando para solucionarlo.</string>
+    <string name="ds_error_screen_title">Ocurrió un error</string>
+    <string name="ds_error_screen_description">Por favor, intentalo de nuevo. Si el error persiste, probá más tarde.</string>
+    <string name="ds_back">Volver</string>
+    <string name="ds_close">Cerrar</string>
+    <string name="ds_loading">Cargando...</string>
+</resources>

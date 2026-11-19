@@ -1,0 +1,45 @@
+{
+  "data": {
+    "type": "HOME_BANNERS",
+    "banners": [
+      {
+        "overline": "¿FILAS LARGAS?",
+        "title": "Pedí más uPOS y no pierdas ni una venta.",
+        "color": "violet",
+        "asset": "posIllustration",
+        "size": "m",
+        "buttonText": "Conocer más",
+        "actionType": "add_ons/addons"
+      },
+      {
+        "overline": "¡TU UPOS TE ESPERA!",
+        "title": "Suscribite a upay pro e impulsá tus ventas.",
+        "color": "violet",
+        "asset": "posIllustration",
+        "size": "m",
+        "buttonText": "Conocer más",
+        "actionType": "products_onboarding",
+        "type": "SUBSCRIPTION"
+      },
+      {
+        "overline": "LINK DE PAGO",
+        "title": "Vendé por chat o redes sociales.",
+        "color": "green",
+        "asset": "paymentLinkIllustration",
+        "size": "m",
+        "buttonText": "Conocer más",
+        "actionType": "products_onboarding",
+        "type": "LINK"
+      },
+      {
+        "overline": "Tus cobros suman upys",
+        "title": "¡Obtené hasta 1.000 upys!",
+        "color": "blue",
+        "asset": "upysIllustration",
+        "size": "m",
+        "buttonText": "Conocer más",
+        "actionType": "benefits/goals"
+      }
+    ]
+  }
+}

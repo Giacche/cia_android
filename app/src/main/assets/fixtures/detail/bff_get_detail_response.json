@@ -1,0 +1,97 @@
+{
+  "data": {
+    "detailScreen": {
+      "type": "DETAIL",
+      "tag": "cia_charge_detail",
+      "appBarTitle": "DETALLE DE COBRO",
+      "primaryButton": {
+        "text": "Compartir",
+        "tag": "cia_charge_detail_share"
+      },
+      "data": {
+        "title": "Cobro con tarjeta",
+        "badge": { "type": "success", "icon": "clock", "text": "Aprobado" },
+        "subtitle": "Se acreditará entre 24 y 48 horas.",
+        "card": {
+          "title": "Detalle de movimiento",
+          "items": [
+            {
+              "label": "Monto cobrado",
+              "value": "Gs. 125.000"
+            },
+            {
+              "label": "Comisión",
+              "value": "Gs. 31.750"
+            },
+            {
+              "label": "IVA",
+              "value": "Gs. 100"
+            },
+            {
+              "label": "Retencion IVA",
+              "value": "Gs. 100"
+            },
+            {
+              "label": "Renta",
+              "value": "Gs. 100"
+            },
+            {
+              "label": "Monto a recibir",
+              "value": "Gs. 121.250"
+            },
+            {
+              "label": "Moneda",
+              "value": "Guaranies"
+            },
+            {
+              "label": "Nro. de operación",
+              "value": "902854390234",
+              "actionLink": {
+                "action": "COPY",
+                "text": "Copiar",
+                "tag": "detail_copy_nro_op"
+              }
+            },
+            {
+              "label": "Fecha y hora",
+              "value": "13/12/2024 15:51 hs"
+            }
+          ],
+          "inlineMessage": null
+        }
+      }
+    },
+    "receiptScreen": {
+      "type": "RECEIPT",
+      "tag": "cia_charge_detail_receipt",
+      "receiptName": "Comprobante de pago",
+      "appBarTitle": "Comprobante de pago",
+      "subTitle": "Monto total",
+      "downloadLabel": "Descargar",
+      "shareLabel": "Compartir",
+      "amount": 2500000,
+      "currency": "PYG",
+      "date": "2025-02-20T17:51:31Z",
+      "items": [
+        {
+          "type": "double",
+          "value": "Mastercard débito terminada en 6298",
+          "subtitle": "Medio de pago",
+          "enabled": true
+        },
+        {
+          "type": "double",
+          "value": "19",
+          "subtitle": "Nro. de comprobante",
+          "enabled": true
+        },
+        {
+          "type": "double",
+          "value": "20/02/2025",
+          "subtitle": "Fecha",
+          "enabled": true
+        }
+      ]
+    }
+  }
+}
