@@ -54,8 +54,8 @@ class MovementsViewModelTest {
 
     @AfterTest fun tearDown() = Dispatchers.resetMain()
 
-    private val cobros = Fixtures.decode(MovementsResponse.serializer(), "charges", "bff_charges_tabs_cobros_get_response.json")
-    private val withFilters = Fixtures.decode(MovementsResponse.serializer(), "charges", "bff_charges_filters_get_response.json")
+    private val cobros = Contratos.decode(MovementsResponse.serializer(), "charges", "bff_charges_tabs_cobros_get_response.json")
+    private val withFilters = Contratos.decode(MovementsResponse.serializer(), "charges", "bff_charges_filters_get_response.json")
     private val screen = MovementsScreenModel("HISTORY", "cia_movements", "MOVIMIENTOS", "Movimientos", pageSize = 3)
 
     private fun viewModel(useCase: FakeMovements, session: MovementsSession = MovementsSession(screen.pageSize)) =
@@ -64,14 +64,14 @@ class MovementsViewModelTest {
     private fun MovementsViewModel.loaded() = (state.value as MovementsUiState.Loaded).value
 
     @Test
-    fun `los fixtures de cobros y de filtros se decodifican`() {
+    fun `los contratos de cobros y de filtros se decodifican`() {
         listOf(
             "bff_charges_tabs_cobros_get_response.json",
             "bff_charges_tabs_servicios_get_response.json",
             "bff_charges_tabs_servicios_filters_get_response.json",
             "bff_charges_filters_get_response.json",
             "bff_charges_filters_services_get_response.json",
-        ).forEach { Fixtures.decode(MovementsResponse.serializer(), "charges", it) }
+        ).forEach { Contratos.decode(MovementsResponse.serializer(), "charges", it) }
         assertNull(cobros.filterScreen?.let { null })
         assertTrue(withFilters.filterScreen != null)
         assertEquals(listOf("app", "payment_link", "approved", "today"), withFilters.activeFilters!!.map { it.id })

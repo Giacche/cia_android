@@ -33,7 +33,7 @@ class ValidateLimitViewModelTest {
 
     @AfterTest fun tearDown() = Dispatchers.resetMain()
 
-    private fun fixture(name: String) = Fixtures.decode(ValidateLimitResponse.serializer(), "validate", name)
+    private fun contrato(name: String) = Contratos.decode(ValidateLimitResponse.serializer(), "validate", name)
 
     private fun viewModel(
         response: ValidateLimitResponse? = null,
@@ -50,7 +50,7 @@ class ValidateLimitViewModelTest {
 
     @Test
     fun `sin CPF ni tope va directo al monto`() = runTest(dispatcher) {
-        val vm = viewModel(fixture("ios_get_validate_qr_sin_cpf_response.json"), canPop = true)
+        val vm = viewModel(contrato("ios_get_validate_qr_sin_cpf_response.json"), canPop = true)
         vm.start()
         advanceUntilIdle()
         val destination = vm.destinations.first()
@@ -64,7 +64,7 @@ class ValidateLimitViewModelTest {
 
     @Test
     fun `con pantalla de CPF va primero al CPF`() = runTest(dispatcher) {
-        val vm = viewModel(fixture("bff_get_validate_qr_response.json"))
+        val vm = viewModel(contrato("bff_get_validate_qr_response.json"))
         vm.start()
         advanceUntilIdle()
         val destination = vm.destinations.first()
@@ -73,7 +73,7 @@ class ValidateLimitViewModelTest {
 
     @Test
     fun `el tope transaccional gana sobre el CPF y el monto`() = runTest(dispatcher) {
-        val vm = viewModel(fixture("bff_get_validate_transaction_limit_response.json"))
+        val vm = viewModel(contrato("bff_get_validate_transaction_limit_response.json"))
         vm.start()
         advanceUntilIdle()
         val route = (vm.destinations.first() as ValidateLimitDestination.Replace).route

@@ -29,7 +29,7 @@ class InputAmountViewModelTest {
     private val events = mutableListOf<AnalyticsEvent>()
 
     private fun screen(name: String = "bff_get_validate_qr_response.json") =
-        Fixtures.decode(AmountOnly.serializer(), "validate", name).amountScreen
+        Contratos.decode(AmountOnly.serializer(), "validate", name).amountScreen
 
     private fun viewModel(
         screen: InputAmountScreenModel = screen(),
@@ -88,7 +88,7 @@ class InputAmountViewModelTest {
     @Test
     fun `calcula la comision y lo que recibe el comercio`() {
         val vm = viewModel(screen("ios_get_validate_qr_sin_cpf_response.json"))
-        // Este fixture trae los textos del resumen vacíos: el resumen no se muestra
+        // Este contrato trae los textos del resumen vacíos: el resumen no se muestra
         vm.didChangeAmount(BigDecimal(100000))
         assertFalse(vm.state.value.showFooterSummary)
 

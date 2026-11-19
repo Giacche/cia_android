@@ -37,7 +37,7 @@ class DetailViewModelTest {
 
     @AfterTest fun tearDown() = Dispatchers.resetMain()
 
-    private val response = Fixtures.decode(DetailResponse.serializer(), "detail", "bff_get_detail_response_v3.json")
+    private val response = Contratos.decode(DetailResponse.serializer(), "detail", "bff_get_detail_response_v3.json")
 
     private class FakeDetail(val response: DetailResponse) : DetailUseCase {
         val calls = mutableListOf<Pair<String, String?>>()
@@ -53,9 +53,9 @@ class DetailViewModelTest {
         DetailViewModel("351", "upos", useCase, Analytics(AnalyticsTracking { events += it }))
 
     @Test
-    fun `el fixture vigente del detalle se decodifica`() {
-        // Los fixtures v1 y v2 son del contrato anterior (ni Flutter ni iOS los usan en el sandbox)
-        Fixtures.decode(DetailResponse.serializer(), "detail", "bff_get_detail_response_v3.json")
+    fun `el contrato vigente del detalle se decodifica`() {
+        // Los archivos v1 y v2 son de una versión anterior del contrato (ni Flutter ni iOS los usan en el sandbox)
+        Contratos.decode(DetailResponse.serializer(), "detail", "bff_get_detail_response_v3.json")
     }
 
     @Test
@@ -118,7 +118,7 @@ class DetailViewModelTest {
     }
 
     @Test
-    fun `el fixture trae tarjeta de descuentos y un paso`() {
+    fun `el contrato trae tarjeta de descuentos y un paso`() {
         val screen = response.detailScreen
         assertNotNull(screen.discountsCard)
         assertEquals(1, screen.stepperCard.items.size)

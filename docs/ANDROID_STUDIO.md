@@ -71,7 +71,7 @@ Kotlin y el soporte de Compose ya vienen con Android Studio: no hay que instalar
 
 ## 7. Cosas que suelen confundir
 
-- **`res/` vs `assets/`:** `res/` son recursos que Android compila (strings, fuentes, íconos) con nombres en minúscula y guión bajo, por eso las fuentes son `inter_bold.ttf`. `assets/` son archivos crudos: acá viven los SVG del design system y los fixtures JSON.
+- **`res/` vs `assets/`:** `res/` son recursos que Android compila (strings, fuentes, íconos) con nombres en minúscula y guión bajo, por eso las fuentes son `inter_bold.ttf`. `assets/` son archivos crudos: acá viven los SVG del design system y los contratos JSON.
 - **`AndroidManifest.xml`:** declara permisos y actividades. Se va a usar para NFC con Tap to Phone.
 - **R8 en `release`:** achica y ofusca el código. Hoy está apagado. Al activarlo hay que agregar reglas para `kotlinx.serialization`.
 - **Emulador y NFC:** el emulador no soporta NFC; Tap to Phone se prueba en un dispositivo físico.

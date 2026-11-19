@@ -81,12 +81,12 @@ class QRGenerateViewModelTest {
     @AfterTest fun tearDown() = Dispatchers.resetMain()
 
     private fun generated(name: String = "bff_qr_post_generate_response.json") =
-        Fixtures.decode(QRGenerateResponse.serializer(), "qr", name)
+        Contratos.decode(QRGenerateResponse.serializer(), "qr", name)
 
     private fun success() = CIAJson.decodeFromString(
         CongratsConfirmDto.serializer(),
-        java.io.File("../../app/src/main/assets/fixtures/qr/bff_qr_post_confirm_response_success.json").readText().let {
-            // el fixture trae el envelope `{ "data": ... }`
+        java.io.File("../../app/src/main/assets/contratos/qr/bff_qr_post_confirm_response_success.json").readText().let {
+            // el contrato trae el envelope `{ "data": ... }`
             CIAJson.parseToJsonElement(it).let { root -> (root as kotlinx.serialization.json.JsonObject)["data"].toString() }
         },
     ).toResponse()

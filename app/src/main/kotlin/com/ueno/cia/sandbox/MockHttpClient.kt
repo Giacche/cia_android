@@ -30,7 +30,7 @@ class MockSelectionStore(context: Context) {
 }
 
 /**
- * Equivale a `smart_charge_mobile_dev_tools` (`MockHttpClientProxy`): responde con fixtures del BFF en lugar de
+ * Equivale a `smart_charge_mobile_dev_tools` (`MockHttpClientProxy`): responde con contratos del BFF en lugar de
  * pegarle a la red. Es el `HttpClient` que el sandbox le provee a CIA.
  */
 class MockHttpClient(
@@ -41,10 +41,10 @@ class MockHttpClient(
 ) : HttpClient {
     private val assets = context.applicationContext.assets
 
-    /** nombre de archivo → ruta dentro de `assets/fixtures`. */
-    private val fixtures: Map<String, String> = buildMap {
-        assets.list(FIXTURES_DIR).orEmpty().forEach { folder ->
-            assets.list("$FIXTURES_DIR/$folder").orEmpty().forEach { file -> put(file, "$FIXTURES_DIR/$folder/$file") }
+    /** nombre de archivo → ruta dentro de `assets/contratos`. */
+    private val contratos: Map<String, String> = buildMap {
+        assets.list(CONTRATOS_DIR).orEmpty().forEach { folder ->
+            assets.list("$CONTRATOS_DIR/$folder").orEmpty().forEach { file -> put(file, "$CONTRATOS_DIR/$folder/$file") }
         }
     }
 
@@ -55,14 +55,14 @@ class MockHttpClient(
             .firstOrNull { it.matches(request.method, request.path, request.query + request.headers) }
             ?: return error(404, "Sin mock para ${request.method} ${request.path}")
         return when (val response = endpoint.responses[selection.selectedIndex(endpoint)]) {
-            is MockResponse.Success -> HttpResponse(200, readFixture(response.fixture))
+            is MockResponse.Success -> HttpResponse(200, readContrato(response.contrato))
             is MockResponse.Json -> HttpResponse(200, response.body)
             is MockResponse.ApiError -> error(response.statusCode, response.description)
         }
     }
 
-    private fun readFixture(name: String): String {
-        val path = fixtures[name] ?: throw APIError.Unknown("Falta el fixture $name")
+    private fun readContrato(name: String): String {
+        val path = contratos[name] ?: throw APIError.Unknown("Falta el contrato $name")
         return assets.open(path).bufferedReader().use { it.readText() }
     }
 
@@ -70,6 +70,6 @@ class MockHttpClient(
         HttpResponse(status, """{"error":{"code":"MOCK_$status","message":"$message"}}""")
 
     private companion object {
-        const val FIXTURES_DIR = "fixtures"
+        const val CONTRATOS_DIR = "contratos"
     }
 }

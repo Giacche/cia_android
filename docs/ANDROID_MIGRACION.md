@@ -121,7 +121,7 @@ Regla de dependencias: `feature → core / designsystem`, nunca `feature → fea
 
 ### Calidad y proceso
 21. Detekt + ktlint obligatorios en CI. Warnings del compilador como errores.
-22. Tests de **ViewModel** y **UseCase** para toda feature (fakes a mano o MockK + Turbine). Los fixtures JSON son los mismos de `microapp/assets/mocks`.
+22. Tests de **ViewModel** y **UseCase** para toda feature (fakes a mano o MockK + Turbine). Los contratos JSON son los mismos de `microapp/assets/mocks`.
 23. Commits con Conventional Commits (misma regex de `commitlint.yaml`, hook `commit-msg`).
 24. Cada fase termina con las pantallas comparadas con Flutter en el sandbox, tests en verde y escenarios de mocks cargados.
 25. R8/ProGuard activos en release. Reglas de `keep` para kotlinx.serialization y Retrofit.

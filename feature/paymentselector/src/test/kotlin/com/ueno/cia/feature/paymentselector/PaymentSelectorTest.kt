@@ -59,16 +59,16 @@ class PaymentSelectorTest {
 
     @AfterTest fun tearDown() = Dispatchers.resetMain()
 
-    private fun fixture(name: String) = Fixtures.decode(PaymentSelectorResponse.serializer(), "payment_selector", name)
-    private val all = fixture("ios_get_payment_selector_todos_con_qr_internacional_response.json")
-    private val countries = fixture("bff_get_payment_selector_qr_inter_response.json")
-    private val withAlert = fixture("bff_get_payment_selector_response.json")
+    private fun contrato(name: String) = Contratos.decode(PaymentSelectorResponse.serializer(), "payment_selector", name)
+    private val all = contrato("ios_get_payment_selector_todos_con_qr_internacional_response.json")
+    private val countries = contrato("bff_get_payment_selector_qr_inter_response.json")
+    private val withAlert = contrato("bff_get_payment_selector_response.json")
     private val navigator get() = PaymentSelectorChargeNavigator(HomeAnalytics(Analytics(AnalyticsTracking { events += it })))
 
     @Test
-    fun `todos los fixtures del selector se decodifican`() {
-        File("../../app/src/main/assets/fixtures/payment_selector").listFiles()!!.filter { it.extension == "json" }.forEach {
-            fixture(it.name)
+    fun `todos los contratos del selector se decodifican`() {
+        File("../../app/src/main/assets/contratos/payment_selector").listFiles()!!.filter { it.extension == "json" }.forEach {
+            contrato(it.name)
         }
     }
 
@@ -195,7 +195,7 @@ class PaymentSelectorTest {
 
     @Test
     fun `el repositorio manda tipo sucursal y origen en headers y el tipo en query`() = runTest(dispatcher) {
-        val http = CapturingHttp(File("../../app/src/main/assets/fixtures/payment_selector/bff_get_payment_selector_qr_inter_response.json").readText())
+        val http = CapturingHttp(File("../../app/src/main/assets/contratos/payment_selector/bff_get_payment_selector_qr_inter_response.json").readText())
         val repository = PaymentSelectorRepository(CIAHttpClient(http, TenantContext(Tenant.EMPRESAS)), NoOpEvents)
         val response = repository.entryPoint("QR_INTERNATIONAL", "B9", "SELECTOR_BUSINESS")
         val request = http.request!!
@@ -209,7 +209,7 @@ class PaymentSelectorTest {
 
     @Test
     fun `sin tipo no manda query ni headers de tipo`() = runTest(dispatcher) {
-        val http = CapturingHttp(File("../../app/src/main/assets/fixtures/payment_selector/bff_get_payment_selector_response.json").readText())
+        val http = CapturingHttp(File("../../app/src/main/assets/contratos/payment_selector/bff_get_payment_selector_response.json").readText())
         PaymentSelectorRepository(CIAHttpClient(http, TenantContext(Tenant.INDIVIDUOS)), NoOpEvents).entryPoint(null, null, null)
         assertTrue(http.request!!.query.isEmpty())
         assertNull(http.request!!.headers["x-type"])

@@ -162,7 +162,7 @@ data class HomeAlertsResponse(
 // region Pendiente de liquidación (GET /v4/home/total_sales)
 
 /**
- * El fixture del sandbox Flutter usa la clave `pendingSettlement`; el modelo espera `totalSales`.
+ * El contrato del sandbox Flutter usa la clave `pendingSettlement`; el modelo espera `totalSales`.
  * Se aceptan ambas ([value] devuelve la que venga).
  */
 @Serializable

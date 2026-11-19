@@ -11,7 +11,7 @@ import com.ueno.cia.core.navigation.CIARoute
 import com.ueno.cia.core.network.APIError
 import com.ueno.cia.core.tenant.Tenant
 import com.ueno.cia.core.tenant.TenantContext
-import com.ueno.cia.feature.home.Fixtures
+import com.ueno.cia.feature.home.Contratos
 import com.ueno.cia.feature.home.data.HomeAlertsResponse
 import com.ueno.cia.feature.home.data.HomeBannersResponse
 import com.ueno.cia.feature.home.data.HomeHeaderResponse
@@ -37,23 +37,23 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 
-/** Use case que responde con los fixtures reales del BFF; cada llamada puede fallar a pedido. */
+/** Use case que responde con los contratos reales del BFF; cada llamada puede fallar a pedido. */
 private class FakeHomeUseCase(
-    layoutFixture: String = "home_get_home_layout.json",
-    headerFixture: String = "home_get_home_header.json",
-    optionsFixture: String = "home_get_home_options.json",
+    layoutContrato: String = "home_get_home_layout.json",
+    headerContrato: String = "home_get_home_header.json",
+    optionsContrato: String = "home_get_home_options.json",
 ) : HomeUseCase {
     val failing = mutableSetOf<String>()
     val calls = mutableListOf<String>()
 
-    private val layout = Fixtures.decode(HomeLayoutResponse.serializer(), "home", layoutFixture)
-    private val header = Fixtures.decode(HomeHeaderResponse.serializer(), "home", headerFixture)
-    private val options = Fixtures.decode(HomeOptionsResponse.serializer(), "home", optionsFixture)
-    private val banners = Fixtures.decode(HomeBannersResponse.serializer(), "home", "home_get_home_banners.json")
-    private val recents = Fixtures.decode(HomeRecentsResponse.serializer(), "home", "home_get_home_recents.json")
-    private val alerts = Fixtures.decode(HomeAlertsResponse.serializer(), "home", "home_get_home_alerts.json")
-    private val pending = Fixtures.decode(HomePendingSettlementResponse.serializer(), "home", "home_get_home_pending_settlement.json")
-    private val charges = Fixtures.decode(MovementsResponse.serializer(), "charges", "bff_charges_tabs_cobros_get_response.json")
+    private val layout = Contratos.decode(HomeLayoutResponse.serializer(), "home", layoutContrato)
+    private val header = Contratos.decode(HomeHeaderResponse.serializer(), "home", headerContrato)
+    private val options = Contratos.decode(HomeOptionsResponse.serializer(), "home", optionsContrato)
+    private val banners = Contratos.decode(HomeBannersResponse.serializer(), "home", "home_get_home_banners.json")
+    private val recents = Contratos.decode(HomeRecentsResponse.serializer(), "home", "home_get_home_recents.json")
+    private val alerts = Contratos.decode(HomeAlertsResponse.serializer(), "home", "home_get_home_alerts.json")
+    private val pending = Contratos.decode(HomePendingSettlementResponse.serializer(), "home", "home_get_home_pending_settlement.json")
+    private val charges = Contratos.decode(MovementsResponse.serializer(), "charges", "bff_charges_tabs_cobros_get_response.json")
 
     private fun <T> respond(name: String, value: T): T {
         calls += name
@@ -146,7 +146,7 @@ class HomeViewModelTest {
 
     @Test
     fun `un errorScreen del layout resetea a la pantalla de resultado`() = runTest(dispatcher) {
-        val vm = viewModel(FakeHomeUseCase(layoutFixture = "home_get_home_layout_error_empresas.json"))
+        val vm = viewModel(FakeHomeUseCase(layoutContrato = "home_get_home_layout_error_empresas.json"))
         vm.start()
         advanceUntilIdle()
         assertIs<HomeUiState.Failed>(vm.state.value)
@@ -173,11 +173,11 @@ class HomeViewModelTest {
         val vm = viewModel()
         vm.start()
         advanceUntilIdle()
-        // En el fixture por defecto "QR" trae un modal con los QR por proveedor
+        // En el contrato por defecto "QR" trae un modal con los QR por proveedor
         val qr = (vm.loaded().options as Loadable.Loaded).value.options.first { it.id == "QR" }
         vm.didTapOption(qr)
         assertIs<HomeDestination.OptionsSheet>(vm.destinations.first())
-        // QR_UENO viene deshabilitado en el fixture; QR_DEPAY está habilitado
+        // QR_UENO viene deshabilitado en el contrato; QR_DEPAY está habilitado
         vm.didSelectModalOption(qr.modal!!.options.first { it.id == "QR_DEPAY" })
         val destination = vm.destinations.first()
         assertIs<HomeDestination.Push>(destination)
@@ -211,18 +211,18 @@ class HomeViewModelTest {
 
     @Test
     fun `una opcion con modal abre el bottom sheet`() = runTest(dispatcher) {
-        val vm = viewModel(FakeHomeUseCase(optionsFixture = "home_get_home_options_qrs_inter.json"))
+        val vm = viewModel(FakeHomeUseCase(optionsContrato = "home_get_home_options_qrs_inter.json"))
         vm.start()
         advanceUntilIdle()
         val withModal = (vm.loaded().options as Loadable.Loaded).value.options.firstOrNull { it.modal != null }
-        assertNotNull(withModal, "El fixture de QR internacional debería traer una opción con modal")
+        assertNotNull(withModal, "El contrato de QR internacional debería traer una opción con modal")
         vm.didTapOption(withModal)
         assertIs<HomeDestination.OptionsSheet>(vm.destinations.first())
     }
 
     @Test
     fun `Android mantiene la opcion TTP`() {
-        val options = Fixtures.decode(HomeOptionsResponse.serializer(), "home", "home_get_home_options.json")
+        val options = Contratos.decode(HomeOptionsResponse.serializer(), "home", "home_get_home_options.json")
         val withTtp = options.copy(options = options.options + options.options.first().copy(id = "TTP"))
         val content = HomeViewModel.optionsContent(withTtp)
         assertTrue(content.options.any { it.id == "TTP" })
@@ -230,7 +230,7 @@ class HomeViewModelTest {
 
     @Test
     fun `sin opciones se muestra el mensaje EMPTY_OPTIONS`() {
-        val options = Fixtures.decode(HomeOptionsResponse.serializer(), "home", "home_get_home_options.json")
+        val options = Contratos.decode(HomeOptionsResponse.serializer(), "home", "home_get_home_options.json")
         val message = options.messages.firstOrNull() ?: com.ueno.cia.feature.home.data.HomeMessageModel(
             id = "EMPTY_OPTIONS", type = "information", message = "Sin opciones", description = "",
         )
@@ -244,8 +244,8 @@ class HomeViewModelTest {
     @Test
     fun `deslizar una sucursal fija el tenant y recarga lo que depende de ella`() = runTest(dispatcher) {
         val useCase = FakeHomeUseCase(
-            layoutFixture = "home_get_home_layout_individuos_carousel.json",
-            headerFixture = "home_get_home_header_individuos_carousel.json",
+            layoutContrato = "home_get_home_layout_individuos_carousel.json",
+            headerContrato = "home_get_home_header_individuos_carousel.json",
         )
         val vm = viewModel(useCase)
         vm.start()
@@ -267,8 +267,8 @@ class HomeViewModelTest {
     fun `llegar a la pagina Mostrar todas deshabilita opciones y oculta banners y recientes`() = runTest(dispatcher) {
         val vm = viewModel(
             FakeHomeUseCase(
-                layoutFixture = "home_get_home_layout_individuos_carousel.json",
-                headerFixture = "home_get_home_header_individuos_carousel.json",
+                layoutContrato = "home_get_home_layout_individuos_carousel.json",
+                headerContrato = "home_get_home_header_individuos_carousel.json",
             ),
         )
         vm.start()

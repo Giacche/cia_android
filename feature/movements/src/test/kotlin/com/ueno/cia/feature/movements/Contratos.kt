@@ -1,13 +1,13 @@
-package com.ueno.cia.feature.cpf
+package com.ueno.cia.feature.movements
 
 import com.ueno.cia.core.network.BFFEnvelope
 import com.ueno.cia.core.network.CIAJson
 import java.io.File
 import kotlinx.serialization.KSerializer
 
-/** Lee los mismos fixtures JSON del BFF que usa el sandbox (`app/src/main/assets/fixtures`). */
-object Fixtures {
-    private val root = listOf("../../app/src/main/assets/fixtures", "app/src/main/assets/fixtures")
+/** Lee los mismos contratos JSON del BFF que usa el sandbox (`app/src/main/assets/contratos`). */
+object Contratos {
+    private val root = listOf("../../app/src/main/assets/contratos", "app/src/main/assets/contratos")
         .map(::File)
         .first { it.isDirectory }
 

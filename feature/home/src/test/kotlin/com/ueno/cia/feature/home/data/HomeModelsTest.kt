@@ -2,7 +2,7 @@ package com.ueno.cia.feature.home.data
 
 import com.ueno.cia.core.model.HomeOptionKind
 import com.ueno.cia.core.model.MovementsResponse
-import com.ueno.cia.feature.home.Fixtures
+import com.ueno.cia.feature.home.Contratos
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -20,28 +20,28 @@ class HomeModelsTest {
         name.startsWith("home_get_home_recents") -> HomeRecentsResponse.serializer()
         name.contains("alerts") -> HomeAlertsResponse.serializer()
         name.contains("pending_settlement") -> HomePendingSettlementResponse.serializer()
-        else -> error("Fixture sin modelo: $name")
+        else -> error("Contrato sin modelo: $name")
     }
 
     @Test
-    fun `todos los fixtures de la home se decodifican`() {
-        val names = Fixtures.names("home")
+    fun `todos los contratos de la home se decodifican`() {
+        val names = Contratos.names("home")
         assertTrue(names.isNotEmpty())
         names.forEach { name ->
-            runCatching { Fixtures.decode(serializerFor(name), "home", name) }
+            runCatching { Contratos.decode(serializerFor(name), "home", name) }
                 .onFailure { throw AssertionError("No se pudo decodificar $name", it) }
         }
     }
 
     @Test
-    fun `el fixture de cobros se decodifica como MovementsResponse`() {
-        val response = Fixtures.decode(MovementsResponse.serializer(), "charges", "bff_charges_tabs_cobros_get_response.json")
+    fun `el contrato de cobros se decodifica como MovementsResponse`() {
+        val response = Contratos.decode(MovementsResponse.serializer(), "charges", "bff_charges_tabs_cobros_get_response.json")
         assertTrue(response.charges.isNotEmpty())
     }
 
     @Test
     fun `el layout por defecto declara sus secciones en orden`() {
-        val layout = Fixtures.decode(HomeLayoutResponse.serializer(), "home", "home_get_home_layout.json").layout
+        val layout = Contratos.decode(HomeLayoutResponse.serializer(), "home", "home_get_home_layout.json").layout
         assertEquals(
             listOf("header", "alerts", "options", "banners", "recents"),
             layout.sections.map { it.id }.take(5),
@@ -51,7 +51,7 @@ class HomeModelsTest {
 
     @Test
     fun `el layout de error de Empresas trae errorScreen`() {
-        val layout = Fixtures.decode(HomeLayoutResponse.serializer(), "home", "home_get_home_layout_error_empresas.json").layout
+        val layout = Contratos.decode(HomeLayoutResponse.serializer(), "home", "home_get_home_layout_error_empresas.json").layout
         assertNotNull(layout.errorScreen)
     }
 
@@ -86,7 +86,7 @@ class HomeModelsTest {
 
     @Test
     fun `las opciones sin disabled quedan habilitadas`() {
-        val options = Fixtures.decode(HomeOptionsResponse.serializer(), "home", "home_get_home_options.json")
+        val options = Contratos.decode(HomeOptionsResponse.serializer(), "home", "home_get_home_options.json")
         assertTrue(options.options.isNotEmpty())
         assertTrue(options.options.all { !it.disabled || it.disabled })
     }

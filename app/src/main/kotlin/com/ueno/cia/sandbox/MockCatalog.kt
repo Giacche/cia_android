@@ -7,8 +7,8 @@ import com.ueno.cia.core.network.HttpMethod
 sealed interface MockResponse {
     val description: String
 
-    /** Fixture JSON de `assets/fixtures/<flujo>/` (ya trae el envelope `{ "data": ... }`). */
-    data class Success(override val description: String, val fixture: String) : MockResponse
+    /** Contrato JSON de `assets/contratos/<flujo>/` (ya trae el envelope `{ "data": ... }`). */
+    data class Success(override val description: String, val contrato: String) : MockResponse
     data class Json(override val description: String, val body: String) : MockResponse
     data class ApiError(override val description: String, val statusCode: Int) : MockResponse
 }
@@ -44,10 +44,10 @@ data class MockFlow(val name: String, val endpoints: List<MockEndpoint>)
 
 /**
  * Equivale a `mock_settings` de Flutter y a `MockCatalog` de iOS. La primera respuesta de cada
- * endpoint es el default. Los fixtures son los mismos JSON del BFF que usan las otras dos plataformas.
+ * endpoint es el default. Los contratos son los mismos JSON del BFF que usan las otras dos plataformas.
  */
 object MockCatalog {
-    private fun success(description: String, fixture: String) = MockResponse.Success(description, fixture)
+    private fun success(description: String, contrato: String) = MockResponse.Success(description, contrato)
     private fun error500() = MockResponse.ApiError("Error 500", 500)
 
     val home = MockFlow(

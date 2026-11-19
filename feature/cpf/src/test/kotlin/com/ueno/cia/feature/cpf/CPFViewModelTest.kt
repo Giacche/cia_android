@@ -29,7 +29,7 @@ private data class ValidateAmount(val amountScreen: InputAmountScreenModel, val 
 class CPFViewModelTest {
     private val events = mutableListOf<AnalyticsEvent>()
 
-    private val response = Fixtures.decode(ValidateAmount.serializer(), "validate", "bff_get_validate_qr_response.json")
+    private val response = Contratos.decode(ValidateAmount.serializer(), "validate", "bff_get_validate_qr_response.json")
     private val cpfScreen = response.cpfScreen!!
 
     private fun viewModel(canPop: Boolean = true) = CPFViewModel(

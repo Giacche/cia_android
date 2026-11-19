@@ -73,8 +73,8 @@ class LinkViewModelsTest {
 
     @AfterTest fun tearDown() = Dispatchers.resetMain()
 
-    private val list = Fixtures.decode(LinkListResponse.serializer(), "link", "bff_link_get_list_response.json")
-    private val emptyList = Fixtures.decode(LinkListResponse.serializer(), "link", "bff_link_get_list_empty_state_response.json")
+    private val list = Contratos.decode(LinkListResponse.serializer(), "link", "bff_link_get_list_response.json")
+    private val emptyList = Contratos.decode(LinkListResponse.serializer(), "link", "bff_link_get_list_empty_state_response.json")
     private fun item(n: Int) = LinkListItemModel("Link $n", "Gs. $n")
 
     private fun listViewModel(useCase: FakeLinkList) = LinkListViewModel(useCase, Analytics(AnalyticsTracking { events += it }))
@@ -83,10 +83,10 @@ class LinkViewModelsTest {
     // region Mis links
 
     @Test
-    fun `los fixtures de la lista y de generar se decodifican`() {
+    fun `los contratos de la lista y de generar se decodifican`() {
         assertNotNull(list.linkListScreen)
         assertNotNull(emptyList.linkListScreen)
-        val raw = File("../../app/src/main/assets/fixtures/link/bff_link_post_generate_response.json").readText()
+        val raw = File("../../app/src/main/assets/contratos/link/bff_link_post_generate_response.json").readText()
         val data = CIAJson.parseToJsonElement(raw).let { (it as kotlinx.serialization.json.JsonObject)["data"].toString() }
         assertTrue(CIAJson.decodeFromString(CongratsConfirmDto.serializer(), data).toResponse().hasResponse)
     }
@@ -193,8 +193,8 @@ class LinkViewModelsTest {
     // region Pre-confirmación
 
     private fun flowInput(withTyc: Boolean): LinkFlowInput {
-        val raw = File("../../app/src/main/assets/fixtures/validate/bff_get_validate_link_response.json").readText()
-        val screen = Fixtures.decode(PreConfirmOnly.serializer(), "validate", "bff_get_validate_link_response.json").linkPreConfirmScreen!!
+        val raw = File("../../app/src/main/assets/contratos/validate/bff_get_validate_link_response.json").readText()
+        val screen = Contratos.decode(PreConfirmOnly.serializer(), "validate", "bff_get_validate_link_response.json").linkPreConfirmScreen!!
         return LinkFlowInput(
             chargeType = ChargeType.LINK,
             provider = ChargeProvider.LINK,
@@ -256,7 +256,7 @@ class LinkViewModelsTest {
     }
 
     private fun generated(): CongratsConfirmResponse {
-        val raw = File("../../app/src/main/assets/fixtures/link/bff_link_post_generate_response.json").readText()
+        val raw = File("../../app/src/main/assets/contratos/link/bff_link_post_generate_response.json").readText()
         val data = CIAJson.parseToJsonElement(raw).let { (it as kotlinx.serialization.json.JsonObject)["data"].toString() }
         return CIAJson.decodeFromString(CongratsConfirmDto.serializer(), data).toResponse()
     }
