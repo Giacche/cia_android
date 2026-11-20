@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -34,11 +33,7 @@ import com.ueno.cia.designsystem.tokens.Spacing
 
 /** Punto de entrada del Monto para el host: conecta el [InputAmountViewModel] con la pantalla. */
 @Composable
-fun InputAmountRoute(
-    viewModel: InputAmountViewModel,
-    onDestination: (InputAmountDestination) -> Unit,
-    modifier: Modifier = Modifier,
-) {
+fun InputAmountRoute(viewModel: InputAmountViewModel, onDestination: (InputAmountDestination) -> Unit, modifier: Modifier = Modifier) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val navigate by rememberUpdatedState(onDestination)
     LaunchedEffect(viewModel) { viewModel.destinations.collect { navigate(it) } }

@@ -123,7 +123,8 @@ Navigation Compose solo pasa primitivos y enums. Las rutas con modelos del BFF (
 ```
 app                    Sandbox: Testing App, MockHttpClient, catálogo de mocks, pantalla "Mocks"
 cia-kit                CIAModule (punto de entrada), CIANavHost (grafo), PlatformActions, placeholders
-core                   Kotlin puro (JVM): red, tenant, analytics, eventos, modelos compartidos, CIARoute
+core                   Kotlin puro (JVM): red, tenant, analytics, flags y experimentos, contrato de almacén seguro, modelos compartidos, CIARoute
+storage                Android: DataStore (preferencias y flags), Room (caché con vencimiento) y Android Keystore (secretos cifrados)
 designsystem           Tokens, tipografía, componentes Compose, íconos e ilustraciones SVG
 feature/
   home                 Home modular (una sección por archivo)
@@ -234,7 +235,7 @@ Catálogo actual: Home (layout, header, opciones, banners, recientes, alertas, t
 
 ## 7. Tests
 
-Más de **250 tests unitarios** que corren en la JVM (sin emulador):
+**305 tests unitarios** que corren en la JVM (sin emulador), más **12 instrumentados** que corren en un emulador o dispositivo:
 
 | Qué | Dónde |
 |-----|-------|
@@ -244,6 +245,11 @@ Más de **250 tests unitarios** que corren en la JVM (sin emulador):
 | Reglas del monto (mínimo, máximo, comisión, descripción) | `feature/inputamount` |
 | Formato de moneda, plantillas y serialización de montos | `core` |
 | Repositorio de PaymentSelector (headers y query reales) | `feature/paymentselector` |
+| Cliente HTTP del host (headers por tenant, errores, decodificación) con **MockK** | `core` |
+| Feature flags, reparto de experimentos A/B y analítica con varios destinos | `core` |
+| Cifrado AES-GCM, almacén seguro, caché con vencimiento y flags en DataStore | `storage` |
+| **Instrumentados**: Android Keystore real y Room (8) | `storage/src/androidTest` |
+| **Instrumentados**: UI del sandbox y etiquetas de accesibilidad (4) | `app/src/androidTest` |
 
 Convenciones:
 
@@ -251,7 +257,7 @@ Convenciones:
 - Se usan `StandardTestDispatcher` y `Dispatchers.setMain`; para tiempo virtual, `advanceTimeBy`.
 - Un `SharedFlow` sin suscriptores **descarta** las emisiones: en los tests hay que suscribirse antes de emitir.
 
-Pendiente: UI tests instrumentados sobre el sandbox y tests de snapshot del design system.
+Los instrumentados se corren con `./gradlew :storage:connectedDebugAndroidTest :app:connectedDebugAndroidTest` (necesitan un emulador). Pendiente: correrlos en el CI y tests de snapshot del design system. Detalle en [docs/12_CALIDAD_Y_CI.md](docs/12_CALIDAD_Y_CI.md).
 
 ---
 
@@ -340,10 +346,13 @@ La propuesta inicial está en [docs/ANDROID_MIGRACION.md](docs/ANDROID_MIGRACION
 - **Eventos de error al BFF** (`/events`): el sandbox usa un reportador vacío; falta el `EventsRepository` real.
 - **Marca de agua en mosaico** del comprobante (iOS la tiene).
 - **Conectividad real** para el polling del QR: hoy el valor por defecto es "siempre conectado"; el host debe proveer la implementación.
-- **Calidad de código:** Detekt y ktlint (o Spotless) todavía no están configurados; tampoco `gradle-daemon-jvm.properties` ni convention plugins.
-- **R8 / ofuscación** de `release`: apagado; al activarlo hay que agregar reglas para `kotlinx.serialization`.
-- **Accesibilidad** (TalkBack, escala de fuente), **UI tests** y **tests de snapshot**.
-- **`applicationId`** definitivo, configuraciones Dev/Staging y CI.
+- **CI:** el workflow de GitHub Actions está escrito pero **nunca corrió en GitHub**; no corre los tests instrumentados.
+- **Adaptadores de Firebase y Amplitude** y crash reporting: necesitan credenciales. Ver [docs/15_FEATURE_FLAGS_Y_ANALITICA.md](docs/15_FEATURE_FLAGS_Y_ANALITICA.md).
+- **Publicación en Google Play**: el release firmado con R8 y el AAB funcionan, pero falta la app en Play Console y el pipeline de subida. Ver [docs/16_PUBLICACION_PLAY.md](docs/16_PUBLICACION_PLAY.md).
+- **Profiling** (Macrobenchmark, Baseline Profile), **Hilt** en la app host, **SonarQube** y cobertura. Ver [docs/17_ROADMAP_PRODUCCION.md](docs/17_ROADMAP_PRODUCCION.md).
+- **Accesibilidad** completa (TalkBack, escala de fuente) y **tests de snapshot**: hoy solo se verifica que los controles tengan etiqueta.
+- **`applicationId`** definitivo y configuraciones Dev/Staging.
+- **`gradle-daemon-jvm.properties`** y convention plugins.
 - **Decisiones abiertas** con el equipo: `minSdk` definitivo, cómo provee el host el cliente de red, y si se migra a AGP 9.
 
 ---
@@ -355,5 +364,12 @@ La propuesta inicial está en [docs/ANDROID_MIGRACION.md](docs/ANDROID_MIGRACION
 | [docs/10_PLAN_DE_MIGRACION.md](docs/10_PLAN_DE_MIGRACION.md) | Estado por fase y bloque, desvíos y cómo probar cada flujo en el sandbox |
 | [docs/ANDROID_MIGRACION.md](docs/ANDROID_MIGRACION.md) | Propuesta inicial: tecnología elegida, buenas prácticas y cómo compilar en un emulador |
 | [docs/ANDROID_STUDIO.md](docs/ANDROID_STUDIO.md) | Guía de Android Studio con equivalencias de Xcode y Flutter |
+| [docs/12_CALIDAD_Y_CI.md](docs/12_CALIDAD_Y_CI.md) | ktlint, Detekt, MockK y el pipeline de GitHub Actions |
+| [docs/13_TRUNK_BASED.md](docs/13_TRUNK_BASED.md) | Estrategia de ramas |
+| [docs/14_DATOS_Y_SEGURIDAD.md](docs/14_DATOS_Y_SEGURIDAD.md) | DataStore, Room y cifrado con Android Keystore |
+| [docs/15_FEATURE_FLAGS_Y_ANALITICA.md](docs/15_FEATURE_FLAGS_Y_ANALITICA.md) | Feature flags, A/B testing y analítica con varios destinos |
+| [docs/16_PUBLICACION_PLAY.md](docs/16_PUBLICACION_PLAY.md) | Release firmado, R8, AAB y ciclo de publicación en Google Play |
+| [docs/17_ROADMAP_PRODUCCION.md](docs/17_ROADMAP_PRODUCCION.md) | Qué está verificado, qué falta y cómo comprobarlo |
+| [docs/PROPUESTA_MOCK_KIT.md](docs/PROPUESTA_MOCK_KIT.md) | Propuesta para ofrecer la estrategia de mocks como librería a otros equipos |
 | `cia_ios/CIA/docs/` | Guías de la migración a iOS (arquitectura, reglas, navegación, networking, modelos, UI, testing, inventario de features…) |
 | `smart_charge_microapp/` | Código Flutter de origen (fuente de verdad del comportamiento) |

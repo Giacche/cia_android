@@ -2,6 +2,7 @@ package com.ueno.cia.designsystem.images
 
 import android.content.Context
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -14,7 +15,6 @@ import androidx.compose.ui.unit.Dp
 import coil3.ImageLoader
 import coil3.compose.AsyncImage
 import coil3.svg.SvgDecoder
-import androidx.compose.foundation.shape.CircleShape
 
 /**
  * Íconos e ilustraciones extraídos del design system Flutter (`assets/ds/icons` y `assets/ds/illustrations`, SVG).
@@ -25,7 +25,9 @@ object DSAssets {
     private const val ILLUSTRATIONS = "ds/illustrations"
 
     @Volatile private var icons: Map<String, String>? = null
+
     @Volatile private var illustrations: Map<String, String>? = null
+
     @Volatile private var loader: ImageLoader? = null
 
     /** Ruta del SVG del ícono, o `null` si el nombre no existe en el design system. */
@@ -47,13 +49,12 @@ object DSAssets {
         return illustrationPath(context, "flag.${iconName.substring(prefix.length).lowercase()}")
     }
 
-    fun imageLoader(context: Context): ImageLoader =
-        loader ?: synchronized(this) {
-            loader ?: ImageLoader.Builder(context.applicationContext)
-                .components { add(SvgDecoder.Factory()) }
-                .build()
-                .also { loader = it }
-        }
+    fun imageLoader(context: Context): ImageLoader = loader ?: synchronized(this) {
+        loader ?: ImageLoader.Builder(context.applicationContext)
+            .components { add(SvgDecoder.Factory()) }
+            .build()
+            .also { loader = it }
+    }
 
     private fun index(
         context: Context,
@@ -94,11 +95,7 @@ fun hasDSIcon(name: String): Boolean {
 
 /** Ilustración del design system a color (sin tinte). */
 @Composable
-fun DSIllustration(
-    name: String,
-    modifier: Modifier = Modifier,
-    contentScale: ContentScale = ContentScale.Fit,
-) {
+fun DSIllustration(name: String, modifier: Modifier = Modifier, contentScale: ContentScale = ContentScale.Fit) {
     val context = LocalContext.current
     val path = remember(name) { DSAssets.illustrationPath(context, name) } ?: return
     AsyncImage(

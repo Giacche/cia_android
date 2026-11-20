@@ -16,14 +16,14 @@ import com.ueno.cia.core.navigation.CIARoute
 import com.ueno.cia.feature.congrats.ui.CongratsDestination
 import com.ueno.cia.feature.congrats.ui.CongratsKind
 import com.ueno.cia.feature.congrats.ui.CongratsViewModel
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import java.math.BigDecimal
 import java.time.Instant
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 import kotlin.test.assertTrue
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
 
 class CongratsViewModelTest {
     private val events = mutableListOf<AnalyticsEvent>()
@@ -48,11 +48,8 @@ class CongratsViewModelTest {
         amount = BigDecimal(10), currency = "PYG", date = Instant.EPOCH, items = emptyList(),
     )
 
-    private fun viewModel(
-        screen: CongratsScreenModel = screen(),
-        origin: CongratsOrigin? = null,
-        receipt: ReceiptScreenModel? = null,
-    ) = CongratsViewModel(CongratsInput(screen, origin, receipt), Analytics(AnalyticsTracking { events += it }))
+    private fun viewModel(screen: CongratsScreenModel = screen(), origin: CongratsOrigin? = null, receipt: ReceiptScreenModel? = null) =
+        CongratsViewModel(CongratsInput(screen, origin, receipt), Analytics(AnalyticsTracking { events += it }))
 
     @Test
     fun `el tipo visual sale de feedbackScreenType`() {
@@ -161,7 +158,10 @@ class CongratsViewModelTest {
     fun `las acciones de la tarjeta copian y comparten`() = runBlocking {
         val copy = CongratsCardItemModel("Ref", "123", actionButton = CongratsCardItemActionButtonModel("COPY", "copy", "t", "123"))
         val share = CongratsCardItemModel(
-            "Link", "x", shareDescription = "texto", actionButton = CongratsCardItemActionButtonModel("SHARE", "share", "t", "x"),
+            "Link",
+            "x",
+            shareDescription = "texto",
+            actionButton = CongratsCardItemActionButtonModel("SHARE", "share", "t", "x"),
         )
         val vm = viewModel()
         vm.didTapCardAction(copy)

@@ -41,12 +41,7 @@ private enum class FilterSheet { Channel, Method, Status }
 
 /** Punto de entrada de los filtros para el host. */
 @Composable
-fun MovementsFiltersRoute(
-    viewModel: MovementsFiltersViewModel,
-    onPop: () -> Unit,
-    onBack: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
+fun MovementsFiltersRoute(viewModel: MovementsFiltersViewModel, onPop: () -> Unit, onBack: () -> Unit, modifier: Modifier = Modifier) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val pop by rememberUpdatedState(onPop)
     LaunchedEffect(viewModel) {
@@ -166,7 +161,11 @@ fun MovementsFiltersScreen(
                     DSTextField(
                         label = screen.amount.from.title,
                         value = state.amountFrom?.let { MovementsFiltersViewModel.thousands(it.toLong().toString()) }.orEmpty(),
-                        onValueChange = { viewModel.setAmountFrom(MovementsFiltersViewModel.amountOf(MovementsFiltersViewModel.thousands(it))) },
+                        onValueChange = {
+                            viewModel.setAmountFrom(
+                                MovementsFiltersViewModel.amountOf(MovementsFiltersViewModel.thousands(it)),
+                            )
+                        },
                         placeholder = screen.amount.from.hint,
                         keyboardType = KeyboardType.Number,
                         modifier = Modifier.weight(1f).testTag("cia_filter_amount_from"),
@@ -174,7 +173,11 @@ fun MovementsFiltersScreen(
                     DSTextField(
                         label = screen.amount.to.title,
                         value = state.amountTo?.let { MovementsFiltersViewModel.thousands(it.toLong().toString()) }.orEmpty(),
-                        onValueChange = { viewModel.setAmountTo(MovementsFiltersViewModel.amountOf(MovementsFiltersViewModel.thousands(it))) },
+                        onValueChange = {
+                            viewModel.setAmountTo(
+                                MovementsFiltersViewModel.amountOf(MovementsFiltersViewModel.thousands(it)),
+                            )
+                        },
                         placeholder = screen.amount.to.hint,
                         keyboardType = KeyboardType.Number,
                         modifier = Modifier.weight(1f).testTag("cia_filter_amount_to"),

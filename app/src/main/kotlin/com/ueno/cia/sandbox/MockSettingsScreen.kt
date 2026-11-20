@@ -31,7 +31,6 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ueno.cia.designsystem.components.StatusBarIcons
@@ -51,11 +50,7 @@ private fun system(size: Int, weight: FontWeight = FontWeight.Normal, color: Col
  * vuelve a las respuestas por defecto y "Listo" cierra. No recarga CIA: la respuesta elegida se usa en el próximo pedido.
  */
 @Composable
-fun MockSettingsScreen(
-    flows: List<MockFlow>,
-    selection: MockSelectionStore,
-    onClose: () -> Unit,
-) {
+fun MockSettingsScreen(flows: List<MockFlow>, selection: MockSelectionStore, onClose: () -> Unit) {
     StatusBarIcons(darkIcons = true)
     BackHandler(onBack = onClose)
     val endpoints = remember(flows) { flows.flatMap { it.endpoints } }

@@ -54,12 +54,7 @@ import kotlinx.coroutines.launch
  * imagen. (Falta la marca de agua en mosaico de la tarjeta.)
  */
 @Composable
-fun ReceiptScreen(
-    screen: ReceiptScreenModel,
-    platform: PlatformActions,
-    onBack: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
+fun ReceiptScreen(screen: ReceiptScreenModel, platform: PlatformActions, onBack: () -> Unit, modifier: Modifier = Modifier) {
     val capture = rememberCaptureLayer()
     val scope = rememberCoroutineScope()
     CIAScaffold(
@@ -95,7 +90,12 @@ private fun ReceiptCard(screen: ReceiptScreenModel, modifier: Modifier = Modifie
         verticalArrangement = Arrangement.spacedBy(Spacing.xl),
     ) {
         Column {
-            DSIllustration("uenoLogo", modifier = Modifier.height(20.dp).size(width = 132.dp, height = 20.dp).semantics { contentDescription = "ueno bank" })
+            DSIllustration(
+                "uenoLogo",
+                modifier = Modifier.height(20.dp).size(width = 132.dp, height = 20.dp).semantics {
+                    contentDescription = "ueno bank"
+                },
+            )
             Spacer(Modifier.height(Spacing.m))
             DSText(screen.receiptName, DSTextStyle.BodyLStrong)
             Spacer(Modifier.height(Spacing.m))

@@ -4,6 +4,7 @@ import com.ueno.cia.core.analytics.Analytics
 import com.ueno.cia.core.analytics.AnalyticsEvent
 import com.ueno.cia.core.analytics.AnalyticsTracking
 import com.ueno.cia.core.analytics.HomeAnalytics
+import com.ueno.cia.core.events.NoOpEvents
 import com.ueno.cia.core.model.ChargeProvider
 import com.ueno.cia.core.model.ChargeType
 import com.ueno.cia.core.model.PaymentSelectorResponse
@@ -16,7 +17,6 @@ import com.ueno.cia.core.network.HttpRequest
 import com.ueno.cia.core.network.HttpResponse
 import com.ueno.cia.core.tenant.Tenant
 import com.ueno.cia.core.tenant.TenantContext
-import com.ueno.cia.core.events.NoOpEvents
 import com.ueno.cia.feature.paymentselector.data.PaymentSelectorRepository
 import com.ueno.cia.feature.paymentselector.domain.PaymentSelectorUseCase
 import com.ueno.cia.feature.paymentselector.ui.PaymentSelectorChargeNavigator
@@ -25,14 +25,6 @@ import com.ueno.cia.feature.paymentselector.ui.PaymentSelectorCountryViewModel
 import com.ueno.cia.feature.paymentselector.ui.PaymentSelectorDestination
 import com.ueno.cia.feature.paymentselector.ui.PaymentSelectorEntryPointViewModel
 import com.ueno.cia.feature.paymentselector.ui.PaymentSelectorViewModel
-import java.io.File
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertIs
-import kotlin.test.assertNull
-import kotlin.test.assertTrue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
@@ -41,6 +33,14 @@ import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
+import java.io.File
+import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertIs
+import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 private class FakeSelector(var response: PaymentSelectorResponse?) : PaymentSelectorUseCase {
     val calls = mutableListOf<Triple<String?, String?, String?>>()
@@ -78,7 +78,8 @@ class PaymentSelectorTest {
     fun `el entry point pide las opciones y reemplaza por el selector`() = runTest(dispatcher) {
         val useCase = FakeSelector(all)
         val vm = PaymentSelectorEntryPointViewModel("QR", "B1", "SELECTOR_BUSINESS", useCase)
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         assertEquals(Triple<String?, String?, String?>("QR", "B1", "SELECTOR_BUSINESS"), useCase.calls.single())
         val destination = vm.destinations.first()
         assertIs<PaymentSelectorDestination.Replace>(destination)
@@ -90,11 +91,13 @@ class PaymentSelectorTest {
     @Test
     fun `sin pantalla en la respuesta o con error falla y volver sale`() = runTest(dispatcher) {
         val empty = PaymentSelectorEntryPointViewModel(null, null, null, FakeSelector(PaymentSelectorResponse(null)))
-        empty.start(); advanceUntilIdle()
+        empty.start()
+        advanceUntilIdle()
         assertEquals(PaymentSelectorEntryPointViewModel.State.Failed, empty.state.value)
 
         val failing = PaymentSelectorEntryPointViewModel(null, null, null, FakeSelector(null))
-        failing.start(); advanceUntilIdle()
+        failing.start()
+        advanceUntilIdle()
         assertEquals(PaymentSelectorEntryPointViewModel.State.Failed, failing.state.value)
         failing.didTapBackFromError()
         assertEquals(PaymentSelectorDestination.Back, failing.destinations.first())
@@ -164,7 +167,8 @@ class PaymentSelectorTest {
     fun `el selector de paises pide QR_INTERNATIONAL y navega al cobro del pais`() = runTest(dispatcher) {
         val useCase = FakeSelector(countries)
         val vm = PaymentSelectorCountryViewModel("B7", "SELECTOR_BUSINESS", useCase, navigator)
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         assertEquals(Triple<String?, String?, String?>("QR_INTERNATIONAL", "B7", "SELECTOR_BUSINESS"), useCase.calls.single())
         val loaded = assertIs<PaymentSelectorCountryState.Loaded>(vm.state.value)
         vm.didTapOption(loaded.screen.data.options.first { it.id == "QR_BOLIVIA" })
@@ -177,7 +181,8 @@ class PaymentSelectorTest {
     @Test
     fun `si no vienen paises el selector falla`() = runTest(dispatcher) {
         val vm = PaymentSelectorCountryViewModel(null, null, FakeSelector(PaymentSelectorResponse(null)), navigator)
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         assertEquals(PaymentSelectorCountryState.Failed, vm.state.value)
     }
 
@@ -195,7 +200,10 @@ class PaymentSelectorTest {
 
     @Test
     fun `el repositorio manda tipo sucursal y origen en headers y el tipo en query`() = runTest(dispatcher) {
-        val http = CapturingHttp(File("../../app/src/main/assets/contratos/payment_selector/bff_get_payment_selector_qr_inter_response.json").readText())
+        val http =
+            CapturingHttp(
+                File("../../app/src/main/assets/contratos/payment_selector/bff_get_payment_selector_qr_inter_response.json").readText(),
+            )
         val repository = PaymentSelectorRepository(CIAHttpClient(http, TenantContext(Tenant.EMPRESAS)), NoOpEvents)
         val response = repository.entryPoint("QR_INTERNATIONAL", "B9", "SELECTOR_BUSINESS")
         val request = http.request!!
@@ -209,7 +217,8 @@ class PaymentSelectorTest {
 
     @Test
     fun `sin tipo no manda query ni headers de tipo`() = runTest(dispatcher) {
-        val http = CapturingHttp(File("../../app/src/main/assets/contratos/payment_selector/bff_get_payment_selector_response.json").readText())
+        val http =
+            CapturingHttp(File("../../app/src/main/assets/contratos/payment_selector/bff_get_payment_selector_response.json").readText())
         PaymentSelectorRepository(CIAHttpClient(http, TenantContext(Tenant.INDIVIDUOS)), NoOpEvents).entryPoint(null, null, null)
         assertTrue(http.request!!.query.isEmpty())
         assertNull(http.request!!.headers["x-type"])

@@ -7,13 +7,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.ueno.cia.core.model.HomeInformationAlertModel
 import com.ueno.cia.designsystem.components.InlineMessage
 import com.ueno.cia.designsystem.components.InlineMessageState
 import com.ueno.cia.designsystem.components.PagingCarousel
 import com.ueno.cia.designsystem.components.RetryView
 import com.ueno.cia.designsystem.components.Skeleton
 import com.ueno.cia.designsystem.tokens.Spacing
-import com.ueno.cia.core.model.HomeInformationAlertModel
 import com.ueno.cia.feature.home.ui.Loadable
 
 /** Alertas (`HomeAlertsWidget`): una sola alerta fija o varias en carrusel. */

@@ -24,11 +24,12 @@ object NoOpAnalyticsTracking : AnalyticsTracking {
 
 /** Equivale a `Analytics` (analytics_helper.dart). */
 class Analytics(private val tracker: AnalyticsTracking) {
-    fun flowStart(stepName: String, label: String, destination: String, subFlow: String, extra: Map<String, String>) =
-        track(
-            AnalyticsEvent.Kind.FLOW_START, subFlow, extra,
-            mapOf("stepName" to stepName, "eventLabel" to label, "elementDestination" to destination),
-        )
+    fun flowStart(stepName: String, label: String, destination: String, subFlow: String, extra: Map<String, String>) = track(
+        AnalyticsEvent.Kind.FLOW_START,
+        subFlow,
+        extra,
+        mapOf("stepName" to stepName, "eventLabel" to label, "elementDestination" to destination),
+    )
 
     fun screenView(subFlow: String, screenName: String, extra: Map<String, String> = emptyMap()) =
         track(AnalyticsEvent.Kind.CUSTOM_SCREEN_VIEW, subFlow, mapOf(SCREEN_NAME_KEY to screenName) + extra, emptyMap())
@@ -41,7 +42,9 @@ class Analytics(private val tracker: AnalyticsTracking) {
         subFlow: String,
         extra: Map<String, String>,
     ) = track(
-        AnalyticsEvent.Kind.FLOW_STEP_CONTINUE, subFlow, extra,
+        AnalyticsEvent.Kind.FLOW_STEP_CONTINUE,
+        subFlow,
+        extra,
         mapOf(
             "stepName" to stepName,
             "previousStepName" to previousStepName,
@@ -51,29 +54,32 @@ class Analytics(private val tracker: AnalyticsTracking) {
     )
 
     /** `Analytics.trackFlowSuccess`: `status` es `ok`, `error` o `N/A`. */
-    fun flowSuccess(stepName: String, previousStepName: String, status: String, subFlow: String, extra: Map<String, String>) =
-        track(
-            AnalyticsEvent.Kind.FLOW_SUCCESS, subFlow, extra,
-            mapOf("stepName" to stepName, "previousStepName" to previousStepName, "status" to status),
-        )
+    fun flowSuccess(stepName: String, previousStepName: String, status: String, subFlow: String, extra: Map<String, String>) = track(
+        AnalyticsEvent.Kind.FLOW_SUCCESS,
+        subFlow,
+        extra,
+        mapOf("stepName" to stepName, "previousStepName" to previousStepName, "status" to status),
+    )
 
     /** `Analytics.trackErrorEvent` con `errorType` `api`. */
-    fun error(serviceName: String, errorCode: Int, errorMessage: String, subFlow: String, extra: Map<String, String>) =
-        track(
-            AnalyticsEvent.Kind.ERROR, subFlow, extra,
-            mapOf(
-                "serviceName" to serviceName,
-                "errorCode" to errorCode.toString(),
-                "errorType" to "api",
-                "errorMessage" to errorMessage,
-            ),
-        )
+    fun error(serviceName: String, errorCode: Int, errorMessage: String, subFlow: String, extra: Map<String, String>) = track(
+        AnalyticsEvent.Kind.ERROR,
+        subFlow,
+        extra,
+        mapOf(
+            "serviceName" to serviceName,
+            "errorCode" to errorCode.toString(),
+            "errorType" to "api",
+            "errorMessage" to errorMessage,
+        ),
+    )
 
-    fun buttonTap(label: String, destination: String, subFlow: String, extra: Map<String, String>) =
-        track(
-            AnalyticsEvent.Kind.BUTTON_TAP, subFlow, extra,
-            mapOf("eventLabel" to label, "elementDestination" to destination, "eventCategory" to BUTTON_CATEGORY),
-        )
+    fun buttonTap(label: String, destination: String, subFlow: String, extra: Map<String, String>) = track(
+        AnalyticsEvent.Kind.BUTTON_TAP,
+        subFlow,
+        extra,
+        mapOf("eventLabel" to label, "elementDestination" to destination, "eventCategory" to BUTTON_CATEGORY),
+    )
 
     private fun track(kind: AnalyticsEvent.Kind, subFlow: String, extra: Map<String, String>, parameters: Map<String, String>) {
         tracker.track(AnalyticsEvent(kind, SQUAD_NAME, FLOW, subFlow, parameters, extra))

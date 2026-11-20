@@ -16,13 +16,13 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.ueno.cia.core.model.ButtonModel
-import com.ueno.cia.designsystem.R as DSR
 import com.ueno.cia.designsystem.components.DSIconButton
 import com.ueno.cia.designsystem.components.DSIconButtonMode
 import com.ueno.cia.designsystem.components.DSText
 import com.ueno.cia.designsystem.tokens.DSColor
 import com.ueno.cia.designsystem.tokens.DSTextStyle
 import com.ueno.cia.designsystem.tokens.Spacing
+import com.ueno.cia.designsystem.R as DSR
 
 /** App bar de la Home sobre el header oscuro: atrás, título y accesos a perfil / ayuda. */
 @Composable

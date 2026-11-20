@@ -12,13 +12,6 @@ import com.ueno.cia.feature.detail.domain.DetailUseCase
 import com.ueno.cia.feature.detail.ui.DetailDestination
 import com.ueno.cia.feature.detail.ui.DetailUiState
 import com.ueno.cia.feature.detail.ui.DetailViewModel
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertIs
-import kotlin.test.assertNotNull
-import kotlin.test.assertTrue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
@@ -27,6 +20,13 @@ import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
+import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertIs
+import kotlin.test.assertNotNull
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class DetailViewModelTest {
@@ -49,8 +49,7 @@ class DetailViewModelTest {
         }
     }
 
-    private fun viewModel(useCase: FakeDetail) =
-        DetailViewModel("351", "upos", useCase, Analytics(AnalyticsTracking { events += it }))
+    private fun viewModel(useCase: FakeDetail) = DetailViewModel("351", "upos", useCase, Analytics(AnalyticsTracking { events += it }))
 
     @Test
     fun `el contrato vigente del detalle se decodifica`() {
@@ -62,7 +61,8 @@ class DetailViewModelTest {
     fun `pide el detalle por ticket y canal`() = runTest(dispatcher) {
         val useCase = FakeDetail(response)
         val vm = viewModel(useCase)
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         assertEquals(listOf<Pair<String, String?>>("351" to "upos"), useCase.calls)
         assertIs<DetailUiState.Loaded>(vm.state.value)
     }
@@ -71,7 +71,8 @@ class DetailViewModelTest {
     fun `si falla muestra el error y se puede reintentar`() = runTest(dispatcher) {
         val useCase = FakeDetail(response).apply { fail = true }
         val vm = viewModel(useCase)
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         assertEquals(DetailUiState.Failed, vm.state.value)
         useCase.fail = false
         vm.load()
@@ -83,7 +84,8 @@ class DetailViewModelTest {
     @Test
     fun `compartir el comprobante abre el recibo y mide el tap`() = runTest(dispatcher) {
         val vm = viewModel(FakeDetail(response))
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         vm.didTapShareReceipt()
         val destination = vm.destinations.first()
         assertIs<DetailDestination.Push>(destination)
@@ -96,7 +98,8 @@ class DetailViewModelTest {
     @Test
     fun `sin comprobante compartir no hace nada`() = runTest(dispatcher) {
         val vm = viewModel(FakeDetail(response.copy(receiptScreen = null)))
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         vm.didTapShareReceipt()
         assertTrue(events.isEmpty())
     }

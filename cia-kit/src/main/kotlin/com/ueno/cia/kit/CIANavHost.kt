@@ -7,22 +7,22 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.ueno.cia.core.analytics.HomeAnalytics
 import com.ueno.cia.core.model.CongratsInput
 import com.ueno.cia.core.model.MovementsFilterScreenModel
+import com.ueno.cia.core.model.MovementsScreenModel
 import com.ueno.cia.core.model.QRTimeoutModel
 import com.ueno.cia.core.model.ReceiptScreenModel
-import com.ueno.cia.core.model.MovementsScreenModel
 import com.ueno.cia.core.navigation.CIARoute
 import com.ueno.cia.core.navigation.CPFInput
 import com.ueno.cia.core.navigation.InputAmountInput
-import com.ueno.cia.core.navigation.PaymentSelectorInput
 import com.ueno.cia.core.navigation.LinkFlowInput
+import com.ueno.cia.core.navigation.PaymentSelectorInput
 import com.ueno.cia.core.navigation.QRFlowInput
 import com.ueno.cia.feature.congrats.ui.CongratsDestination
 import com.ueno.cia.feature.congrats.ui.CongratsRoute
@@ -34,7 +34,6 @@ import com.ueno.cia.feature.detail.receipt.ReceiptScreen
 import com.ueno.cia.feature.detail.ui.DetailDestination
 import com.ueno.cia.feature.detail.ui.DetailRoute
 import com.ueno.cia.feature.detail.ui.DetailViewModel
-import com.ueno.cia.core.analytics.HomeAnalytics
 import com.ueno.cia.feature.home.ui.HomeDestination
 import com.ueno.cia.feature.home.ui.HomeRoute
 import com.ueno.cia.feature.home.ui.HomeViewModel
@@ -78,18 +77,14 @@ import kotlin.reflect.typeOf
 
 /** Grafo de navegación de CIA (`CIARouter` + `ScreenFactory` en iOS, `go_router` en Flutter). */
 @Composable
-internal fun CIANavHost(
-    container: CIAContainer,
-    host: CIAHost,
-    startRoute: CIARoute,
-    modifier: Modifier = Modifier,
-) {
+internal fun CIANavHost(container: CIAContainer, host: CIAHost, startRoute: CIARoute, modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     val onBack: () -> Unit = remember(navController) {
         { if (!navController.popBackStack()) host.onExit() }
     }
 
     val platform = rememberPlatformActions()
+
     /** `goBackToHome`: vuelve a la Home; si ya no está en el stack (tras un `reset`) la abre de nuevo. */
     val goHome: () -> Unit = remember(navController) {
         {
@@ -98,6 +93,7 @@ internal fun CIANavHost(
             }
         }
     }
+
     /** `go` de Flutter: el stack queda solo con la pantalla nueva. */
     val reset: (CIARoute) -> Unit = remember(navController) {
         { route -> navController.navigate(route) { popUpTo(navController.graph.id) { inclusive = true } } }
@@ -282,7 +278,8 @@ internal fun CIANavHost(
         composable<CIARoute.Movements>(typeMap = mapOf(typeOf<MovementsScreenModel>() to jsonNavType<MovementsScreenModel>())) { entry ->
             val route = entry.toRoute<CIARoute.Movements>()
             // La sesión (pestaña elegida + filtros aplicados) se comparte con la pantalla de filtros vía esta entrada
-            val session: MovementsSession = viewModel(factory = viewModelFactory { initializer { MovementsSession(route.screen.pageSize) } })
+            val session: MovementsSession =
+                viewModel(factory = viewModelFactory { initializer { MovementsSession(route.screen.pageSize) } })
             val viewModel: MovementsViewModel = viewModel(
                 factory = viewModelFactory { initializer { MovementsViewModel(route.screen, container.movementsUseCase, session) } },
             )
@@ -408,11 +405,18 @@ internal fun CIANavHost(
             )
         }
 
-        composable<CIARoute.PaymentSelector>(typeMap = mapOf(typeOf<PaymentSelectorInput>() to jsonNavType<PaymentSelectorInput>())) { entry ->
+        composable<CIARoute.PaymentSelector>(
+            typeMap = mapOf(typeOf<PaymentSelectorInput>() to jsonNavType<PaymentSelectorInput>()),
+        ) { entry ->
             val route = entry.toRoute<CIARoute.PaymentSelector>()
             val viewModel: PaymentSelectorViewModel = viewModel(
                 factory = viewModelFactory {
-                    initializer { PaymentSelectorViewModel(route.input, PaymentSelectorChargeNavigator(HomeAnalytics(container.analytics))) }
+                    initializer {
+                        PaymentSelectorViewModel(
+                            route.input,
+                            PaymentSelectorChargeNavigator(HomeAnalytics(container.analytics)),
+                        )
+                    }
                 },
             )
             PaymentSelectorRoute(

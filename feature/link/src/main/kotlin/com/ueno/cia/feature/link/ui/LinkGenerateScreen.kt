@@ -16,11 +16,7 @@ import com.ueno.cia.designsystem.components.StatusBarIcons
 
 /** Equivale a `LinkGenerateScreen`: solo loader mientras se genera el link y, si falla, el error de pantalla completa. */
 @Composable
-fun LinkGenerateRoute(
-    viewModel: LinkGenerateViewModel,
-    onDestination: (LinkGenerateDestination) -> Unit,
-    modifier: Modifier = Modifier,
-) {
+fun LinkGenerateRoute(viewModel: LinkGenerateViewModel, onDestination: (LinkGenerateDestination) -> Unit, modifier: Modifier = Modifier) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val navigate by rememberUpdatedState(onDestination)
     LaunchedEffect(viewModel) { viewModel.start() }
@@ -31,7 +27,10 @@ fun LinkGenerateRoute(
     Box(modifier.fillMaxSize().testTag("cia_link_generate")) {
         when (state) {
             LinkGenerateState.Loading -> LoaderScreen()
-            LinkGenerateState.Failed -> FeedbackErrorScreen(onRetry = viewModel::didTapBackFromError, modifier = Modifier.testTag("cia_error_screen"))
+            LinkGenerateState.Failed -> FeedbackErrorScreen(
+                onRetry = viewModel::didTapBackFromError,
+                modifier = Modifier.testTag("cia_error_screen"),
+            )
         }
     }
 }

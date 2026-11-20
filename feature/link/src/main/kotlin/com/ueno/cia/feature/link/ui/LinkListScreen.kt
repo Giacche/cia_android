@@ -67,12 +67,7 @@ fun LinkListRoute(
  * informativo, skeleton al cambiar de pestaña y estado vacío con botones.
  */
 @Composable
-fun LinkListScreen(
-    viewModel: LinkListViewModel,
-    state: LinkListUiState,
-    onBack: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
+fun LinkListScreen(viewModel: LinkListViewModel, state: LinkListUiState, onBack: () -> Unit, modifier: Modifier = Modifier) {
     val loaded = (state as? LinkListUiState.Loaded)?.value
     val showEmpty = loaded != null && !loaded.isLoadingItems && loaded.items.isEmpty()
     CIAScaffold(
@@ -86,7 +81,12 @@ fun LinkListScreen(
                     // Con botón principal: doble (principal + secundario). Sin él: un solo botón con el texto del secundario.
                     val primary = screen.primaryButton
                     if (primary != null) {
-                        DSButton(primary.text, viewModel::didTapContinue, style = DSButtonStyle.Primary, modifier = Modifier.fillMaxWidth().testTag(primary.tag))
+                        DSButton(
+                            primary.text,
+                            viewModel::didTapContinue,
+                            style = DSButtonStyle.Primary,
+                            modifier = Modifier.fillMaxWidth().testTag(primary.tag),
+                        )
                         DSButton(
                             screen.secondaryButton?.text.orEmpty(),
                             viewModel::didTapGoBackHome,
@@ -116,7 +116,9 @@ fun LinkListScreen(
                     onSelect = viewModel::didSelectTab,
                 )
                 when {
-                    value.isLoadingItems -> Column(Modifier.padding(horizontal = Spacing.l).padding(top = Spacing.xs)) { repeat(3) { RowSkeleton() } }
+                    value.isLoadingItems -> Column(
+                        Modifier.padding(horizontal = Spacing.l).padding(top = Spacing.xs),
+                    ) { repeat(3) { RowSkeleton() } }
                     showEmpty -> EmptyContent(value)
                     else -> LinksList(value, viewModel)
                 }
@@ -153,7 +155,13 @@ private fun LinksList(state: LinkListViewState, viewModel: LinkListViewModel) {
             LinkRow(item, onShare = { viewModel.didTapShare(item) }, modifier = Modifier.testTag("cia_link_row_$index"))
         }
         item(key = "footer") {
-            if (state.isLoadingNextPage) Box(Modifier.padding(horizontal = Spacing.l)) { RowSkeleton() } else Spacer(Modifier.height(Spacing.xl))
+            if (state.isLoadingNextPage) {
+                Box(
+                    Modifier.padding(horizontal = Spacing.l),
+                ) { RowSkeleton() }
+            } else {
+                Spacer(Modifier.height(Spacing.xl))
+            }
         }
     }
 }

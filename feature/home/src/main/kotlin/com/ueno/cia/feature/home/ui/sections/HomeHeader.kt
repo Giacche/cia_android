@@ -15,7 +15,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.ueno.cia.core.tenant.Tenant
-import com.ueno.cia.designsystem.R as DSR
 import com.ueno.cia.designsystem.components.DSButton
 import com.ueno.cia.designsystem.components.DSButtonStyle
 import com.ueno.cia.designsystem.components.DSText
@@ -30,6 +29,7 @@ import com.ueno.cia.feature.home.data.HomeBranchModel
 import com.ueno.cia.feature.home.data.HomeHeaderResponse
 import com.ueno.cia.feature.home.ui.HomeHeaderContent
 import com.ueno.cia.feature.home.ui.Loadable
+import com.ueno.cia.designsystem.R as DSR
 
 /** Flutter muestra hasta 4 sucursales y una página final "Mostrar todas". */
 const val MAX_VISIBLE_BRANCHES = 4

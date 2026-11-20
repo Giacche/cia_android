@@ -2,14 +2,13 @@ package com.ueno.cia.feature.link.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ueno.cia.core.model.ChargeType
 import com.ueno.cia.core.model.CongratsInput
 import com.ueno.cia.core.model.CongratsOrigin
-import com.ueno.cia.core.model.ChargeType
 import com.ueno.cia.core.navigation.CIARoute
 import com.ueno.cia.core.navigation.LinkFlowInput
 import com.ueno.cia.feature.link.data.LinkGenerateRequest
 import com.ueno.cia.feature.link.domain.LinkGenerateUseCase
-import kotlin.coroutines.cancellation.CancellationException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -18,6 +17,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import kotlin.coroutines.cancellation.CancellationException
 
 enum class LinkGenerateState { Loading, Failed }
 

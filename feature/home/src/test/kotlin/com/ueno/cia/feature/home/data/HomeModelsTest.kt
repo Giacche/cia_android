@@ -3,13 +3,13 @@ package com.ueno.cia.feature.home.data
 import com.ueno.cia.core.model.HomeOptionKind
 import com.ueno.cia.core.model.MovementsResponse
 import com.ueno.cia.feature.home.Contratos
+import kotlinx.serialization.KSerializer
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
-import kotlinx.serialization.KSerializer
 
 class HomeModelsTest {
     private fun serializerFor(name: String): KSerializer<*> = when {

@@ -10,10 +10,10 @@ import com.ueno.cia.core.model.CongratsConfirmResponse
 import com.ueno.cia.core.model.CongratsOrigin
 import com.ueno.cia.core.model.DetailCardItemModel
 import com.ueno.cia.core.model.TycModel
-import com.ueno.cia.core.network.APIError
-import com.ueno.cia.core.network.CIAJson
 import com.ueno.cia.core.navigation.CIARoute
 import com.ueno.cia.core.navigation.LinkFlowInput
+import com.ueno.cia.core.network.APIError
+import com.ueno.cia.core.network.CIAJson
 import com.ueno.cia.feature.link.data.LinkGenerateRequest
 import com.ueno.cia.feature.link.data.LinkListItemModel
 import com.ueno.cia.feature.link.data.LinkListResponse
@@ -27,6 +27,15 @@ import com.ueno.cia.feature.link.ui.LinkListUiState
 import com.ueno.cia.feature.link.ui.LinkListViewModel
 import com.ueno.cia.feature.link.ui.LinkPreConfirmDestination
 import com.ueno.cia.feature.link.ui.LinkPreConfirmViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
+import kotlinx.serialization.Serializable
 import java.io.File
 import java.math.BigDecimal
 import kotlin.test.AfterTest
@@ -38,15 +47,6 @@ import kotlin.test.assertIs
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.advanceUntilIdle
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.test.setMain
-import kotlinx.serialization.Serializable
 
 @Serializable
 private data class PreConfirmOnly(val linkPreConfirmScreen: com.ueno.cia.core.model.LinkPreConfirmModel? = null)
@@ -95,7 +95,8 @@ class LinkViewModelsTest {
     fun `carga los activos y deja elegida la pestana del BFF`() = runTest(dispatcher) {
         val useCase = FakeLinkList(list, emptyList)
         val vm = listViewModel(useCase)
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         assertEquals(Triple("ACTIVE", 0, 10), useCase.calls.single())
         assertEquals(0, vm.loaded().currentTabIndex)
         assertEquals(2, vm.loaded().items.size)
@@ -105,14 +106,16 @@ class LinkViewModelsTest {
     @Test
     fun `una lista corta es la ultima pagina`() = runTest(dispatcher) {
         val vm = listViewModel(FakeLinkList(list, emptyList))
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         assertTrue(vm.loaded().isLastPage)
     }
 
     @Test
     fun `si falla la carga inicial muestra el error`() = runTest(dispatcher) {
         val vm = listViewModel(FakeLinkList(list, emptyList).apply { fail = true })
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         assertEquals(LinkListUiState.Failed, vm.state.value)
     }
 
@@ -120,7 +123,8 @@ class LinkViewModelsTest {
     fun `cambiar de pestana pide los links de ese estado`() = runTest(dispatcher) {
         val useCase = FakeLinkList(list, emptyList)
         val vm = listViewModel(useCase)
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         val expired = vm.loaded().tabs.indexOfFirst { it.id == "EXPIRED" }
         vm.didSelectTab(expired)
         assertTrue(vm.loaded().isLoadingItems)
@@ -134,7 +138,8 @@ class LinkViewModelsTest {
     fun `elegir la misma pestana no vuelve a pedir`() = runTest(dispatcher) {
         val useCase = FakeLinkList(list, emptyList)
         val vm = listViewModel(useCase)
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         vm.didSelectTab(0)
         advanceUntilIdle()
         assertEquals(1, useCase.calls.size)
@@ -143,30 +148,42 @@ class LinkViewModelsTest {
     @Test
     fun `la paginacion de a 10 agrega y corta con una pagina corta`() = runTest(dispatcher) {
         val useCase = FakeLinkList(list, emptyList).apply {
-            pageItems = { _, page -> if (page == 0) List(10) { item(it) } else if (page == 1) List(10) { item(100 + it) } else List(3) { item(200 + it) } }
+            pageItems = { _, page ->
+                if (page == 0) {
+                    List(10) {
+                        item(it)
+                    }
+                } else if (page == 1) List(10) { item(100 + it) } else List(3) { item(200 + it) }
+            }
         }
         val vm = listViewModel(useCase)
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         assertFalse(vm.loaded().isLastPage)
 
-        vm.loadNextPage(); advanceUntilIdle()
+        vm.loadNextPage()
+        advanceUntilIdle()
         assertEquals(20, vm.loaded().items.size)
         assertFalse(vm.loaded().isLastPage)
 
-        vm.loadNextPage(); advanceUntilIdle()
+        vm.loadNextPage()
+        advanceUntilIdle()
         assertEquals(23, vm.loaded().items.size)
         assertTrue(vm.loaded().isLastPage)
 
-        vm.loadNextPage(); advanceUntilIdle()
+        vm.loadNextPage()
+        advanceUntilIdle()
         assertEquals(3, useCase.calls.size)
     }
 
     @Test
     fun `cerrar el mensaje lo quita de la pestana actual`() = runTest(dispatcher) {
         val vm = listViewModel(FakeLinkList(list, emptyList))
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         val withMessage = vm.loaded().tabs.indexOfFirst { it.message != null }
-        vm.didSelectTab(withMessage); advanceUntilIdle()
+        vm.didSelectTab(withMessage)
+        advanceUntilIdle()
         assertNotNull(vm.loaded().currentTab?.message)
         vm.closeMessage()
         assertNull(vm.loaded().currentTab?.message)
@@ -175,7 +192,8 @@ class LinkViewModelsTest {
     @Test
     fun `crear un link abre validar limite y compartir comparte el contenido`() = runTest(dispatcher) {
         val vm = listViewModel(FakeLinkList(list, emptyList))
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         vm.didTapContinue()
         assertEquals(
             LinkListDestination.Push(CIARoute.ValidateLimitEntryPoint(ChargeType.LINK, ChargeProvider.LINK)),
@@ -202,7 +220,9 @@ class LinkViewModelsTest {
             amountFormatted = "Gs. 50.000",
             description = "Café",
             approximateToReceive = "Gs. 47.250",
-            linkPreConfirmScreen = screen.copy(tyc = if (withTyc) TycModel("cia_tyc", "Acepto los", "Términos y condiciones", "https://ueno.com.py/tyc") else null),
+            linkPreConfirmScreen = screen.copy(
+                tyc = if (withTyc) TycModel("cia_tyc", "Acepto los", "Términos y condiciones", "https://ueno.com.py/tyc") else null,
+            ),
             extraDetailItems = listOf(DetailCardItemModel("Descripción", "Café"), DetailCardItemModel("Total a cobrar", "Gs. 50.000")),
         ).also { assertTrue(raw.isNotEmpty()) }
     }
@@ -265,7 +285,8 @@ class LinkViewModelsTest {
     fun `generar manda monto y descripcion y resetea al resultado`() = runTest(dispatcher) {
         val useCase = FakeGenerate { generated() }
         val vm = LinkGenerateViewModel(flowInput(withTyc = false), useCase)
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         assertEquals("GS", useCase.request!!.currency)
         assertEquals("LINK", useCase.request!!.type)
         assertEquals(BigDecimal(50000), useCase.request!!.amount)
@@ -279,11 +300,13 @@ class LinkViewModelsTest {
     @Test
     fun `sin pantalla de resultado o con error falla`() = runTest(dispatcher) {
         val empty = LinkGenerateViewModel(flowInput(false), FakeGenerate { CongratsConfirmResponse(null, null) })
-        empty.start(); advanceUntilIdle()
+        empty.start()
+        advanceUntilIdle()
         assertEquals(LinkGenerateState.Failed, empty.state.value)
 
         val failing = LinkGenerateViewModel(flowInput(false), FakeGenerate { throw APIError.Server(500, null, "boom") })
-        failing.start(); advanceUntilIdle()
+        failing.start()
+        advanceUntilIdle()
         assertEquals(LinkGenerateState.Failed, failing.state.value)
         failing.didTapBackFromError()
         assertEquals(LinkGenerateDestination.Back, failing.destinations.first())

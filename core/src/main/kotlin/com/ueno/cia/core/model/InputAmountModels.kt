@@ -1,8 +1,8 @@
 package com.ueno.cia.core.model
 
 import com.ueno.cia.core.util.BigDecimalSerializer
-import java.math.BigDecimal
 import kotlinx.serialization.Serializable
+import java.math.BigDecimal
 
 // features/input_amount/models (Flutter).
 

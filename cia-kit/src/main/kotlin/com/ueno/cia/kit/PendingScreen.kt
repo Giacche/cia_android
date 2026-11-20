@@ -1,5 +1,6 @@
 package com.ueno.cia.kit
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.activity.compose.BackHandler
 import com.ueno.cia.designsystem.components.DSButton
 import com.ueno.cia.designsystem.components.DSButtonStyle
 import com.ueno.cia.designsystem.components.DSText
@@ -36,8 +36,19 @@ internal fun PendingScreen(route: String, onBack: () -> Unit) {
             verticalArrangement = Arrangement.spacedBy(Spacing.m),
         ) {
             DSText(stringResource(R.string.cia_pending_title), DSTextStyle.DisplayM, textAlign = TextAlign.Center)
-            DSText(stringResource(R.string.cia_pending_description), DSTextStyle.BodyL, color = DSColor.Neutral600, textAlign = TextAlign.Center)
-            DSText(route, DSTextStyle.BodyM, color = DSColor.Neutral500, textAlign = TextAlign.Center, modifier = Modifier.testTag("cia_pending_route"))
+            DSText(
+                stringResource(R.string.cia_pending_description),
+                DSTextStyle.BodyL,
+                color = DSColor.Neutral600,
+                textAlign = TextAlign.Center,
+            )
+            DSText(
+                route,
+                DSTextStyle.BodyM,
+                color = DSColor.Neutral500,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.testTag("cia_pending_route"),
+            )
         }
         DSButton(
             text = stringResource(R.string.cia_pending_accept),

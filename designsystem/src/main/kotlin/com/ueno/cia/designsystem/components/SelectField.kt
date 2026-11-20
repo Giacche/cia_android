@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -101,7 +100,9 @@ fun RadioOptionsSheet(
                     horizontalArrangement = Arrangement.spacedBy(Spacing.m),
                 ) {
                     Box(
-                        modifier = Modifier.size(24.dp).background(DSColor.White, CircleShape).border(1.dp, DSColor.Neutral200, CircleShape),
+                        modifier = Modifier.size(
+                            24.dp,
+                        ).background(DSColor.White, CircleShape).border(1.dp, DSColor.Neutral200, CircleShape),
                         contentAlignment = Alignment.Center,
                     ) {
                         if (selected) Box(Modifier.size(12.dp).background(DSColor.Black, CircleShape))

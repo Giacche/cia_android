@@ -31,12 +31,7 @@ import com.ueno.cia.designsystem.tokens.Spacing
 
 /** Punto de entrada del CPF para el host. */
 @Composable
-fun CPFRoute(
-    viewModel: CPFViewModel,
-    onDestination: (CPFDestination) -> Unit,
-    onBack: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
+fun CPFRoute(viewModel: CPFViewModel, onDestination: (CPFDestination) -> Unit, onBack: () -> Unit, modifier: Modifier = Modifier) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val navigate by rememberUpdatedState(onDestination)
     LaunchedEffect(viewModel) { viewModel.destinations.collect { navigate(it) } }

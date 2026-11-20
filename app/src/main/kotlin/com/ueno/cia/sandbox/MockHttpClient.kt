@@ -66,8 +66,7 @@ class MockHttpClient(
         return assets.open(path).bufferedReader().use { it.readText() }
     }
 
-    private fun error(status: Int, message: String) =
-        HttpResponse(status, """{"error":{"code":"MOCK_$status","message":"$message"}}""")
+    private fun error(status: Int, message: String) = HttpResponse(status, """{"error":{"code":"MOCK_$status","message":"$message"}}""")
 
     private companion object {
         const val CONTRATOS_DIR = "contratos"

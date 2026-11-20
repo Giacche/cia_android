@@ -45,7 +45,8 @@ enum class DSTextStyle(
     DisplayM(MontserratExtraBold, FontWeight.ExtraBold, 20f, 1.4f, 0.24f),
     DisplayL(MontserratExtraBold, FontWeight.ExtraBold, 24f, 1.333f, 0.24f),
     DisplayXL(MontserratExtraBold, FontWeight.ExtraBold, 32f, 1.25f, 0f),
-    DisplayX2L(MontserratExtraBold, FontWeight.ExtraBold, 40f, 1.2f, 0.24f);
+    DisplayX2L(MontserratExtraBold, FontWeight.ExtraBold, 40f, 1.2f, 0.24f),
+    ;
 
     val textStyle: TextStyle
         get() = TextStyle(

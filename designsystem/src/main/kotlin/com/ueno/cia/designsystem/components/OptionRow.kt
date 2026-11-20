@@ -31,13 +31,7 @@ import com.ueno.cia.designsystem.tokens.Spacing
 
 /** `GuListItem.double(invert: true)` con miniatura a la izquierda y chevron a la derecha (selector de proveedor). */
 @Composable
-fun OptionRow(
-    icon: String,
-    title: String,
-    subtitle: String,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
+fun OptionRow(icon: String, title: String, subtitle: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
     val interaction = remember { MutableInteractionSource() }
     val pressed by interaction.collectIsPressedAsState()
     val spoken = listOf(title, subtitle).filter { it.isNotEmpty() }.joinToString(", ")

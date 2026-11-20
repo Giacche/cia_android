@@ -1,9 +1,7 @@
 package com.ueno.cia.core.model
 
-import com.ueno.cia.core.util.BigDecimalSerializer
-import java.math.BigDecimal
-import java.time.Instant
 import com.ueno.cia.core.network.CIAJson
+import com.ueno.cia.core.util.BigDecimalSerializer
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -12,6 +10,8 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.decodeFromJsonElement
+import java.math.BigDecimal
+import java.time.Instant
 
 // features/detail/screens/receipt/models (Flutter).
 

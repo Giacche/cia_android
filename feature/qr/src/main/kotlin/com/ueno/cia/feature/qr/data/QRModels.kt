@@ -6,9 +6,9 @@ import com.ueno.cia.core.model.ChargeType
 import com.ueno.cia.core.model.CongratsScreenModel
 import com.ueno.cia.core.model.QRTimeoutModel
 import com.ueno.cia.core.util.BigDecimalSerializer
-import java.math.BigDecimal
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import java.math.BigDecimal
 
 // features/qr/screens/generate/models (Flutter).
 

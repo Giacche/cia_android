@@ -52,25 +52,52 @@ data class TycModel(
 /** Equivale a `ChargeTypeEnum`. */
 @Serializable
 enum class ChargeType {
-    @SerialName("TTP") TTP,
-    @SerialName("QR") QR,
-    @SerialName("LINK") LINK,
+    @SerialName("TTP")
+    TTP,
+
+    @SerialName("QR")
+    QR,
+
+    @SerialName("LINK")
+    LINK,
 }
 
 /** Equivale a `ChargeProviderEnum`. Un valor desconocido del BFF se interpreta como [UNKNOWN] (ver [fromRaw]). */
 @Serializable
 enum class ChargeProvider(val raw: String) {
-    @SerialName("UPAY") UPAY("UPAY"),
-    @SerialName("BANCARD") BANCARD("BANCARD"),
-    @SerialName("DEPAY") DEPAY("DEPAY"),
-    @SerialName("PIX") PIX("PIX"),
-    @SerialName("LINK") LINK("LINK"),
-    @SerialName("SIP") SIP("SIP"),
-    @SerialName("INTER") INTER("INTER"),
-    @SerialName("QR-BO") BOLIVIA("QR-BO"),
-    @SerialName("QR-PE") PERU("QR-PE"),
-    @SerialName("QR-CO") COLOMBIA("QR-CO"),
-    @SerialName("UNKNOWN") UNKNOWN("UNKNOWN");
+    @SerialName("UPAY")
+    UPAY("UPAY"),
+
+    @SerialName("BANCARD")
+    BANCARD("BANCARD"),
+
+    @SerialName("DEPAY")
+    DEPAY("DEPAY"),
+
+    @SerialName("PIX")
+    PIX("PIX"),
+
+    @SerialName("LINK")
+    LINK("LINK"),
+
+    @SerialName("SIP")
+    SIP("SIP"),
+
+    @SerialName("INTER")
+    INTER("INTER"),
+
+    @SerialName("QR-BO")
+    BOLIVIA("QR-BO"),
+
+    @SerialName("QR-PE")
+    PERU("QR-PE"),
+
+    @SerialName("QR-CO")
+    COLOMBIA("QR-CO"),
+
+    @SerialName("UNKNOWN")
+    UNKNOWN("UNKNOWN"),
+    ;
 
     companion object {
         fun fromRaw(raw: String): ChargeProvider = entries.firstOrNull { it.raw == raw.uppercase() } ?: UNKNOWN

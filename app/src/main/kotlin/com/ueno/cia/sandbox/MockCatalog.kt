@@ -54,7 +54,9 @@ object MockCatalog {
         name = "Home",
         endpoints = listOf(
             MockEndpoint(
-                "Layout", HttpMethod.GET, CIAEndpoints.Home.LAYOUT,
+                "Layout",
+                HttpMethod.GET,
+                CIAEndpoints.Home.LAYOUT,
                 listOf(
                     success("Default (header, alertas, opciones, banners, recientes)", "home_get_home_layout.json"),
                     success("Variante 2", "home_get_home_layout_02.json"),
@@ -67,7 +69,9 @@ object MockCatalog {
                 ),
             ),
             MockEndpoint(
-                "Header", HttpMethod.GET, CIAEndpoints.Home.HEADER,
+                "Header",
+                HttpMethod.GET,
+                CIAEndpoints.Home.HEADER,
                 listOf(
                     success("Individuos", "home_get_home_header.json"),
                     success("Empresas (sucursales)", "home_get_home_header_empresas.json"),
@@ -76,7 +80,9 @@ object MockCatalog {
                 ),
             ),
             MockEndpoint(
-                "Opciones", HttpMethod.GET, CIAEndpoints.Home.OPTIONS,
+                "Opciones",
+                HttpMethod.GET,
+                CIAEndpoints.Home.OPTIONS,
                 listOf(
                     success("QR internacional (video)", "home_get_home_options_qrs_inter.json"),
                     success("Default", "home_get_home_options.json"),
@@ -86,7 +92,9 @@ object MockCatalog {
                 ),
             ),
             MockEndpoint(
-                "Banners", HttpMethod.GET, CIAEndpoints.Home.BANNERS,
+                "Banners",
+                HttpMethod.GET,
+                CIAEndpoints.Home.BANNERS,
                 listOf(
                     success("Varios banners", "home_get_home_banners.json"),
                     success("Add-ons Esc-01 (solo uPOS)", "home_get_home_banners_add_ons_esc01.json"),
@@ -97,11 +105,15 @@ object MockCatalog {
                 ),
             ),
             MockEndpoint(
-                "Recientes", HttpMethod.GET, CIAEndpoints.Home.RECENTS,
+                "Recientes",
+                HttpMethod.GET,
+                CIAEndpoints.Home.RECENTS,
                 listOf(success("Default", "home_get_home_recents.json"), error500()),
             ),
             MockEndpoint(
-                "Alertas", HttpMethod.GET, CIAEndpoints.Home.ALERTS,
+                "Alertas",
+                HttpMethod.GET,
+                CIAEndpoints.Home.ALERTS,
                 listOf(
                     MockResponse.Json("Sin alertas (como en el video)", """{"data":{"type":"HOME_ALERTS","informationAlert":[]}}"""),
                     success("Una alerta", "home_get_home_alerts.json"),
@@ -110,7 +122,9 @@ object MockCatalog {
                 ),
             ),
             MockEndpoint(
-                "Total de ventas", HttpMethod.GET, CIAEndpoints.Home.PENDING_SETTLEMENT,
+                "Total de ventas",
+                HttpMethod.GET,
+                CIAEndpoints.Home.PENDING_SETTLEMENT,
                 listOf(success("Default", "home_get_home_pending_settlement.json"), error500()),
             ),
         ),
@@ -121,7 +135,9 @@ object MockCatalog {
         name = "Movimientos",
         endpoints = listOf(
             MockEndpoint(
-                "Cobros (history-tab / page / size + filtros)", HttpMethod.GET, CIAEndpoints.Home.CHARGES,
+                "Cobros (history-tab / page / size + filtros)",
+                HttpMethod.GET,
+                CIAEndpoints.Home.CHARGES,
                 listOf(
                     success("Cobros", "bff_charges_tabs_cobros_get_response.json"),
                     error500(),
@@ -138,7 +154,9 @@ object MockCatalog {
         name = "Validar límite",
         endpoints = listOf(
             MockEndpoint(
-                "Validar límite - Link de pago (x-type LINK)", HttpMethod.GET, CIAEndpoints.ValidateLimit.PATH + "?x-type=LINK",
+                "Validar límite - Link de pago (x-type LINK)",
+                HttpMethod.GET,
+                CIAEndpoints.ValidateLimit.PATH + "?x-type=LINK",
                 listOf(
                     // Igual que el QR: sin resumen de comisión en el footer del monto (el BFF no manda los textos)
                     success("Link de pago sin resumen de comisión (como el QR)", "android_get_validate_link_sin_resumen_response.json"),
@@ -148,7 +166,9 @@ object MockCatalog {
                 ),
             ),
             MockEndpoint(
-                "Validar límite (headers x-type / x-provider)", HttpMethod.GET, CIAEndpoints.ValidateLimit.PATH,
+                "Validar límite (headers x-type / x-provider)",
+                HttpMethod.GET,
+                CIAEndpoints.ValidateLimit.PATH,
                 listOf(
                     success("QR sin CPF, sin resumen (como en el video)", "ios_get_validate_qr_sin_cpf_response.json"),
                     success("QR con pantalla de CPF", "bff_get_validate_qr_response.json"),
@@ -164,16 +184,23 @@ object MockCatalog {
         name = "QR",
         endpoints = listOf(
             MockEndpoint(
-                "Generar QR", HttpMethod.POST, CIAEndpoints.QR.GENERATE,
+                "Generar QR",
+                HttpMethod.POST,
+                CIAEndpoints.QR.GENERATE,
                 listOf(
                     success("QR generado", "bff_qr_post_generate_response.json"),
                     success("QR generado + error semántico (CPF no coincide)", "bff_qr_post_generate_response_semantic.json"),
-                    success("QR que vence en 12 s (solo Android, para ver el timeout)", "android_qr_post_generate_response_short_timeout.json"),
+                    success(
+                        "QR que vence en 12 s (solo Android, para ver el timeout)",
+                        "android_qr_post_generate_response_short_timeout.json",
+                    ),
                     error500(),
                 ),
             ),
             MockEndpoint(
-                "Confirmar pago del QR (polling)", HttpMethod.POST, CIAEndpoints.QR.CONFIRM,
+                "Confirmar pago del QR (polling)",
+                HttpMethod.POST,
+                CIAEndpoints.QR.CONFIRM,
                 listOf(
                     MockResponse.Json("Todavía sin pago (el QR vence)", """{"data":{"responseScreen":{},"receiptScreen":{}}}"""),
                     success("Pago confirmado", "bff_qr_post_confirm_response_success.json"),
@@ -188,11 +215,15 @@ object MockCatalog {
         name = "Link de pago",
         endpoints = listOf(
             MockEndpoint(
-                "Generar link", HttpMethod.POST, CIAEndpoints.Link.GENERATE,
+                "Generar link",
+                HttpMethod.POST,
+                CIAEndpoints.Link.GENERATE,
                 listOf(success("Link generado", "bff_link_post_generate_response.json"), error500()),
             ),
             MockEndpoint(
-                "Mis links (status / page / size)", HttpMethod.GET, CIAEndpoints.Link.LIST,
+                "Mis links (status / page / size)",
+                HttpMethod.GET,
+                CIAEndpoints.Link.LIST,
                 listOf(
                     success("Lista con links", "bff_link_get_list_response.json"),
                     success("Lista vacía", "bff_link_get_list_empty_state_response.json"),
@@ -207,17 +238,27 @@ object MockCatalog {
         endpoints = listOf(
             // Más específico primero: gana el primero que calza (en Flutter se distingue por `?xType=`)
             MockEndpoint(
-                "Entry point · QR internacional (x-type)", HttpMethod.GET, CIAEndpoints.PaymentSelector.PATH + "?xType=QR_INTERNATIONAL",
+                "Entry point · QR internacional (x-type)",
+                HttpMethod.GET,
+                CIAEndpoints.PaymentSelector.PATH + "?xType=QR_INTERNATIONAL",
                 listOf(
-                    success("QR internacional · países (Argentina, Pix, Bolivia, Perú, Colombia)", "bff_get_payment_selector_qr_inter_response.json"),
+                    success(
+                        "QR internacional · países (Argentina, Pix, Bolivia, Perú, Colombia)",
+                        "bff_get_payment_selector_qr_inter_response.json",
+                    ),
                     success("QR internacional con alerta de RUC", "ios_get_payment_selector_qr_inter_alert_response.json"),
                     error500(),
                 ),
             ),
             MockEndpoint(
-                "Entry point · selector de cobros", HttpMethod.GET, CIAEndpoints.PaymentSelector.PATH,
+                "Entry point · selector de cobros",
+                HttpMethod.GET,
+                CIAEndpoints.PaymentSelector.PATH,
                 listOf(
-                    success("Todos los medios habilitados + QR internacional", "ios_get_payment_selector_todos_con_qr_internacional_response.json"),
+                    success(
+                        "Todos los medios habilitados + QR internacional",
+                        "ios_get_payment_selector_todos_con_qr_internacional_response.json",
+                    ),
                     success("Todos los medios habilitados", "bff_get_payment_selector_all_enabled_response.json"),
                     success("Con QR internacional", "bff_get_payment_selector_con_qr_internacional_response.json"),
                     success("Con alerta de RUC y medios deshabilitados", "bff_get_payment_selector_response.json"),
@@ -231,7 +272,9 @@ object MockCatalog {
         name = "Detalle de cobro",
         endpoints = listOf(
             MockEndpoint(
-                "Detalle (por Nro. de ticket)", HttpMethod.GET, CIAEndpoints.Detail.PATH_TEMPLATE,
+                "Detalle (por Nro. de ticket)",
+                HttpMethod.GET,
+                CIAEndpoints.Detail.PATH_TEMPLATE,
                 listOf(success("Detalle con descuentos", "bff_get_detail_response_v3.json"), error500()),
             ),
         ),

@@ -16,25 +16,45 @@ class HomeAnalytics(private val analytics: Analytics) {
     )
 
     fun linkStart(label: String) = analytics.flowStart(
-        "link_crear_inicio", label, CIARouteDestination.INPUT_AMOUNT, "link", extra,
+        "link_crear_inicio",
+        label,
+        CIARouteDestination.INPUT_AMOUNT,
+        "link",
+        extra,
     )
 
     fun myLinksTap(label: String) = analytics.buttonTap(label, CIARouteDestination.LINK_LIST, "link", extra)
 
     fun validateRucStart(label: String) = analytics.flowStart(
-        "validacion_ruc_informacion_inicio", label, CIARouteDestination.TAX_INFO, "validacion_ruc", extra,
+        "validacion_ruc_informacion_inicio",
+        label,
+        CIARouteDestination.TAX_INFO,
+        "validacion_ruc",
+        extra,
     )
 
     fun updateFieldStart(label: String) = analytics.flowStart(
-        "actualizacion_rubro_inicio", label, CIARouteDestination.UPDATE_FIELD, "actualizacion_rubro", extra,
+        "actualizacion_rubro_inicio",
+        label,
+        CIARouteDestination.UPDATE_FIELD,
+        "actualizacion_rubro",
+        extra,
     )
 
     fun linkOnboardingStart(label: String) = analytics.flowStart(
-        "link_onboarding_inicio", label, CIARouteDestination.PRODUCTS_ONBOARDING, "link", extra,
+        "link_onboarding_inicio",
+        label,
+        CIARouteDestination.PRODUCTS_ONBOARDING,
+        "link",
+        extra,
     )
 
     fun subscriptionOnboardingStart(label: String) = analytics.flowStart(
-        "suscripcion_onboarding_inicio", label, CIARouteDestination.PRODUCTS_ONBOARDING, "suscripcion", extra,
+        "suscripcion_onboarding_inicio",
+        label,
+        CIARouteDestination.PRODUCTS_ONBOARDING,
+        "suscripcion",
+        extra,
     )
 
     fun editProfileTap(label: String) = analytics.buttonTap(label, CIARouteDestination.PROFILE_NAME, "perfil", extra)

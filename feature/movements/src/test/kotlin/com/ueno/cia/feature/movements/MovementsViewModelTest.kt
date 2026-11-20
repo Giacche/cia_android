@@ -13,14 +13,6 @@ import com.ueno.cia.feature.movements.ui.MovementsFiltersViewModel
 import com.ueno.cia.feature.movements.ui.MovementsSession
 import com.ueno.cia.feature.movements.ui.MovementsUiState
 import com.ueno.cia.feature.movements.ui.MovementsViewModel
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertIs
-import kotlin.test.assertNull
-import kotlin.test.assertTrue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
@@ -30,12 +22,21 @@ import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
+import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertIs
+import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 private fun charge(n: Int) = MovementChargeModel("Cobro $n", "Sub $n", "Gs. $n", "Hoy", "10:00", ticketNumber = "T$n")
 
 private class FakeMovements(var base: MovementsResponse) : MovementsUseCase {
     val queries = mutableListOf<MovementsQuery>()
     var fail = false
+
     /** Cobros por página; si no hay, se devuelve [base]. */
     var pages: (MovementsQuery) -> List<MovementChargeModel>? = { null }
 
@@ -105,33 +106,45 @@ class MovementsViewModelTest {
     fun `una pagina completa habilita pedir mas y una incompleta no`() = runTest(dispatcher) {
         val full = FakeMovements(cobros).apply { pages = { listOf(charge(1), charge(2), charge(3)) } }
         val a = viewModel(full)
-        a.start(); advanceUntilIdle()
+        a.start()
+        advanceUntilIdle()
         assertTrue(a.loaded().hasMoreMovements)
 
         val partial = FakeMovements(cobros).apply { pages = { listOf(charge(1)) } }
         val b = viewModel(partial)
-        b.start(); advanceUntilIdle()
+        b.start()
+        advanceUntilIdle()
         assertFalse(b.loaded().hasMoreMovements)
     }
 
     @Test
     fun `la paginacion agrega cobros y corta con una pagina vacia`() = runTest(dispatcher) {
         val useCase = FakeMovements(cobros).apply {
-            pages = { query -> if (query.page == 1) List(3) { charge(it) } else if (query.page == 2) List(3) { charge(10 + it) } else emptyList() }
+            pages = { query ->
+                when (query.page) {
+                    1 -> List(3) { charge(it) }
+                    2 -> List(3) { charge(10 + it) }
+                    else -> emptyList()
+                }
+            }
         }
         val vm = viewModel(useCase)
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
 
-        vm.loadNextPage(); advanceUntilIdle()
+        vm.loadNextPage()
+        advanceUntilIdle()
         assertEquals(6, vm.loaded().charges.size)
         assertEquals(2, vm.loaded().page)
         assertTrue(vm.loaded().hasMoreMovements)
 
-        vm.loadNextPage(); advanceUntilIdle()
+        vm.loadNextPage()
+        advanceUntilIdle()
         assertEquals(6, vm.loaded().charges.size)
         assertFalse(vm.loaded().hasMoreMovements)
 
-        vm.loadNextPage(); advanceUntilIdle()
+        vm.loadNextPage()
+        advanceUntilIdle()
         assertEquals(3, useCase.queries.size, "no vuelve a pedir cuando ya no hay más")
     }
 
@@ -139,7 +152,8 @@ class MovementsViewModelTest {
     fun `no pide otra pagina mientras carga la anterior`() = runTest(dispatcher) {
         val useCase = FakeMovements(cobros).apply { pages = { List(3) { n -> charge(n) } } }
         val vm = viewModel(useCase)
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         vm.loadNextPage()
         vm.loadNextPage()
         advanceUntilIdle()
@@ -151,7 +165,8 @@ class MovementsViewModelTest {
         val session = MovementsSession(3).apply { appliedFilters = MovementsQuery(page = 1, channel = "app", status = "approved") }
         val useCase = FakeMovements(withFilters)
         val vm = viewModel(useCase, session)
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         // La primera carga sí lleva los filtros
         assertEquals("app", useCase.queries.first().channel)
 
@@ -172,7 +187,8 @@ class MovementsViewModelTest {
         val disabled = cobros.copy(tabsOptions = cobros.tabsOptions!!.map { if (it.id == "services") it.copy(disabled = true) else it })
         val useCase = FakeMovements(disabled)
         val vm = viewModel(useCase)
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         vm.didSelectTab(0)
         vm.didSelectTab(1)
         advanceUntilIdle()
@@ -182,7 +198,8 @@ class MovementsViewModelTest {
     @Test
     fun `sin pestanas del BFF se arma una sola segun el tipo`() = runTest(dispatcher) {
         val vm = viewModel(FakeMovements(cobros.copy(tabsOptions = null)))
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         assertEquals(listOf("Cobros"), vm.loaded().tabs.map { it.title })
     }
 
@@ -191,7 +208,8 @@ class MovementsViewModelTest {
         val session = MovementsSession(3).apply { appliedFilters = MovementsQuery(page = 1, channel = "app") }
         val useCase = FakeMovements(withFilters)
         val vm = viewModel(useCase, session)
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         assertTrue(vm.loaded().isFilterActive)
 
         vm.clearFilters()
@@ -207,7 +225,8 @@ class MovementsViewModelTest {
         val session = MovementsSession(3)
         val useCase = FakeMovements(cobros)
         val vm = viewModel(useCase, session)
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         session.appliedFilters = MovementsQuery(page = 1, status = "approved")
         session.notifyFiltersApplied()
         advanceUntilIdle()
@@ -219,9 +238,11 @@ class MovementsViewModelTest {
     fun `el pull to refresh conserva la lista si falla`() = runTest(dispatcher) {
         val useCase = FakeMovements(cobros)
         val vm = viewModel(useCase)
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         useCase.fail = true
-        vm.refresh(); advanceUntilIdle()
+        vm.refresh()
+        advanceUntilIdle()
         assertEquals(cobros.charges, vm.loaded().charges)
         assertFalse(vm.loaded().isRefreshing)
     }
@@ -230,7 +251,8 @@ class MovementsViewModelTest {
     fun `tocar un cobro abre su detalle con el canal filtrado`() = runTest(dispatcher) {
         val session = MovementsSession(3).apply { appliedFilters = MovementsQuery(page = 1, channel = "upos") }
         val vm = viewModel(FakeMovements(cobros), session)
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         val charge = vm.loaded().charges.first()
         vm.didTapCharge(charge)
         assertEquals(
@@ -242,7 +264,8 @@ class MovementsViewModelTest {
     @Test
     fun `el boton de filtros abre el formulario del BFF`() = runTest(dispatcher) {
         val vm = viewModel(FakeMovements(withFilters))
-        vm.start(); advanceUntilIdle()
+        vm.start()
+        advanceUntilIdle()
         vm.didTapFilter()
         val destination = vm.destinations.first()
         assertIs<MovementsDestination.Push>(destination)
@@ -293,7 +316,10 @@ class MovementsViewModelTest {
         // El colector tiene que estar suscripto antes de emitir (el flujo no guarda emisiones sin suscriptores)
         advanceUntilIdle()
         val vm = MovementsFiltersViewModel(filterScreen, session)
-        vm.selectChannel("app"); vm.selectStatus("approved"); vm.setPeriodFrom("01/10/24"); vm.setAmountTo(9000.0)
+        vm.selectChannel("app")
+        vm.selectStatus("approved")
+        vm.setPeriodFrom("01/10/24")
+        vm.setAmountTo(9000.0)
         vm.applyFilters()
         val applied = session.appliedFilters!!
         assertEquals("services", applied.type)
@@ -311,7 +337,8 @@ class MovementsViewModelTest {
     @Test
     fun `limpiar deja el formulario vacio`() {
         val vm = MovementsFiltersViewModel(filterScreen, MovementsSession(3))
-        vm.selectStatus("approved"); vm.setPeriodTo("10/10/24")
+        vm.selectStatus("approved")
+        vm.setPeriodTo("10/10/24")
         vm.clearFilters()
         val state = vm.state.value
         assertNull(state.selectedChannel)
@@ -331,8 +358,9 @@ class MovementsViewModelTest {
         assertNull(MovementsFiltersViewModel.amountOf(""))
     }
 
-    private fun kotlinx.coroutines.test.TestScope.launchCollect(session: MovementsSession, onEach: () -> Unit) =
-        backgroundScope.launch(kotlinx.coroutines.test.UnconfinedTestDispatcher(testScheduler)) { session.didApplyFilters.collect { onEach() } }
+    private fun kotlinx.coroutines.test.TestScope.launchCollect(session: MovementsSession, onEach: () -> Unit) = backgroundScope.launch(
+        kotlinx.coroutines.test.UnconfinedTestDispatcher(testScheduler),
+    ) { session.didApplyFilters.collect { onEach() } }
 
     // endregion
 }

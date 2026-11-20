@@ -34,12 +34,7 @@ data class DSTab(val label: String, val disabled: Boolean = false, val icon: Str
  * Soporta pestañas deshabilitadas y un ícono opcional a la izquierda del texto (`GuTab`).
  */
 @Composable
-fun DSTabBar(
-    tabs: List<DSTab>,
-    selectedIndex: Int,
-    onSelect: (Int) -> Unit,
-    modifier: Modifier = Modifier,
-) {
+fun DSTabBar(tabs: List<DSTab>, selectedIndex: Int, onSelect: (Int) -> Unit, modifier: Modifier = Modifier) {
     Box(modifier.fillMaxWidth().height(56.dp)) {
         Row(
             modifier = Modifier.fillMaxWidth().height(56.dp).horizontalScroll(rememberScrollState()).padding(horizontal = Spacing.l),

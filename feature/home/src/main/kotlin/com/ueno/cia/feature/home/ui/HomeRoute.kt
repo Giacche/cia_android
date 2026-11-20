@@ -9,9 +9,9 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.ueno.cia.core.model.HomeModalModel
 import com.ueno.cia.core.tenant.Tenant
 import com.ueno.cia.feature.home.data.HomeBranchModel
-import com.ueno.cia.core.model.HomeModalModel
 
 /**
  * Punto de entrada de la Home para el host: conecta el [HomeViewModel] con [HomeScreen], muestra los bottom
@@ -19,12 +19,7 @@ import com.ueno.cia.core.model.HomeModalModel
  * [HomeDestination.HelpCenter]).
  */
 @Composable
-fun HomeRoute(
-    viewModel: HomeViewModel,
-    tenant: Tenant,
-    onNavigate: (HomeDestination) -> Unit,
-    modifier: Modifier = Modifier,
-) {
+fun HomeRoute(viewModel: HomeViewModel, tenant: Tenant, onNavigate: (HomeDestination) -> Unit, modifier: Modifier = Modifier) {
     val uiState by viewModel.state.collectAsStateWithLifecycle()
     val isRefreshing by viewModel.isRefreshing.collectAsStateWithLifecycle()
     var optionsModal by remember { mutableStateOf<HomeModalModel?>(null) }

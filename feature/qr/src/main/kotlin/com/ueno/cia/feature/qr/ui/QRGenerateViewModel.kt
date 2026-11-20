@@ -25,8 +25,6 @@ import com.ueno.cia.feature.qr.data.QRGenerateResponse
 import com.ueno.cia.feature.qr.data.QROptionModel
 import com.ueno.cia.feature.qr.data.QRScreenModel
 import com.ueno.cia.feature.qr.domain.QRGenerateUseCase
-import java.util.Base64
-import kotlin.coroutines.cancellation.CancellationException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
@@ -37,6 +35,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeoutOrNull
+import java.util.Base64
+import kotlin.coroutines.cancellation.CancellationException
 
 /** Equivale a `QrGenerateState`. */
 data class QRViewState(

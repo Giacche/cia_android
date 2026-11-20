@@ -83,7 +83,9 @@ fun LinkPreConfirmScreen(
         },
     ) {
         Column(
-            Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = Spacing.l).padding(top = Spacing.xs, bottom = Spacing.l),
+            Modifier.fillMaxSize().verticalScroll(
+                rememberScrollState(),
+            ).padding(horizontal = Spacing.l).padding(top = Spacing.xs, bottom = Spacing.l),
         ) {
             Spacer(Modifier.height(Spacing.xl))
             DSText(screen.title, DSTextStyle.DisplayS)

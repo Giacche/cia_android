@@ -14,10 +14,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -166,7 +166,8 @@ enum class InlineMessageState(
     Information(DSColor.Blue50, DSColor.Blue800, DSColor.Blue500, "information"),
     Success(DSColor.Green50, DSColor.Green800, DSColor.Green500, "check"),
     Warning(DSColor.Yellow50, DSColor.Yellow800, DSColor.Yellow500, "warning"),
-    Error(DSColor.Pink50, DSColor.Pink800, DSColor.Pink500, "warning");
+    Error(DSColor.Pink50, DSColor.Pink800, DSColor.Pink500, "warning"),
+    ;
 
     companion object {
         /** Equivale a `InlineMessageStateHelper.getByName`. */
@@ -233,7 +234,8 @@ enum class OverviewBannerColor(val background: Color, val overline: Color) {
     Blue(DSColor.Blue200, DSColor.Blue800),
     Green(DSColor.Green200, DSColor.Green800),
     Violet(DSColor.Violet200, DSColor.Violet800),
-    Black(DSColor.Black, DSColor.Neutral400);
+    Black(DSColor.Black, DSColor.Neutral400),
+    ;
 
     companion object {
         fun byName(name: String): OverviewBannerColor = when (name.lowercase()) {
@@ -288,14 +290,7 @@ fun OverviewBanner(
 
 /** Fila de movimiento: título/subtítulo a la izquierda, importe/fecha a la derecha. */
 @Composable
-fun MovementRow(
-    title: String,
-    subtitle: String,
-    amount: String,
-    date: String,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
+fun MovementRow(title: String, subtitle: String, amount: String, date: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
     val interaction = remember { MutableInteractionSource() }
     val pressed by interaction.collectIsPressedAsState()
     Row(

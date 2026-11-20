@@ -10,6 +10,9 @@ import com.ueno.cia.core.navigation.CIARoute
 import com.ueno.cia.core.navigation.InputAmountInput
 import com.ueno.cia.feature.inputamount.ui.InputAmountDestination
 import com.ueno.cia.feature.inputamount.ui.InputAmountViewModel
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.Serializable
 import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -17,9 +20,6 @@ import kotlin.test.assertFalse
 import kotlin.test.assertIs
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.Serializable
 
 /** Solo el tramo del validate que interesa: la pantalla de monto. */
 @Serializable

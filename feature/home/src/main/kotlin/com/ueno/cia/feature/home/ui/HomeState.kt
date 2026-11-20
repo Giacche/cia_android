@@ -1,15 +1,14 @@
 package com.ueno.cia.feature.home.ui
 
 import com.ueno.cia.core.model.ButtonModel
+import com.ueno.cia.core.model.HomeInformationAlertModel
+import com.ueno.cia.core.model.HomeOptionModel
 import com.ueno.cia.core.model.LinkButtonModel
 import com.ueno.cia.core.model.MovementChargeModel
 import com.ueno.cia.feature.home.data.HomeBannerModel
-import com.ueno.cia.feature.home.data.HomeBranchModel
 import com.ueno.cia.feature.home.data.HomeHeaderResponse
-import com.ueno.cia.core.model.HomeInformationAlertModel
 import com.ueno.cia.feature.home.data.HomeLayoutSectionModel
 import com.ueno.cia.feature.home.data.HomeMessageModel
-import com.ueno.cia.core.model.HomeOptionModel
 import com.ueno.cia.feature.home.data.HomePendingSettlementModel
 import com.ueno.cia.feature.home.data.HomeRecentsResponse
 import com.ueno.cia.feature.home.data.HomeSectionID

@@ -1,20 +1,20 @@
 package com.ueno.cia.feature.home.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -28,7 +28,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import com.ueno.cia.core.tenant.Tenant
-import com.ueno.cia.designsystem.R as DSR
 import com.ueno.cia.designsystem.components.DSIconButton
 import com.ueno.cia.designsystem.components.DSIconButtonMode
 import com.ueno.cia.designsystem.components.FeedbackErrorScreen
@@ -46,6 +45,7 @@ import com.ueno.cia.feature.home.ui.sections.HomeOptionsSection
 import com.ueno.cia.feature.home.ui.sections.HomePendingSettlementSection
 import com.ueno.cia.feature.home.ui.sections.HomeRecentsSection
 import com.ueno.cia.feature.home.ui.sections.HomeTopBar
+import com.ueno.cia.designsystem.R as DSR
 
 /** Mientras carga el layout se muestra la estructura por defecto en skeleton (`onLoading` de Flutter). */
 private val LoadingPlaceholder = HomeState(
@@ -56,13 +56,7 @@ private val LoadingPlaceholder = HomeState(
 /** Equivale a `HomeScreen` + `HomeScreenScaffold`. Sin estado propio: todo llega por parámetros. */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(
-    uiState: HomeUiState,
-    isRefreshing: Boolean,
-    tenant: Tenant,
-    actions: HomeActions,
-    modifier: Modifier = Modifier,
-) {
+fun HomeScreen(uiState: HomeUiState, isRefreshing: Boolean, tenant: Tenant, actions: HomeActions, modifier: Modifier = Modifier) {
     val palette = remember(tenant) { Palette(tenant) }
     val failed = uiState is HomeUiState.Failed
     StatusBarIcons(darkIcons = failed)

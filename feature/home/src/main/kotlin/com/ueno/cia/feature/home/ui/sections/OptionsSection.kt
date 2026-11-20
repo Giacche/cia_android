@@ -14,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.ueno.cia.core.model.HomeOptionModel
+import com.ueno.cia.core.model.gridAspectRatio
 import com.ueno.cia.designsystem.components.DSSection
 import com.ueno.cia.designsystem.components.InlineMessage
 import com.ueno.cia.designsystem.components.InlineMessageState
@@ -25,8 +27,6 @@ import com.ueno.cia.designsystem.tokens.DSColor
 import com.ueno.cia.designsystem.tokens.Radius
 import com.ueno.cia.designsystem.tokens.Spacing
 import com.ueno.cia.feature.home.R
-import com.ueno.cia.core.model.HomeOptionModel
-import com.ueno.cia.core.model.gridAspectRatio
 import com.ueno.cia.feature.home.ui.HomeOptionsContent
 import com.ueno.cia.feature.home.ui.Loadable
 

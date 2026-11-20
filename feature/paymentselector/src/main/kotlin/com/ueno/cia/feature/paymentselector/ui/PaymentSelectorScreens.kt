@@ -45,13 +45,11 @@ private const val APP_BAR_TITLE = "COBROS"
  * país). Solo dibuja título + alerta opcional + grilla; la navegación vive en el ViewModel.
  */
 @Composable
-private fun PaymentSelectorOptions(
-    data: PaymentSelectorDataModel,
-    onOptionTap: (HomeOptionModel) -> Unit,
-    onAlertAction: () -> Unit,
-) {
+private fun PaymentSelectorOptions(data: PaymentSelectorDataModel, onOptionTap: (HomeOptionModel) -> Unit, onAlertAction: () -> Unit) {
     Column(
-        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(start = Spacing.l, end = Spacing.l, top = Spacing.m, bottom = Spacing.xl),
+        modifier = Modifier.fillMaxSize().verticalScroll(
+            rememberScrollState(),
+        ).padding(start = Spacing.l, end = Spacing.l, top = Spacing.m, bottom = Spacing.xl),
     ) {
         Spacer(Modifier.height(Spacing.l))
         DSText(data.title, DSTextStyle.DisplayS, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
@@ -77,7 +75,9 @@ private fun PaymentSelectorOptions(
                         icon = option.icon,
                         disabled = option.disabled,
                         onClick = { onOptionTap(option) },
-                        modifier = cell.testTag(if (option.tag.isEmpty()) option.id.lowercase() else "${option.tag}_${option.id.lowercase()}"),
+                        modifier = cell.testTag(
+                            if (option.tag.isEmpty()) option.id.lowercase() else "${option.tag}_${option.id.lowercase()}",
+                        ),
                     )
                 }
             },
@@ -159,12 +159,20 @@ fun PaymentSelectorCountryRoute(
     LaunchedEffect(viewModel) { viewModel.start() }
     LaunchedEffect(viewModel) { viewModel.destinations.collect { navigate(it) } }
     val loaded = state as? PaymentSelectorCountryState.Loaded
-    CIAScaffold(title = loaded?.screen?.appBarTitle ?: APP_BAR_TITLE, onBack = onBack, modifier = modifier.testTag("cia_payment_selector_country")) {
+    CIAScaffold(
+        title = loaded?.screen?.appBarTitle ?: APP_BAR_TITLE,
+        onBack = onBack,
+        modifier = modifier.testTag("cia_payment_selector_country"),
+    ) {
         when (val current = state) {
             PaymentSelectorCountryState.Loading -> PaymentSelectorSkeleton()
             PaymentSelectorCountryState.Failed ->
                 FeedbackErrorScreen(onRetry = viewModel::didTapBackFromError, modifier = Modifier.testTag("cia_error_screen"))
-            is PaymentSelectorCountryState.Loaded -> PaymentSelectorOptions(current.screen.data, viewModel::didTapOption, viewModel::didTapAlertAction)
+            is PaymentSelectorCountryState.Loaded -> PaymentSelectorOptions(
+                current.screen.data,
+                viewModel::didTapOption,
+                viewModel::didTapAlertAction,
+            )
         }
     }
 }

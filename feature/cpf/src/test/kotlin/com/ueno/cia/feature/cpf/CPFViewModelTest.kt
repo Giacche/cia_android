@@ -3,25 +3,23 @@ package com.ueno.cia.feature.cpf
 import com.ueno.cia.core.analytics.Analytics
 import com.ueno.cia.core.analytics.AnalyticsEvent
 import com.ueno.cia.core.analytics.AnalyticsTracking
-import com.ueno.cia.core.model.ButtonModel
 import com.ueno.cia.core.model.ChargeProvider
 import com.ueno.cia.core.model.ChargeType
 import com.ueno.cia.core.model.CpfScreenModel
 import com.ueno.cia.core.model.InputAmountScreenModel
-import com.ueno.cia.core.model.NumberInputModel
 import com.ueno.cia.core.navigation.CIARoute
 import com.ueno.cia.core.navigation.CPFInput
 import com.ueno.cia.feature.cpf.ui.CPFDestination
 import com.ueno.cia.feature.cpf.ui.CPFViewModel
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.Serializable
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertIs
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.Serializable
 
 @Serializable
 private data class ValidateAmount(val amountScreen: InputAmountScreenModel, val cpfScreen: CpfScreenModel? = null)

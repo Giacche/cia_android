@@ -1,8 +1,8 @@
 package com.ueno.cia.feature.home.ui
 
+import com.ueno.cia.core.model.HomeModalModel
 import com.ueno.cia.core.navigation.CIARoute
 import com.ueno.cia.feature.home.data.HomeBranchModel
-import com.ueno.cia.core.model.HomeModalModel
 
 /** Navegación de una sola vez que la Home le pide al host (`Signal<Destination>` en iOS). */
 sealed interface HomeDestination {

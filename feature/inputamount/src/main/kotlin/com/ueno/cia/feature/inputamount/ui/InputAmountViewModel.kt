@@ -14,7 +14,6 @@ import com.ueno.cia.core.navigation.QRFlowInput
 import com.ueno.cia.core.util.CIACurrency
 import com.ueno.cia.core.util.CurrencyFormatter
 import com.ueno.cia.core.util.TemplateString
-import java.math.BigDecimal
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,6 +21,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
+import java.math.BigDecimal
 
 /** Equivale a `InputAmountState` (input_amount_state.dart). */
 data class InputAmountViewState(
@@ -128,8 +128,10 @@ class InputAmountViewModel(
                     description = description,
                     approximateToReceive = state.totalAmountValue,
                     linkPreConfirmScreen = linkScreen,
-                    extraDetailItems = (if (description.isEmpty()) emptyList() else listOf(DetailCardItemModel("Descripción", description))) +
-                        DetailCardItemModel("Total a cobrar", amountFormatted),
+                    extraDetailItems = buildList {
+                        if (description.isNotEmpty()) add(DetailCardItemModel("Descripción", description))
+                        add(DetailCardItemModel("Total a cobrar", amountFormatted))
+                    },
                 )
                 analytics.flowContinue(
                     stepName = QRAnalyticsNames.INPUT_AMOUNT_STEP,
@@ -181,18 +183,16 @@ class InputAmountViewModel(
         return description.length >= rule.minLength && !description.endsWith(" ")
     }
 
-    private fun commission(amount: BigDecimal): BigDecimal =
-        amount.multiply(current.screen.commission).divide(BigDecimal(100))
+    private fun commission(amount: BigDecimal): BigDecimal = amount.multiply(current.screen.commission).divide(BigDecimal(100))
 
     /** `_getComissionDetail`. */
-    private fun commissionDetail(amount: BigDecimal): String =
-        TemplateString.fill(
-            current.screen.summaryInfo.commissionValueTemplate,
-            mapOf(
-                "commission" to dartDoubleString(current.screen.commission),
-                "commission_amount" to formatter.string(commission(amount)),
-            ),
-        )
+    private fun commissionDetail(amount: BigDecimal): String = TemplateString.fill(
+        current.screen.summaryInfo.commissionValueTemplate,
+        mapOf(
+            "commission" to dartDoubleString(current.screen.commission),
+            "commission_amount" to formatter.string(commission(amount)),
+        ),
+    )
 
     /** `_getTotalDetail`: lo que recibe el comercio (monto menos comisión). */
     private fun totalDetail(amount: BigDecimal): String {
@@ -204,8 +204,10 @@ class InputAmountViewModel(
 
     companion object {
         /** Flutter imprime la comisión con `double.toString()`: `5` → `"5.0"`, `5.5` → `"5.5"`. */
-        fun dartDoubleString(value: BigDecimal): String =
-            if (value.compareTo(BigDecimal(value.toBigInteger())) == 0) "${value.toBigInteger()}.0"
-            else value.stripTrailingZeros().toPlainString()
+        fun dartDoubleString(value: BigDecimal): String = if (value.compareTo(BigDecimal(value.toBigInteger())) == 0) {
+            "${value.toBigInteger()}.0"
+        } else {
+            value.stripTrailingZeros().toPlainString()
+        }
     }
 }

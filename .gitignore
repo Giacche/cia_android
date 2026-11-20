@@ -7,3 +7,8 @@ local.properties
 captures/
 .cxx/
 *.apk
+
+# Firma de release: nunca al repo
+*.jks
+*.keystore
+keystore.properties

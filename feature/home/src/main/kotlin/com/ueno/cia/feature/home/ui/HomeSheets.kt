@@ -20,8 +20,10 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
-import com.ueno.cia.designsystem.components.DSText
+import com.ueno.cia.core.model.HomeModalModel
+import com.ueno.cia.core.model.HomeOptionModel
 import com.ueno.cia.designsystem.components.DSBottomSheet
+import com.ueno.cia.designsystem.components.DSText
 import com.ueno.cia.designsystem.components.QuickActionCard
 import com.ueno.cia.designsystem.components.TwoColumnGrid
 import com.ueno.cia.designsystem.tokens.DSColor
@@ -30,8 +32,6 @@ import com.ueno.cia.designsystem.tokens.Radius
 import com.ueno.cia.designsystem.tokens.Spacing
 import com.ueno.cia.feature.home.R
 import com.ueno.cia.feature.home.data.HomeBranchModel
-import com.ueno.cia.core.model.HomeModalModel
-import com.ueno.cia.core.model.HomeOptionModel
 import com.ueno.cia.feature.home.ui.sections.optionsAspectRatio
 
 /**
@@ -40,11 +40,7 @@ import com.ueno.cia.feature.home.ui.sections.optionsAspectRatio
  * La opción elegida se entrega una vez cerrado el sheet.
  */
 @Composable
-fun HomeOptionsSheet(
-    modal: HomeModalModel,
-    onSelect: (HomeOptionModel) -> Unit,
-    onDismiss: () -> Unit,
-) {
+fun HomeOptionsSheet(modal: HomeModalModel, onSelect: (HomeOptionModel) -> Unit, onDismiss: () -> Unit) {
     DSBottomSheet(title = modal.title, onDismiss = onDismiss) { dismiss ->
         TwoColumnGrid(
             aspectRatio = optionsAspectRatio(modal.options),
@@ -67,11 +63,7 @@ fun HomeOptionsSheet(
 
 /** Bottom sheet "Seleccioná una sucursal" (`HomeBranchSelectorBottomSheet`). */
 @Composable
-fun HomeBranchesSheet(
-    branches: List<HomeBranchModel>,
-    onSelect: (HomeBranchModel) -> Unit,
-    onDismiss: () -> Unit,
-) {
+fun HomeBranchesSheet(branches: List<HomeBranchModel>, onSelect: (HomeBranchModel) -> Unit, onDismiss: () -> Unit) {
     DSBottomSheet(title = stringResource(R.string.home_branches_sheet_title), onDismiss = onDismiss) { dismiss ->
         Column(
             modifier = Modifier

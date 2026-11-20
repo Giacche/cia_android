@@ -1,6 +1,5 @@
 package com.ueno.cia.feature.home.data
 
-import com.ueno.cia.core.model.BadgeModel
 import com.ueno.cia.core.model.ButtonModel
 import com.ueno.cia.core.model.CongratsScreenModel
 import com.ueno.cia.core.model.EmptyStateModel
@@ -45,7 +44,8 @@ enum class HomeSectionID(val id: String) {
     TotalSales("total_sales"),
 
     /** Flutter marca loading con este id pero carga con `total_sales`; se aceptan ambos. */
-    PendingSettlement("pending_settlement");
+    PendingSettlement("pending_settlement"),
+    ;
 
     val isHeader: Boolean get() = this == Header || this == HeaderEmpresas || this == HeaderCarousel
     val isPendingSettlement: Boolean get() = this == TotalSales || this == PendingSettlement

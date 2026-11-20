@@ -11,8 +11,7 @@ import kotlinx.serialization.encodeToString
  * los viajan como JSON dentro del argumento.
  */
 internal inline fun <reified T : Any> jsonNavType(): NavType<T> = object : NavType<T>(isNullableAllowed = false) {
-    override fun get(bundle: Bundle, key: String): T? =
-        bundle.getString(key)?.let { CIAJson.decodeFromString<T>(it) }
+    override fun get(bundle: Bundle, key: String): T? = bundle.getString(key)?.let { CIAJson.decodeFromString<T>(it) }
 
     // Navigation ya decodifica el argumento de la ruta: volver a decodificar corrompe los textos con "%" (ej. "2.9% + IVA")
     override fun parseValue(value: String): T = CIAJson.decodeFromString<T>(value)

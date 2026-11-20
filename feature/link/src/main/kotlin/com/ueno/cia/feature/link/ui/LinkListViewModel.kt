@@ -11,7 +11,6 @@ import com.ueno.cia.feature.link.data.LinkListResponse
 import com.ueno.cia.feature.link.data.LinkListScreenModel
 import com.ueno.cia.feature.link.data.LinkListTabModel
 import com.ueno.cia.feature.link.domain.LinkListUseCase
-import kotlin.coroutines.cancellation.CancellationException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -21,6 +20,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlin.coroutines.cancellation.CancellationException
 
 /** Equivale a `LinkListState`. */
 data class LinkListViewState(
@@ -177,7 +177,15 @@ class LinkListViewModel(
         if (state.currentTabIndex !in state.screen.tabsOptions.indices) return@update state
         state.copy(
             screen = state.screen.copy(
-                tabsOptions = state.screen.tabsOptions.mapIndexed { i, tab -> if (i == state.currentTabIndex) tab.copy(message = null) else tab },
+                tabsOptions = state.screen.tabsOptions.mapIndexed { i, tab ->
+                    if (i == state.currentTabIndex) {
+                        tab.copy(
+                            message = null,
+                        )
+                    } else {
+                        tab
+                    }
+                },
             ),
         )
     }
@@ -206,13 +214,12 @@ class LinkListViewModel(
     companion object {
         const val PAGE_SIZE = 10
 
-        suspend inline fun <T> attempt(block: () -> T): Result<T> =
-            try {
-                Result.success(block())
-            } catch (error: CancellationException) {
-                throw error
-            } catch (error: Throwable) {
-                Result.failure(error)
-            }
+        suspend inline fun <T> attempt(block: () -> T): Result<T> = try {
+            Result.success(block())
+        } catch (error: CancellationException) {
+            throw error
+        } catch (error: Throwable) {
+            Result.failure(error)
+        }
     }
 }

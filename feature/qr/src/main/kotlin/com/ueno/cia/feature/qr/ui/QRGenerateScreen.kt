@@ -163,11 +163,7 @@ fun QRGenerateScreen(
 }
 
 @Composable
-private fun QRContent(
-    state: QRViewState,
-    capture: androidx.compose.ui.graphics.layer.GraphicsLayer,
-    onSelectProvider: () -> Unit,
-) {
+private fun QRContent(state: QRViewState, capture: androidx.compose.ui.graphics.layer.GraphicsLayer, onSelectProvider: () -> Unit) {
     val screen = state.qrScreen
     val bitmap = remember(state.qrCodeImage) {
         BitmapFactory.decodeByteArray(state.qrCodeImage, 0, state.qrCodeImage.size)?.asImageBitmap()
@@ -226,11 +222,7 @@ private fun QRContent(
 
 /** Selector de proveedor de QR (`QrBottomSheetOptionsWidget`). */
 @Composable
-fun QRProvidersSheet(
-    sheet: QRBottomSheetModel,
-    onSelect: (com.ueno.cia.core.model.ChargeProvider) -> Unit,
-    onDismiss: () -> Unit,
-) {
+fun QRProvidersSheet(sheet: QRBottomSheetModel, onSelect: (com.ueno.cia.core.model.ChargeProvider) -> Unit, onDismiss: () -> Unit) {
     DSBottomSheet(title = sheet.title, onDismiss = onDismiss) { dismiss ->
         Column(Modifier.testTag("cia_qr_providers_sheet")) {
             sheet.options.orEmpty().forEach { option ->
@@ -263,7 +255,11 @@ private fun QRSkeleton() {
         Skeleton(width = 180.dp, height = 16.dp)
         Spacer(Modifier.height(Spacing.l))
         BoxWithConstraints(Modifier.weight(1f, fill = false).fillMaxWidth(), contentAlignment = Alignment.Center) {
-            Skeleton(modifier = Modifier.size(minOf(maxWidth, maxHeight)), width = minOf(maxWidth, maxHeight), height = minOf(maxWidth, maxHeight))
+            Skeleton(
+                modifier = Modifier.size(minOf(maxWidth, maxHeight)),
+                width = minOf(maxWidth, maxHeight),
+                height = minOf(maxWidth, maxHeight),
+            )
         }
         Spacer(Modifier.height(Spacing.l))
         Skeleton(width = 140.dp, height = 14.dp)

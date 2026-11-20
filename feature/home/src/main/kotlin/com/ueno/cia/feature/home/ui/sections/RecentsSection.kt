@@ -46,7 +46,12 @@ fun HomeRecentsSection(
                     val empty = state.recents.valueOrNull?.emptyState ?: return@Column
                     DSSection(title = title) { EmptyState(empty.illustration, empty.title, empty.subtitle) }
                 } else {
-                    DSSection(title = title, actionTitle = state.recentsLink?.text, onAction = onShowAllTap, actionTag = state.recentsLink?.tag) {
+                    DSSection(
+                        title = title,
+                        actionTitle = state.recentsLink?.text,
+                        onAction = onShowAllTap,
+                        actionTag = state.recentsLink?.tag,
+                    ) {
                         Column {
                             charges.forEach { charge ->
                                 MovementRow(

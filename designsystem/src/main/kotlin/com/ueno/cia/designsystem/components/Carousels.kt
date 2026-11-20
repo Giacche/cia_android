@@ -30,13 +30,7 @@ import com.ueno.cia.designsystem.tokens.Spacing
 
 /** Indicador de página (puntos). */
 @Composable
-fun PageIndicator(
-    count: Int,
-    current: Int,
-    selectedColor: Color,
-    unselectedColor: Color,
-    modifier: Modifier = Modifier,
-) {
+fun PageIndicator(count: Int, current: Int, selectedColor: Color, unselectedColor: Color, modifier: Modifier = Modifier) {
     if (count <= 1) return
     Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
         repeat(count) { index ->
@@ -52,13 +46,12 @@ fun PageIndicator(
  * cada ítem mide el ancho menos 2 × 20 dp de margen y 16 dp de asomo; 8 dp entre ítems.
  */
 @Composable
-fun PagingCarousel(
-    count: Int,
-    modifier: Modifier = Modifier,
-    itemHeight: Dp,
-    item: @Composable (Int) -> Unit,
-) {
-    Column(modifier = modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(Spacing.x2s)) {
+fun PagingCarousel(count: Int, modifier: Modifier = Modifier, itemHeight: Dp, item: @Composable (Int) -> Unit) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(Spacing.x2s),
+    ) {
         val state = rememberPagerState(pageCount = { count })
         BoxWithConstraints(Modifier.fillMaxWidth()) {
             HorizontalPager(

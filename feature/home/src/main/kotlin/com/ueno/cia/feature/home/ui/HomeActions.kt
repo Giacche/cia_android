@@ -1,10 +1,10 @@
 package com.ueno.cia.feature.home.ui
 
+import com.ueno.cia.core.model.HomeInformationAlertModel
+import com.ueno.cia.core.model.HomeOptionModel
 import com.ueno.cia.core.model.MovementChargeModel
 import com.ueno.cia.feature.home.data.HomeBannerModel
 import com.ueno.cia.feature.home.data.HomeBranchModel
-import com.ueno.cia.core.model.HomeInformationAlertModel
-import com.ueno.cia.core.model.HomeOptionModel
 
 /** Todo lo que la pantalla le puede pedir al ViewModel (la UI no lo conoce directamente: facilita previews y tests). */
 data class HomeActions(

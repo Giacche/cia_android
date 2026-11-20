@@ -10,12 +10,6 @@ import com.ueno.cia.feature.validatelimit.domain.ValidateLimitUseCase
 import com.ueno.cia.feature.validatelimit.ui.ValidateLimitDestination
 import com.ueno.cia.feature.validatelimit.ui.ValidateLimitState
 import com.ueno.cia.feature.validatelimit.ui.ValidateLimitViewModel
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertIs
-import kotlin.test.assertNull
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
@@ -24,6 +18,12 @@ import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
+import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertIs
+import kotlin.test.assertNull
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class ValidateLimitViewModelTest {
@@ -41,7 +41,9 @@ class ValidateLimitViewModelTest {
         provider: ChargeProvider = ChargeProvider.UPAY,
         canPop: Boolean = false,
     ) = ValidateLimitViewModel(
-        chargeType, provider, canPop,
+        chargeType,
+        provider,
+        canPop,
         object : ValidateLimitUseCase {
             override suspend fun validateLimit(chargeType: ChargeType, provider: ChargeProvider) =
                 response ?: throw APIError.Server(500, null, "boom")

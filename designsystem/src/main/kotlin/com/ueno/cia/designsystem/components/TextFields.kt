@@ -23,11 +23,11 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import com.ueno.cia.designsystem.tokens.DSColor
 import com.ueno.cia.designsystem.tokens.DSTextStyle
 import com.ueno.cia.designsystem.tokens.Radius
 import com.ueno.cia.designsystem.tokens.Spacing
-import androidx.compose.ui.unit.dp
 
 /**
  * `GuTextfield` (vía `TextFieldWrapper`): label arriba, caja con borde (azul con foco, rosa con error), y debajo la

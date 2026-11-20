@@ -20,6 +20,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -34,6 +35,7 @@ import com.ueno.cia.core.tenant.TenantContext
 import com.ueno.cia.kit.CIADependencies
 import com.ueno.cia.kit.CIAHost
 import com.ueno.cia.kit.CIAModule
+import com.ueno.cia.storage.CIAStorage
 import kotlinx.coroutines.flow.MutableSharedFlow
 
 /**
@@ -94,6 +96,8 @@ private fun SandboxRoot(
 
     // El MockHttpClient lee la respuesta elegida en cada pedido: cambiarla no reinicia CIA (igual que en iOS)
     val httpClient = remember { MockHttpClient(context, MockCatalog.all, selection) }
+    val scope = rememberCoroutineScope()
+    val featureFlags = remember { CIAStorage.featureFlags(context, scope) }
 
     fun openCia(route: CIARoute = CIARoute.Home) {
         startRoute = route
@@ -101,6 +105,7 @@ private fun SandboxRoot(
             CIADependencies(
                 httpClient = httpClient,
                 tenantContext = TenantContext(tenant),
+                featureFlags = featureFlags,
                 analyticsTracking = AnalyticsTracking { event: AnalyticsEvent ->
                     Log.d("CIA-Analytics", "${event.kind} ${event.subFlow} ${event.parameters} ${event.extraParams}")
                 },

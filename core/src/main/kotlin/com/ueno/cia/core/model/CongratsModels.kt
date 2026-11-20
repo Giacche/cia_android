@@ -51,7 +51,16 @@ data class CongratsCardItemActionButtonModel(
 /** `CongratsOriginEnum`: define qué hacen los botones de la pantalla de resultado. */
 @Serializable
 enum class CongratsOrigin {
-    TTP, QR, LINK, PROFILE, ONBOARDING, VALIDATE_RUC, UPDATE_FIELD, SUBSCRIPTION, TRANSACTION_LIMIT, HOME_LAYOUT,
+    TTP,
+    QR,
+    LINK,
+    PROFILE,
+    ONBOARDING,
+    VALIDATE_RUC,
+    UPDATE_FIELD,
+    SUBSCRIPTION,
+    TRANSACTION_LIMIT,
+    HOME_LAYOUT,
 }
 
 @Serializable

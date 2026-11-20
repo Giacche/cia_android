@@ -1,10 +1,10 @@
 package com.ueno.cia.core.util
 
 import com.ueno.cia.core.network.CIAJson
+import kotlinx.serialization.Serializable
 import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlinx.serialization.Serializable
 
 class CurrencyFormatterTest {
     private val formatter = CurrencyFormatter.Gs
@@ -35,7 +35,10 @@ class CurrencyFormatterTest {
     fun `completa las plantillas del BFF`() {
         assertEquals(
             "Comisión 5.5% (Gs. 825)",
-            TemplateString.fill("Comisión {commission}% ({commission_amount})", mapOf("commission" to "5.5", "commission_amount" to "Gs. 825")),
+            TemplateString.fill(
+                "Comisión {commission}% ({commission_amount})",
+                mapOf("commission" to "5.5", "commission_amount" to "Gs. 825"),
+            ),
         )
     }
 

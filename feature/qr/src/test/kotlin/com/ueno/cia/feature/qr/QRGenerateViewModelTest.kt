@@ -5,6 +5,7 @@ import com.ueno.cia.core.analytics.AnalyticsEvent
 import com.ueno.cia.core.analytics.AnalyticsTracking
 import com.ueno.cia.core.model.ChargeProvider
 import com.ueno.cia.core.model.ChargeType
+import com.ueno.cia.core.model.CongratsConfirmDto
 import com.ueno.cia.core.model.CongratsConfirmResponse
 import com.ueno.cia.core.model.CongratsOrigin
 import com.ueno.cia.core.navigation.CIARoute
@@ -12,7 +13,6 @@ import com.ueno.cia.core.navigation.QRFlowInput
 import com.ueno.cia.core.network.APIError
 import com.ueno.cia.core.network.CIAJson
 import com.ueno.cia.core.platform.ConnectivityChecking
-import com.ueno.cia.core.model.CongratsConfirmDto
 import com.ueno.cia.feature.qr.data.QRConfirmRequest
 import com.ueno.cia.feature.qr.data.QRGenerateRequest
 import com.ueno.cia.feature.qr.data.QRGenerateResponse
@@ -20,16 +20,6 @@ import com.ueno.cia.feature.qr.domain.QRGenerateUseCase
 import com.ueno.cia.feature.qr.ui.QRGenerateDestination
 import com.ueno.cia.feature.qr.ui.QRGenerateViewModel
 import com.ueno.cia.feature.qr.ui.QRState
-import java.math.BigDecimal
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertIs
-import kotlin.test.assertNotNull
-import kotlin.test.assertNull
-import kotlin.test.assertTrue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
@@ -40,11 +30,22 @@ import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
+import java.math.BigDecimal
+import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertIs
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 private class FakeQRUseCase(var generated: QRGenerateResponse) : QRGenerateUseCase {
     val generateRequests = mutableListOf<QRGenerateRequest>()
     val confirmRequests = mutableListOf<QRConfirmRequest>()
     var generateFails = false
+
     /** Respuestas sucesivas del confirm; la última se repite. `null` = falla. */
     var confirms: MutableList<CongratsConfirmResponse?> = mutableListOf(EMPTY)
     var notified = 0
@@ -101,7 +102,11 @@ class QRGenerateViewModelTest {
             analytics = Analytics(AnalyticsTracking { events += it }),
         )
 
-    private fun TestScope.started(useCase: FakeQRUseCase, provider: ChargeProvider = ChargeProvider.UPAY, cpf: String? = null): QRGenerateViewModel {
+    private fun TestScope.started(
+        useCase: FakeQRUseCase,
+        provider: ChargeProvider = ChargeProvider.UPAY,
+        cpf: String? = null,
+    ): QRGenerateViewModel {
         val vm = viewModel(useCase, provider, cpf)
         vm.start()
         advanceTimeBy(1)
@@ -231,7 +236,13 @@ class QRGenerateViewModelTest {
 
     @Test
     fun `el selector solo se ofrece con mas de un proveedor`() = runTest(dispatcher) {
-        val single = generated().let { it.copy(qrScreen = it.qrScreen.copy(bottomSheet = it.qrScreen.bottomSheet!!.copy(options = it.qrScreen.bottomSheet!!.options!!.take(1)))) }
+        val single = generated().let {
+            it.copy(
+                qrScreen = it.qrScreen.copy(
+                    bottomSheet = it.qrScreen.bottomSheet!!.copy(options = it.qrScreen.bottomSheet!!.options!!.take(1)),
+                ),
+            )
+        }
         val vm = started(FakeQRUseCase(single))
         assertFalse(assertIs<QRState.Loaded>(vm.state.value).value.selectorEnabled)
     }
@@ -250,7 +261,10 @@ class QRGenerateViewModelTest {
     fun `un objeto vacio en el confirm significa todavia sin resultado`() {
         val empty = CIAJson.decodeFromString(CongratsConfirmDto.serializer(), """{"responseScreen":{},"receiptScreen":{}}""").toResponse()
         assertFalse(empty.hasResponse)
-        val nulls = CIAJson.decodeFromString(CongratsConfirmDto.serializer(), """{"responseScreen":null,"receiptScreen":null}""").toResponse()
+        val nulls = CIAJson.decodeFromString(
+            CongratsConfirmDto.serializer(),
+            """{"responseScreen":null,"receiptScreen":null}""",
+        ).toResponse()
         assertFalse(nulls.hasResponse)
         assertTrue(success().hasResponse)
         assertNotNull(success().receiptScreen)

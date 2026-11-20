@@ -23,6 +23,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -46,7 +47,6 @@ import com.ueno.cia.designsystem.images.DSIcon
 import com.ueno.cia.designsystem.tokens.DSColor
 import com.ueno.cia.designsystem.tokens.Radius
 import com.ueno.cia.designsystem.tokens.Spacing
-import androidx.compose.material3.Text
 
 /** Flujo que se puede abrir desde el sandbox. `entry == null` = todavía no migrado a Android. */
 data class SandboxFlow(val id: String, val title: String, val entry: CIARoute?)

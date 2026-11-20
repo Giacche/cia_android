@@ -1,7 +1,5 @@
 package com.ueno.cia.core.util
 
-import java.math.BigDecimal
-import java.math.RoundingMode
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
@@ -9,6 +7,8 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonDecoder
 import kotlinx.serialization.json.jsonPrimitive
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 /** Subconjunto de `Currency` del design system (solo guaraníes tiene uso real en CIA). */
 data class CIACurrency(
@@ -49,8 +49,7 @@ class CurrencyFormatter(val currency: CIACurrency = CIACurrency.Gs) {
         val Gs = CurrencyFormatter(CIACurrency.Gs)
 
         /** Agrupa de a tres dígitos desde la derecha: `"1234567"` → `"1.234.567"`. */
-        fun group(digits: String, separator: String): String =
-            digits.reversed().chunked(3).joinToString(separator).reversed()
+        fun group(digits: String, separator: String): String = digits.reversed().chunked(3).joinToString(separator).reversed()
     }
 }
 

@@ -47,11 +47,11 @@ import com.ueno.cia.designsystem.images.DSIcon
 import com.ueno.cia.designsystem.tokens.DSColor
 import com.ueno.cia.designsystem.tokens.DSTextStyle
 import com.ueno.cia.designsystem.tokens.Spacing
+import kotlinx.coroutines.launch
 import java.math.BigDecimal
 import kotlin.math.PI
 import kotlin.math.roundToInt
 import kotlin.math.sin
-import kotlinx.coroutines.launch
 
 /**
  * `GuAmount` (sin slider): símbolo de moneda + monto grande centrado, con separador de miles en vivo, teclado
@@ -99,7 +99,9 @@ fun AmountInput(
                 color = DSColor.Black,
             )
             Row(
-                modifier = Modifier.offset { androidx.compose.ui.unit.IntOffset((sin(shake.value * 2 * PI * 2.5) * 10 * (1 - shake.value) * density).roundToInt(), 0) },
+                modifier = Modifier.offset {
+                    androidx.compose.ui.unit.IntOffset((sin(shake.value * 2 * PI * 2.5) * 10 * (1 - shake.value) * density).roundToInt(), 0)
+                },
                 horizontalArrangement = Arrangement.spacedBy(Spacing.x2s),
                 verticalAlignment = Alignment.Bottom,
             ) {

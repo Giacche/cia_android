@@ -1,8 +1,5 @@
 package com.ueno.cia.core.network
 
-import java.io.IOException
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
 import kotlinx.coroutines.suspendCancellableCoroutine
 import okhttp3.Call
 import okhttp3.Callback
@@ -12,6 +9,9 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
+import java.io.IOException
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
 /** Implementación de [HttpClient] sobre OkHttp, para el sandbox contra un BFF real o cuando el host no provee cliente. */
 class OkHttpHttpClient(

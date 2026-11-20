@@ -13,8 +13,8 @@ import com.ueno.cia.core.model.PaymentSelectorScreenModel
 import com.ueno.cia.core.model.QRTimeoutModel
 import com.ueno.cia.core.model.ReceiptScreenModel
 import com.ueno.cia.core.util.BigDecimalSerializer
-import java.math.BigDecimal
 import kotlinx.serialization.Serializable
+import java.math.BigDecimal
 
 /**
  * Rutas de CIA (`CIARoute` en iOS, `go_router` en Flutter). Viven en `core` para que las features se pidan
@@ -24,35 +24,57 @@ import kotlinx.serialization.Serializable
 @Serializable
 sealed interface CIARoute {
     @Serializable data object Home : CIARoute
+
     @Serializable data class ValidateLimitEntryPoint(
         val chargeType: ChargeType,
         val provider: ChargeProvider,
         val canPop: Boolean = false,
     ) : CIARoute
+
     @Serializable data class Cpf(val input: CPFInput) : CIARoute
+
     @Serializable data class InputAmount(val input: InputAmountInput) : CIARoute
+
     @Serializable data class QrGenerate(val input: QRFlowInput) : CIARoute
+
     @Serializable data class QrTimeout(val screen: QRTimeoutModel) : CIARoute
+
     @Serializable data class Receipt(val screen: ReceiptScreenModel) : CIARoute
+
     @Serializable data class LinkPreConfirm(val input: LinkFlowInput) : CIARoute
+
     @Serializable data class PaymentSelectorEntryPoint(
         val type: String? = null,
         val branchId: String? = null,
         val origin: String? = null,
     ) : CIARoute
+
     @Serializable data class PaymentSelector(val input: PaymentSelectorInput) : CIARoute
+
     @Serializable data class PaymentSelectorCountry(val branchId: String? = null, val origin: String? = null) : CIARoute
+
     @Serializable data object LinkList : CIARoute
+
     @Serializable data class Movements(val screen: MovementsScreenModel) : CIARoute
+
     @Serializable data class MovementsFilters(val filterScreen: MovementsFilterScreenModel) : CIARoute
+
     @Serializable data class LinkGenerate(val input: LinkFlowInput) : CIARoute
+
     @Serializable data class Detail(val ticketNumber: String, val channel: String? = null) : CIARoute
+
     @Serializable data object Profile : CIARoute
+
     @Serializable data class ProfileName(val origin: ProfileOrigin = ProfileOrigin.PROFILE) : CIARoute
+
     @Serializable data object TaxInfo : CIARoute
+
     @Serializable data object UpdateField : CIARoute
+
     @Serializable data class Congrats(val input: CongratsInput) : CIARoute
+
     @Serializable data class ProductsOnboardingEntryPoint(val productType: String? = null) : CIARoute
+
     @Serializable data object TapToPhone : CIARoute
 
     /** Deeplink corto del BFF todavía no mapeado a una ruta (ej. `add_ons/addons`). */

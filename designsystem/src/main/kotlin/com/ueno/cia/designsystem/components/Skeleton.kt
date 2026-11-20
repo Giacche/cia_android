@@ -19,7 +19,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.ueno.cia.designsystem.tokens.DSColor
 import com.ueno.cia.designsystem.tokens.Radius
 

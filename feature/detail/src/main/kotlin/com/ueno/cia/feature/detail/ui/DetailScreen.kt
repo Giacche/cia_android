@@ -45,7 +45,6 @@ import com.ueno.cia.designsystem.images.DSIcon
 import com.ueno.cia.designsystem.images.hasDSIcon
 import com.ueno.cia.designsystem.tokens.DSColor
 import com.ueno.cia.designsystem.tokens.DSTextStyle
-import com.ueno.cia.designsystem.tokens.Radius
 import com.ueno.cia.designsystem.tokens.Spacing
 import com.ueno.cia.feature.detail.data.DetailPaymentTypeCardModel
 import com.ueno.cia.feature.detail.data.DetailScreenModel

@@ -1,12 +1,15 @@
 package com.ueno.cia.feature.home.ui
 
-import com.ueno.cia.core.analytics.HomeAnalytics
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ueno.cia.core.analytics.HomeAnalytics
 import com.ueno.cia.core.model.ChargeProvider
 import com.ueno.cia.core.model.ChargeType
 import com.ueno.cia.core.model.CongratsInput
 import com.ueno.cia.core.model.CongratsOrigin
+import com.ueno.cia.core.model.HomeInformationAlertModel
+import com.ueno.cia.core.model.HomeOptionKind
+import com.ueno.cia.core.model.HomeOptionModel
 import com.ueno.cia.core.model.MovementChargeModel
 import com.ueno.cia.core.navigation.CIARoute
 import com.ueno.cia.core.navigation.ProductType
@@ -16,15 +19,10 @@ import com.ueno.cia.core.tenant.TenantContext
 import com.ueno.cia.feature.home.data.HomeBannerModel
 import com.ueno.cia.feature.home.data.HomeBranchModel
 import com.ueno.cia.feature.home.data.HomeHeaderResponse
-import com.ueno.cia.core.model.HomeInformationAlertModel
 import com.ueno.cia.feature.home.data.HomeLayoutModel
-import com.ueno.cia.feature.home.data.HomeLayoutSectionModel
-import com.ueno.cia.core.model.HomeOptionKind
-import com.ueno.cia.core.model.HomeOptionModel
 import com.ueno.cia.feature.home.data.HomeOptionsResponse
 import com.ueno.cia.feature.home.data.HomeSectionID
 import com.ueno.cia.feature.home.domain.HomeUseCase
-import kotlin.coroutines.cancellation.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
@@ -38,6 +36,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlin.coroutines.cancellation.CancellationException
 
 /** Equivale a `HomeNotifier` + la navegación de `HomeScreen` (home_notifier.dart / home_screen.dart). */
 class HomeViewModel(
@@ -179,11 +178,7 @@ class HomeViewModel(
     )
 
     /** Cada sección aplica solo su parte sobre el estado vigente (Flutter re-captura `state.value` tras el await). */
-    private suspend fun <T> section(
-        fetch: suspend () -> T,
-        onSuccess: (HomeState, T) -> HomeState,
-        onFailure: (HomeState) -> HomeState,
-    ) {
+    private suspend fun <T> section(fetch: suspend () -> T, onSuccess: (HomeState, T) -> HomeState, onFailure: (HomeState) -> HomeState) {
         attempt { fetch() }.fold(
             onSuccess = { value -> update { onSuccess(it, value) } },
             onFailure = { update(onFailure) },
@@ -433,13 +428,12 @@ class HomeViewModel(
         }
 
         /** Como `runCatching`, pero la cancelación de la corrutina se propaga. */
-        private inline fun <T> attempt(block: () -> T): Result<T> =
-            try {
-                Result.success(block())
-            } catch (error: CancellationException) {
-                throw error
-            } catch (error: Throwable) {
-                Result.failure(error)
-            }
+        private inline fun <T> attempt(block: () -> T): Result<T> = try {
+            Result.success(block())
+        } catch (error: CancellationException) {
+            throw error
+        } catch (error: Throwable) {
+            Result.failure(error)
+        }
     }
 }

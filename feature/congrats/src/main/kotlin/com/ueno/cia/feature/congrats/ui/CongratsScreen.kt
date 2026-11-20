@@ -19,8 +19,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,9 +31,8 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.ueno.cia.core.model.CongratsCardModel
 import com.ueno.cia.core.model.CongratsCardItemModel
-import com.ueno.cia.designsystem.R as DSR
+import com.ueno.cia.core.model.CongratsCardModel
 import com.ueno.cia.designsystem.components.DSButton
 import com.ueno.cia.designsystem.components.DSButtonStyle
 import com.ueno.cia.designsystem.components.DSText
@@ -47,14 +46,11 @@ import com.ueno.cia.designsystem.tokens.DSColor
 import com.ueno.cia.designsystem.tokens.DSTextStyle
 import com.ueno.cia.designsystem.tokens.Radius
 import com.ueno.cia.designsystem.tokens.Spacing
+import com.ueno.cia.designsystem.R as DSR
 
 /** Punto de entrada del resultado para el host: conecta el [CongratsViewModel] con la pantalla. */
 @Composable
-fun CongratsRoute(
-    viewModel: CongratsViewModel,
-    onDestination: (CongratsDestination) -> Unit,
-    modifier: Modifier = Modifier,
-) {
+fun CongratsRoute(viewModel: CongratsViewModel, onDestination: (CongratsDestination) -> Unit, modifier: Modifier = Modifier) {
     val navigate by rememberUpdatedState(onDestination)
     LaunchedEffect(viewModel) { viewModel.start() }
     LaunchedEffect(viewModel) { viewModel.destinations.collect { navigate(it) } }
@@ -216,7 +212,10 @@ private fun CenteredLayout(viewModel: CongratsViewModel) {
 private fun Buttons(viewModel: CongratsViewModel, modifier: Modifier = Modifier) {
     val screen = viewModel.screen
     val isError = viewModel.kind == CongratsKind.Error
-    Column(modifier.fillMaxWidth().navigationBarsPadding().padding(bottom = Spacing.s), verticalArrangement = Arrangement.spacedBy(Spacing.s)) {
+    Column(
+        modifier.fillMaxWidth().navigationBarsPadding().padding(bottom = Spacing.s),
+        verticalArrangement = Arrangement.spacedBy(Spacing.s),
+    ) {
         DSButton(
             text = if (isError) stringResource(DSR.string.ds_retry) else screen.primaryButton.text,
             onClick = viewModel::didTapPrimary,

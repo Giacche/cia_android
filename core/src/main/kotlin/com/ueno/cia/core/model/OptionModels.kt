@@ -1,6 +1,5 @@
 package com.ueno.cia.core.model
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 // Opciones de cobro y alertas que comparten la Home y el selector de cobros (features/home/screens/home/models).
@@ -26,8 +25,20 @@ data class HomeModalModel(val title: String, val options: List<HomeOptionModel>)
 
 /** Equivale a `HomeOptionsEnum`. Id desconocido → [QrUeno] (default de Flutter). */
 enum class HomeOptionKind {
-    Ttp, QrUeno, QrBancard, QrDepay, QrPix, Link, QrSip, QrInter,
-    QrBolivia, QrPeru, QrColombia, QrInternacional, LinkList;
+    Ttp,
+    QrUeno,
+    QrBancard,
+    QrDepay,
+    QrPix,
+    Link,
+    QrSip,
+    QrInter,
+    QrBolivia,
+    QrPeru,
+    QrColombia,
+    QrInternacional,
+    LinkList,
+    ;
 
     companion object {
         fun fromId(id: String): HomeOptionKind = when (id) {
@@ -49,7 +60,6 @@ enum class HomeOptionKind {
     }
 }
 
-
 @Serializable
 data class HomeInformationAlertModel(
     val type: String,
@@ -57,7 +67,6 @@ data class HomeInformationAlertModel(
     val title: String? = null,
     val actionLink: LinkButtonModel? = null,
 )
-
 
 /** Flutter: 3/2, o 2.5/2 si alguna opción tiene descripción (ancho / alto de cada card de la grilla). */
 fun List<HomeOptionModel>.gridAspectRatio(): Float = if (any { it.description.isNotEmpty() }) 2.5f / 2f else 3f / 2f

@@ -1,0 +1,50 @@
+# Se parte de la configuración por defecto de Detekt (buildUponDefaultConfig) y solo se ajusta lo que no aplica a Compose.
+# El formato lo cubre ktlint, por eso no se usa el plugin de formatting de Detekt.
+complexity:
+  LongMethod:
+    threshold: 80
+    ignoreAnnotated: ['Composable']
+  LongParameterList:
+    functionThreshold: 8
+    constructorThreshold: 10
+    ignoreAnnotated: ['Composable']
+  TooManyFunctions:
+    active: false
+  CyclomaticComplexMethod:
+    threshold: 20
+    ignoreAnnotated: ['Composable']
+  NestedBlockDepth:
+    threshold: 5
+    ignoreAnnotated: ['Composable']
+
+naming:
+  MatchingDeclarationName:
+    active: false
+  FunctionNaming:
+    ignoreAnnotated: ['Composable']
+  TopLevelPropertyNaming:
+    constantPattern: '[A-Z][A-Za-z0-9_]*'
+
+style:
+  MagicNumber:
+    active: false
+  MaxLineLength:
+    maxLineLength: 140
+  ReturnCount:
+    max: 4
+  UnusedPrivateMember:
+    ignoreAnnotated: ['Preview']
+  WildcardImport:
+    active: true
+
+empty-blocks:
+  EmptyFunctionBlock:
+    active: false
+
+# El ViewModel es la frontera de errores: captura cualquier falla del use case y la convierte en estado de UI
+# (`Failed`, `Error`). Siempre se relanza CancellationException antes. Fuera de los ViewModels la regla sigue activa.
+exceptions:
+  TooGenericExceptionCaught:
+    excludes: ['**/*ViewModel.kt', '**/*ViewModels.kt']
+  SwallowedException:
+    excludes: ['**/*ViewModel.kt', '**/*ViewModels.kt']

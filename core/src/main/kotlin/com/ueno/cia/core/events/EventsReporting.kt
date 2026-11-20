@@ -19,12 +19,11 @@ object NoOpEvents : EventsReporting {
 }
 
 /** Equivale a `reportingError` de Flutter: reporta el error y lo vuelve a lanzar. */
-suspend inline fun <T> EventsReporting.reportingError(type: String, path: String, block: () -> T): T =
-    try {
-        block()
-    } catch (error: CancellationException) {
-        throw error
-    } catch (error: APIError) {
-        runCatching { report(type, error, path) }
-        throw error
-    }
+suspend inline fun <T> EventsReporting.reportingError(type: String, path: String, block: () -> T): T = try {
+    block()
+} catch (error: CancellationException) {
+    throw error
+} catch (error: APIError) {
+    runCatching { report(type, error, path) }
+    throw error
+}

@@ -7,9 +7,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -34,14 +34,19 @@ import com.ueno.cia.designsystem.tokens.Spacing
 enum class DSButtonStyle {
     /** Fondo negro, texto blanco. */
     Primary,
+
     /** Fondo blanco, borde gris. */
     Secondary,
+
     /** Transparente con borde negro, chico (ej. "Conocer más" del banner). */
     Tertiary,
+
     /** Variante de [Secondary] sobre fondos oscuros. */
     SecondaryDark,
+
     /** [Secondary] chico (pill de 32 dp): "Cambiar QR", "Filtrar". */
     SecondarySmall,
+
     /** `EGuButtonStyle.accent`: fondo verde, texto oscuro. */
     Accent,
 }
@@ -85,8 +90,11 @@ fun DSButton(
             .then(if (colors.border != null) Modifier.border(BorderStroke(1.dp, colors.border), shape) else Modifier)
             .clickable(interactionSource = interaction, indication = null, enabled = enabled, role = Role.Button, onClick = onClick)
             .padding(
-                if (small) PaddingValues(horizontal = Spacing.m, vertical = Spacing.xs)
-                else PaddingValues(horizontal = Spacing.xl, vertical = Spacing.s),
+                if (small) {
+                    PaddingValues(horizontal = Spacing.m, vertical = Spacing.xs)
+                } else {
+                    PaddingValues(horizontal = Spacing.xl, vertical = Spacing.s)
+                },
             ),
         horizontalArrangement = Arrangement.spacedBy(Spacing.x2s, Alignment.CenterHorizontally),
         verticalAlignment = Alignment.CenterVertically,
@@ -117,19 +125,14 @@ fun DSLinkButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifie
 enum class DSIconButtonMode {
     /** Fondo `neutral700` con ícono blanco (sobre headers oscuros). */
     Dark,
+
     /** Fondo blanco con borde y ícono negro. */
     Light,
 }
 
 /** `GuButtonIcon` tamaño small (32 dp). */
 @Composable
-fun DSIconButton(
-    icon: String,
-    mode: DSIconButtonMode,
-    contentDescription: String,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
+fun DSIconButton(icon: String, mode: DSIconButtonMode, contentDescription: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
     val dark = mode == DSIconButtonMode.Dark
     Box(
         modifier = modifier

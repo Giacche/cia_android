@@ -4,8 +4,8 @@ import com.ueno.cia.core.model.ButtonModel
 import com.ueno.cia.core.model.CongratsCardItemActionButtonModel
 import com.ueno.cia.core.model.EmptyStateModel
 import com.ueno.cia.core.util.BigDecimalSerializer
-import java.math.BigDecimal
 import kotlinx.serialization.Serializable
+import java.math.BigDecimal
 
 // features/link/screens/link_list/models (Flutter).
 

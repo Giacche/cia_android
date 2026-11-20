@@ -7,6 +7,8 @@ import com.ueno.cia.core.analytics.AnalyticsTracking
 import com.ueno.cia.core.analytics.NoOpAnalyticsTracking
 import com.ueno.cia.core.events.EventsReporting
 import com.ueno.cia.core.events.NoOpEvents
+import com.ueno.cia.core.flags.FeatureFlags
+import com.ueno.cia.core.flags.InMemoryFeatureFlags
 import com.ueno.cia.core.navigation.CIARoute
 import com.ueno.cia.core.network.CIAHttpClient
 import com.ueno.cia.core.network.HttpClient
@@ -35,6 +37,8 @@ class CIADependencies(
     val events: EventsReporting = NoOpEvents,
     /** El polling de QR solo consulta la confirmación si hay red (`connectivity_plus` en Flutter). */
     val connectivity: ConnectivityChecking = AlwaysConnected,
+    /** Feature flags del host (Remote Config, un servicio propio o DataStore). Por defecto, todo con su valor por defecto. */
+    val featureFlags: FeatureFlags = InMemoryFeatureFlags(),
 )
 
 /** Lo que CIA le pide al host cuando la navegación sale del módulo. */
@@ -50,6 +54,7 @@ interface CIAHost {
 internal class CIAContainer(val dependencies: CIADependencies) {
     val httpClient = CIAHttpClient(dependencies.httpClient, dependencies.tenantContext)
     val analytics = Analytics(dependencies.analyticsTracking)
+    val featureFlags: FeatureFlags = dependencies.featureFlags
     val homeUseCase: HomeUseCase = HomeRepository(httpClient, dependencies.events)
     val validateLimitUseCase: ValidateLimitUseCase = ValidateLimitRepository(httpClient, dependencies.events)
     val qrGenerateUseCase: QRGenerateUseCase = QRGenerateRepository(httpClient, dependencies.events)

@@ -13,7 +13,6 @@ import com.ueno.cia.core.model.MovementsResponse
 import com.ueno.cia.core.model.MovementsScreenModel
 import com.ueno.cia.core.navigation.CIARoute
 import com.ueno.cia.feature.movements.domain.MovementsUseCase
-import kotlin.coroutines.cancellation.CancellationException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -23,6 +22,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlin.coroutines.cancellation.CancellationException
 
 /** Equivale a `MovementsState`. */
 data class MovementsViewState(
@@ -259,13 +259,12 @@ class MovementsViewModel(
 
     private companion object {
         /** Como `runCatching`, pero la cancelación de la corrutina se propaga. */
-        suspend inline fun <T> attempt(block: () -> T): Result<T> =
-            try {
-                Result.success(block())
-            } catch (error: CancellationException) {
-                throw error
-            } catch (error: Throwable) {
-                Result.failure(error)
-            }
+        suspend inline fun <T> attempt(block: () -> T): Result<T> = try {
+            Result.success(block())
+        } catch (error: CancellationException) {
+            throw error
+        } catch (error: Throwable) {
+            Result.failure(error)
+        }
     }
 }

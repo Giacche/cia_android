@@ -2,8 +2,8 @@ package com.ueno.cia.feature.validatelimit
 
 import com.ueno.cia.core.network.BFFEnvelope
 import com.ueno.cia.core.network.CIAJson
-import java.io.File
 import kotlinx.serialization.KSerializer
+import java.io.File
 
 /** Lee los mismos contratos JSON del BFF que usa el sandbox (`app/src/main/assets/contratos`). */
 object Contratos {
